@@ -22,6 +22,11 @@ class Link implements Item
         $this->active = false;
     }
 
+    public function isActive() : bool
+    {
+        return $this->active;
+    }
+
     public function setActive() : Item
     {
         $this->active = true;
@@ -70,10 +75,5 @@ class Link implements Item
         );
 
         return $segments[$index-1] ?? null;
-    }
-
-    public function isActive() : bool
-    {
-        return $this->active;
     }
 }
