@@ -1,0 +1,5 @@
+suites:
+    navigation_suite:
+        namespace: Spatie\Navigation
+        psr4_prefix: Spatie\Navigation
+        src_path: src
