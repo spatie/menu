@@ -20,7 +20,7 @@ class MenuDisplayerSpec extends ObjectBehavior
     {
         $link = new Link('Home', 'https://spatie.be');
 
-        $this->display($link)->shouldRender('
+        $this->display($link)->shouldReturnHtml('
             <ul>
                 <li>
                     <a href="https://spatie.be">Home</a>
@@ -33,7 +33,7 @@ class MenuDisplayerSpec extends ObjectBehavior
     {
         $link = (new Link('Home', 'https://spatie.be'))->setActive();
 
-        $this->display($link)->shouldRender('
+        $this->display($link)->shouldReturnHtml('
             <ul>
                 <li class="active">
                     <a href="https://spatie.be">Home</a>
@@ -49,7 +49,7 @@ class MenuDisplayerSpec extends ObjectBehavior
             new Link('Open Source', 'https://spatie.be/opensource')
         );
 
-        $this->display($group)->shouldRender('
+        $this->display($group)->shouldReturnHtml('
             <ul>
                 <li>
                     <a href="https://spatie.be">Home</a>
@@ -68,7 +68,7 @@ class MenuDisplayerSpec extends ObjectBehavior
             (new Link('Open Source', 'https://spatie.be/opensource'))->setActive()
         );
 
-        $this->display($group)->shouldRender('
+        $this->display($group)->shouldReturnHtml('
             <ul>
                 <li>
                     <a href="https://spatie.be">Home</a>
@@ -80,12 +80,13 @@ class MenuDisplayerSpec extends ObjectBehavior
         ');
     }
 
-    function getMatchers() : array
+    public function getMatchers() : array
     {
         return [
-            'render' => function ($subject, $html) {
-                $html = preg_replace('/>\s+</', '><', $html);
-                $html = preg_replace('/(^\s+)|(\s+$)/', '', $html);
+            'returnHtml' => function (string $subject, string $html) {
+
+                $subject = $this->sanitizeHtmlWhitespace($subject);
+                $html = $this->sanitizeHtmlWhitespace($html);
 
                 if ($subject !== $html) {
                     throw new FailureException("expected {$html} but got {$subject}");
@@ -94,5 +95,13 @@ class MenuDisplayerSpec extends ObjectBehavior
                 return true;
             },
         ];
+    }
+
+    public function sanitizeHtmlWhitespace(string $subject) : string
+    {
+        $find = ['/>\s+</', '/(^\s+)|(\s+$)/'];
+        $replace = ['><', ''];
+
+        return preg_replace($find, $replace, $subject);
     }
 }
