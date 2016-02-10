@@ -10,6 +10,11 @@ class Group implements GroupInterface
     /** @var array */
     protected $children = [];
 
+    public function __construct(Node ...$node)
+    {
+        $this->children = $node;
+    }
+
     public function add(Node $child) : Group
     {
         $this->children[] = $child;
@@ -20,6 +25,11 @@ class Group implements GroupInterface
     public function children() : array
     {
         return $this->children;
+    }
+
+    public function map(callable $callable) : array
+    {
+        return array_map($callable, $this->children);
     }
 
     public function isActive() : bool
