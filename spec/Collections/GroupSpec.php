@@ -1,14 +1,19 @@
 <?php
 
-namespace spec\Spatie\Navigation\Groups;
+namespace spec\Spatie\Navigation\Collections;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Spatie\Navigation\Groups\Group;
+use Spatie\Navigation\Collections\Group;
 use Spatie\Navigation\Node;
 
 class GroupSpec extends ObjectBehavior
 {
+    function let(Node $node)
+    {
+        $this->beConstructedWith($node);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(Group::class);

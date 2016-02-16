@@ -23,6 +23,11 @@
             "Spatie\\Navigation\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Spatie\\Navigation\\": "spec"
+        }
+    },
     "scripts": {
         "test": "vendor/bin/phpspec"
     },

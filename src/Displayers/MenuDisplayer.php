@@ -4,19 +4,18 @@ namespace Spatie\Navigation\Displayers;
 
 use Spatie\Navigation\Displayer;
 use Spatie\Navigation\Group as GroupInterface;
-use Spatie\Navigation\Groups\Group;
+use Spatie\Navigation\Collections\Group;
 use Spatie\Navigation\Items\Link;
 use Spatie\Navigation\Node;
+use Spatie\Navigation\Root;
 
 class MenuDisplayer implements Displayer
 {
-    public function display(Node $node) : string
+    public function display(Root $root) : string
     {
-        if (! $node instanceof GroupInterface) {
-            $node = new Group($node);
-        }
-
-        return $this->renderGroupContents($node);
+        return '<ul>'.implode('', $root->map(function (Node $node) {
+            return $this->renderNode($node);
+        })).'</ul>';
     }
 
     protected function renderNode(Node $node) : string

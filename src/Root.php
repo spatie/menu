@@ -2,9 +2,9 @@
 
 namespace Spatie\Navigation;
 
-interface Group extends Node
+interface Root
 {
-    public function base() : Node;
     public function children() : array;
     public function map(callable $callable) : array;
+    public function filter(callable $callable) : array;
 }

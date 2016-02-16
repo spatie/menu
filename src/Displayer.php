@@ -4,5 +4,5 @@ namespace Spatie\Navigation;
 
 interface Displayer
 {
-    public function display(Node $node) : string;
+    public function display(Root $root) : string;
 }
