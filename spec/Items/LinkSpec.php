@@ -2,11 +2,10 @@
 
 namespace spec\Spatie\Navigation\Items;
 
-use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Spatie\Navigation\Item;
 use Spatie\Navigation\Items\Link;
-use Spatie\Navigation\Node;
+use spec\Spatie\Navigation\ObjectBehavior;
 
 class LinkSpec extends ObjectBehavior
 {
@@ -20,7 +19,6 @@ class LinkSpec extends ObjectBehavior
         $this->shouldHaveType(Link::class);
 
         $this->shouldImplement(Item::class);
-        $this->shouldImplement(Node::class);
     }
 
     function it_contains_text()
@@ -72,5 +70,18 @@ class LinkSpec extends ObjectBehavior
         $this->segment(1)->shouldBe('opensource');
     }
 
+    function it_can_be_rendered()
+    {
+        $this->beConstructedWith('Open Source', '/opensource');
 
+        $this->render()->shouldReturn('<li><a href="/opensource">Open Source</a></li>');
+    }
+
+    function it_has_an_active_class_when_rendered_active()
+    {
+        $this->beConstructedWith('Open Source', '/opensource');
+        $this->setActive();
+
+        $this->render()->shouldReturn('<li class="active"><a href="/opensource">Open Source</a></li>');
+    }
 }

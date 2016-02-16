@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Spatie\Navigation\Displayers;
+namespace spec\Spatie\Navigation;
 
 use PhpSpec\Exception\Example\FailureException;
-use PhpSpec\ObjectBehavior;
+use PhpSpec\ObjectBehavior as BaseObjectBehavior;
 
-abstract class DisplayerBehavior extends ObjectBehavior
+abstract class ObjectBehavior extends BaseObjectBehavior
 {
     public function getMatchers() : array
     {

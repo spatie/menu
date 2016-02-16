@@ -2,9 +2,8 @@
 
 namespace Spatie\Navigation;
 
-interface Group extends Node
+interface Group extends Item
 {
-    public function base() : Node;
-    public function children() : array;
-    public function map(callable $callable) : array;
+    public function base() : Item;
+    public function items() : array;
 }

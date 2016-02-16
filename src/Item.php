@@ -2,8 +2,8 @@
 
 namespace Spatie\Navigation;
 
-interface Item extends Node
+interface Item
 {
-    public function setActive() : Item;
-    public function setInactive() : Item;
+    public function isActive() : bool;
+    public function render() : string;
 }

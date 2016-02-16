@@ -3,9 +3,12 @@
 namespace Spatie\Navigation\Items;
 
 use Spatie\Navigation\Item;
+use Spatie\Navigation\Traits\HtmlElement;
 
 class Link implements Item
 {
+    use HtmlElement;
+
     /** @var string */
     protected $text;
 
@@ -75,5 +78,14 @@ class Link implements Item
         );
 
         return $segments[$index-1] ?? null;
+    }
+
+    public function render() : string
+    {
+        return $this->renderHtml(
+            'li',
+            "<a href=\"{$this->url}\">{$this->text}</a>",
+            $this->isActive() ? ['active'] : []
+        );
     }
 }
