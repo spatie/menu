@@ -21,7 +21,11 @@ class Menu
 
     public function manipulate(callable $callable) : Menu
     {
-        return new static(...$callable($this->items));
+        foreach($this->items as $item) {
+            $callable($item);
+        }
+
+        return $this;
     }
 
     public function render() : string
