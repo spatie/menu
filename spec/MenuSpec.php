@@ -4,6 +4,7 @@ namespace spec\Spatie\Navigation;
 
 use Prophecy\Argument;
 use Spatie\Navigation\Item;
+use Spatie\Navigation\Items\Link;
 use Spatie\Navigation\Menu;
 
 class MenuSpec extends ObjectBehavior
@@ -39,5 +40,37 @@ class MenuSpec extends ObjectBehavior
         $this->addItem($item);
 
         $this->render()->shouldReturnHtml('<ul><li></li></ul>');
+    }
+
+    function it_can_manipulate_items(Item $item)
+    {
+        $this->addItem($item);
+
+        $i = 0;
+
+        $this->manipulate(function ($item) use (&$i) {
+            expect($item)->toBe($item);
+            $i++;
+        });
+
+        expect($i)->toBe(1);
+    }
+
+    function it_can_manipulate_a_specific_type_of_items_with_a_typehint(Item $item)
+    {
+        // We can't mock this one since manipulate depends on an `instanceof` call
+        $link = new Link('Spatie', 'https://spatie.be');
+
+        $this->addItem($item);
+        $this->addItem($link);
+
+        $i = 0;
+
+        $this->manipulate(function (Link $link) use (&$i) {
+            expect($link)->toBe($link);
+            $i++;
+        });
+
+        expect($i)->toBe(1);
     }
 }

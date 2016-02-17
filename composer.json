@@ -16,12 +16,16 @@
         }
     ],
     "require": {
-        "php" : "^7.0"
+        "php" : "^7.0",
+        "phpspec/prophecy": "^1.6"
     },
     "autoload": {
         "psr-4": {
             "Spatie\\Navigation\\": "src"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -32,6 +36,7 @@
         "test": "vendor/bin/phpspec"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^2.4",
+        "bossa/phpspec2-expect": "^1.0"
     }
 }

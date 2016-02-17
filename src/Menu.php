@@ -4,6 +4,7 @@ namespace Spatie\Navigation;
 
 use Spatie\Navigation\Traits\Collection;
 use Spatie\Navigation\Traits\HtmlElement;
+use function Spatie\Navigation\callable_parameter_types;
 
 class Menu
 {
@@ -21,7 +22,14 @@ class Menu
 
     public function manipulate(callable $callable) : Menu
     {
+        $type = callable_parameter_types($callable)[0] ?? null;
+
         foreach($this->items as $item) {
+
+            if ($type && ! $item instanceof $type) {
+                continue;
+            }
+
             $callable($item);
         }
 
