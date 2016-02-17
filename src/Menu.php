@@ -27,9 +27,9 @@ class Menu
         return $this->addItem(new Link($text, $url));
     }
 
-    public function addHtml(string $html) : Menu
+    public function addHtml(string $html, ...$args) : Menu
     {
-        return $this->addItem(new RawHtml($html));
+        return $this->addItem(new RawHtml($html, ...$args));
     }
 
     public function manipulate(callable $callable) : Menu

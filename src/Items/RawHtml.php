@@ -15,9 +15,9 @@ class RawHtml implements Item
     /** @var bool */
     protected $active;
 
-    public function __construct(string $html)
+    public function __construct(string $html, ...$args)
     {
-        $this->html = $html;
+        $this->html = sprintf($html, ...$args);
         $this->active = false;
     }
 
