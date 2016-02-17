@@ -22,7 +22,7 @@ class Menu
 
     public function manipulate(callable $callable) : Menu
     {
-        $type = callable_parameter_types($callable)[0] ?? null;
+        $type = get_callable_parameter_types($callable)[0] ?? null;
 
         foreach($this->items as $item) {
 

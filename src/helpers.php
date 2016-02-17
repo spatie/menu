@@ -5,7 +5,7 @@ namespace Spatie\Navigation;
 use ReflectionFunction;
 use ReflectionParameter;
 
-function callable_parameter_types(callable $callable) : array
+function get_callable_parameter_types(callable $callable) : array
 {
     $reflection = new ReflectionFunction($callable);
 
