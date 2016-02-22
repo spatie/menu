@@ -13,4 +13,4 @@ before_script:
   - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
 
 script:
-  - phpspec run
+  - vendor/bin/phpspec run
