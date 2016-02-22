@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Spatie\Navigation\Items;
+namespace spec\Spatie\Menu\Items;
 
 use Prophecy\Argument;
-use Spatie\Navigation\Items\RawHtml;
-use spec\Spatie\Navigation\ObjectBehavior;
+use Spatie\Menu\Items\RawHtml;
+use spec\Spatie\Menu\ObjectBehavior;
 
 class RawHtmlSpec extends ObjectBehavior
 {

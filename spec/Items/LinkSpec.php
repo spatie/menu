@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Spatie\Navigation\Items;
+namespace spec\Spatie\Menu\Items;
 
 use Prophecy\Argument;
-use Spatie\Navigation\Item;
-use Spatie\Navigation\Items\Link;
-use spec\Spatie\Navigation\ObjectBehavior;
+use Spatie\Menu\Item;
+use Spatie\Menu\Items\Link;
+use spec\Spatie\Menu\ObjectBehavior;
 
 class LinkSpec extends ObjectBehavior
 {

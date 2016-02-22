@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Navigation;
+namespace Spatie\Menu;
 
-use Spatie\Navigation\Items\Link;
-use Spatie\Navigation\Items\RawHtml;
-use Spatie\Navigation\Traits\Collection;
-use Spatie\Navigation\Traits\HtmlElement;
-use function Spatie\Navigation\callable_parameter_types;
+use Spatie\Menu\Items\Link;
+use Spatie\Menu\Items\RawHtml;
+use Spatie\Menu\Traits\Collection;
+use Spatie\Menu\Traits\HtmlElement;
+use function Spatie\Menu\callable_parameter_types;
 
 class Menu
 {

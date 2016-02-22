@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\Spatie\Navigation;
+namespace spec\Spatie\Menu;
 
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior as BaseObjectBehavior;

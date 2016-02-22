@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Navigation\Stubs;
+namespace Spatie\Menu\Stubs;
 
-use Spatie\Navigation\Traits\Activatable;
+use Spatie\Menu\Traits\Activatable;
 
 class ActivatableStub
 {

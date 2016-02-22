@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Navigation\Traits;
+namespace Spatie\Menu\Traits;
 
 trait Activatable
 {

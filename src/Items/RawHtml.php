@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\Navigation\Items;
+namespace Spatie\Menu\Items;
 
-use Spatie\Navigation\Item;
-use Spatie\Navigation\Traits\Activatable;
-use Spatie\Navigation\Traits\HtmlElement;
+use Spatie\Menu\Item;
+use Spatie\Menu\Traits\Activatable;
+use Spatie\Menu\Traits\HtmlElement;
 
 class RawHtml implements Item
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Spatie\Navigation\Stubs;
+namespace spec\Spatie\Menu\Stubs;
 
 use Prophecy\Argument;
-use Spatie\Navigation\Item;
-use Spatie\Navigation\Stubs\CollectionStub;
-use spec\Spatie\Navigation\ObjectBehavior;
+use Spatie\Menu\Item;
+use Spatie\Menu\Stubs\CollectionStub;
+use spec\Spatie\Menu\ObjectBehavior;
 
 class CollectionStubSpec extends ObjectBehavior
 {

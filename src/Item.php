@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Navigation;
+namespace Spatie\Menu;
 
 interface Item
 {

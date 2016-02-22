@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Navigation\\": "src"
+            "Spatie\\Menu\\": "src"
         },
         "files": [
             "src/helpers.php"
@@ -29,7 +29,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Spatie\\Navigation\\": "spec"
+            "spec\\Spatie\\Menu\\": "spec"
         }
     },
     "scripts": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Spatie\Navigation\Traits;
+namespace Spatie\Menu\Traits;
 
-use Spatie\Navigation\Item;
+use Spatie\Menu\Item;
 
 trait Collection
 {

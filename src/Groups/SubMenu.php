@@ -1,24 +1,24 @@
 <?php
 
-namespace Spatie\Navigation\Groups;
+namespace Spatie\Menu\Groups;
 
-use Spatie\Navigation\Items\Link;
-use Spatie\Navigation\Traits\Collection;
-use Spatie\Navigation\Item;
-use Spatie\Navigation\Traits\HtmlElement;
+use Spatie\Menu\Items\Link;
+use Spatie\Menu\Traits\Collection;
+use Spatie\Menu\Item;
+use Spatie\Menu\Traits\HtmlElement;
 
 class SubMenu implements Item
 {
     use HtmlElement, Collection;
 
     /**
-     * @var \Spatie\Navigation\Item
+     * @var \Spatie\Menu\Item
      */
     protected $base;
 
     /**
-     * @param \Spatie\Navigation\Item $base
-     * @param \Spatie\Navigation\Item[] ...$items
+     * @param \Spatie\Menu\Item $base
+     * @param \Spatie\Menu\Item[] ...$items
      */
     private function __construct(Item $base, Item ...$items)
     {
@@ -27,7 +27,7 @@ class SubMenu implements Item
     }
 
     /**
-     * @param \Spatie\Navigation\Item $base
+     * @param \Spatie\Menu\Item $base
      * @param array $items
      *
      * @return static
@@ -38,7 +38,7 @@ class SubMenu implements Item
     }
 
     /**
-     * @return \Spatie\Navigation\Items\Link
+     * @return \Spatie\Menu\Items\Link
      */
     public function base() : Link
     {

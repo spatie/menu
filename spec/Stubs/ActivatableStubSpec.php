@@ -1,10 +1,10 @@
 <?php
 
-namespace spec\Spatie\Navigation\Stubs;
+namespace spec\Spatie\Menu\Stubs;
 
 use Prophecy\Argument;
-use Spatie\Navigation\Stubs\ActivatableStub;
-use spec\Spatie\Navigation\ObjectBehavior;
+use Spatie\Menu\Stubs\ActivatableStub;
+use spec\Spatie\Menu\ObjectBehavior;
 
 class ActivatableStubSpec extends ObjectBehavior
 {
