@@ -6,7 +6,7 @@ use Spatie\Navigation\Item;
 
 trait Collection
 {
-    /** @var \Spatie\Navigation\Item[] */
+    /** @var array */
     protected $items = [];
 
     public function items() : array

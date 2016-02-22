@@ -9,6 +9,11 @@ use Spatie\Navigation\Menu;
 
 class MenuSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedThrough('create', []);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(Menu::class);
@@ -16,14 +21,7 @@ class MenuSpec extends ObjectBehavior
 
     function it_can_be_initialized_with_items(Item $item1, Item $item2)
     {
-        $this->beConstructedWith($item1, $item2);
-
-        $this->items()->shouldHaveCount(2);
-    }
-
-    function it_can_be_initialized_via_a_factory_method(Item $item1, Item $item2)
-    {
-        $this->beConstructedThrough('create', [$item1, $item2]);
+        $this->beConstructedThrough('create', [[$item1, $item2]]);
 
         $this->items()->shouldHaveCount(2);
     }
@@ -59,7 +57,7 @@ class MenuSpec extends ObjectBehavior
     function it_can_manipulate_a_specific_type_of_items_with_a_typehint(Item $item)
     {
         // We can't mock this one since manipulate depends on an `instanceof` call
-        $link = new Link('Spatie', 'https://spatie.be');
+        $link = Link::create('Spatie', 'https://spatie.be');
 
         $this->addItem($item);
         $this->addItem($link);

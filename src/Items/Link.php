@@ -3,52 +3,56 @@
 namespace Spatie\Navigation\Items;
 
 use Spatie\Navigation\Item;
+use Spatie\Navigation\Traits\Activatable;
 use Spatie\Navigation\Traits\HtmlElement;
 
 class Link implements Item
 {
-    use HtmlElement;
+    use Activatable, HtmlElement;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $text;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $url;
 
-    /** @var bool */
-    protected $active;
-
-    public function __construct(string $text, string $url)
+    /**
+     * @param string $text
+     * @param string $url
+     */
+    private function __construct(string $text, string $url)
     {
         $this->text = $text;
         $this->url = $url;
         $this->active = false;
     }
 
-    public function isActive() : bool
+    /**
+     * @param string $text
+     * @param string $url
+     *
+     * @return static
+     */
+    public static function create(string $text, string $url)
     {
-        return $this->active;
+        return new static($text, $url);
     }
 
-    public function setActive() : Item
-    {
-        $this->active = true;
-
-        return $this;
-    }
-
-    public function setInactive() : Item
-    {
-        $this->active = false;
-
-        return $this;
-    }
-
+    /**
+     * @return string
+     */
     public function text() : string
     {
         return $this->text;
     }
 
+    /**
+     * @return string
+     */
     public function url() : string
     {
         return $this->url;
@@ -80,6 +84,9 @@ class Link implements Item
         return $segments[$index-1] ?? null;
     }
 
+    /**
+     * @return string
+     */
     public function render() : string
     {
         return $this->renderHtml(

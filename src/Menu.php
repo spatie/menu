@@ -12,27 +12,49 @@ class Menu
 {
     use HtmlElement, Collection;
 
-    public function __construct(Item ...$items)
+    private function __construct(Item ...$items)
     {
         $this->items = $items;
     }
 
-    public static function create(Item ...$items) : Menu
+    /**
+     * @param array $items
+     *
+     * @return static
+     */
+    public static function create(array $items = [])
     {
         return new static(...$items);
     }
 
-    public function addLink(string $text, string $url) : Menu
+    /**
+     * @param string $text
+     * @param string $url
+     *
+     * @return static
+     */
+    public function addLink(string $text, string $url)
     {
         return $this->addItem(new Link($text, $url));
     }
 
-    public function addHtml(string $html, ...$args) : Menu
+    /**
+     * @param string $html
+     * @param array ...$args
+     *
+     * @return static
+     */
+    public function addHtml(string $html, ...$args)
     {
         return $this->addItem(new RawHtml($html, ...$args));
     }
 
-    public function manipulate(callable $callable) : Menu
+    /**
+     * @param callable $callable
+     *
+     * @return static
+     */
+    public function manipulate(callable $callable)
     {
         $type = get_callable_parameter_types($callable)[0] ?? null;
 
@@ -48,7 +70,12 @@ class Menu
         return $this;
     }
 
-    public function setActive(callable $callable) : Menu
+    /**
+     * @param callable $callable
+     *
+     * @return static
+     */
+    public function setActive(callable $callable)
     {
         $type = get_callable_parameter_types($callable)[0] ?? null;
 
@@ -66,6 +93,9 @@ class Menu
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function render() : string
     {
         return $this->renderHtml('ul', $this->mapAndJoin(function (Item $item) {

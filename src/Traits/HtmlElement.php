@@ -4,10 +4,10 @@ namespace Spatie\Navigation\Traits;
 
 trait HtmlElement
 {
-    /** @var string|null[] */
+    /** @var array */
     protected $attributes = [];
 
-    /** @var string[] */
+    /** @var array */
     protected $classNames = [];
 
     public function attributes() : array
