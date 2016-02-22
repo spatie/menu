@@ -2,6 +2,8 @@
 
 namespace Spatie\Menu;
 
+use ReflectionFunction;
+use ReflectionParameter;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Items\RawHtml;
 use Spatie\Menu\Traits\Collection;
@@ -55,7 +57,7 @@ class Menu
      */
     public function manipulate(callable $callable)
     {
-        $type = $this->getTypeToManipulate();
+        $type = $this->getTypeToManipulate($callable);
 
         foreach($this->items as $item) {
 
@@ -76,7 +78,7 @@ class Menu
      */
     public function setActive(callable $callable)
     {
-        $type = $this->getTypeToManipulate();
+        $type = $this->getTypeToManipulate($callable);
 
         foreach($this->items as $item) {
 
