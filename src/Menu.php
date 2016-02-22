@@ -35,18 +35,17 @@ class Menu
      */
     public function addLink(string $text, string $url)
     {
-        return $this->addItem(new Link($text, $url));
+        return $this->addItem(Link::create($text, $url));
     }
 
     /**
      * @param string $html
-     * @param array ...$args
      *
      * @return static
      */
-    public function addHtml(string $html, ...$args)
+    public function addHtml(string $html)
     {
-        return $this->addItem(new RawHtml($html, ...$args));
+        return $this->addItem(RawHtml::create($html));
     }
 
     /**
@@ -56,7 +55,7 @@ class Menu
      */
     public function manipulate(callable $callable)
     {
-        $type = get_callable_parameter_types($callable)[0] ?? null;
+        $type = $this->getTypeToManipulate();
 
         foreach($this->items as $item) {
 
@@ -77,7 +76,7 @@ class Menu
      */
     public function setActive(callable $callable)
     {
-        $type = get_callable_parameter_types($callable)[0] ?? null;
+        $type = $this->getTypeToManipulate();
 
         foreach($this->items as $item) {
 
@@ -91,6 +90,22 @@ class Menu
         }
 
         return $this;
+    }
+
+    /**
+     * @param callable $callable
+     *
+     * @return string|null
+     */
+    protected function getTypeToManipulate(callable $callable)
+    {
+        $reflection = new ReflectionFunction($callable);
+
+        $parameterTypes = array_map(function (ReflectionParameter $parameter) {
+            return $parameter->getClass() ? $parameter->getClass()->name : null;
+        }, $reflection->getParameters());
+
+        return $parameterTypes[0] ?? null;
     }
 
     /**

@@ -22,10 +22,7 @@
     "autoload": {
         "psr-4": {
             "Spatie\\Menu\\": "src"
-        },
-        "files": [
-            "src/helpers.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
