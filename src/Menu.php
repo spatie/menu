@@ -30,14 +30,14 @@ class Menu
     }
 
     /**
-     * @param string $text
      * @param string $url
+     * @param string $text
      *
      * @return static
      */
-    public function addLink(string $text, string $url)
+    public function addLink(string $url, string $text)
     {
-        return $this->addItem(Link::create($text, $url));
+        return $this->addItem(Link::create($url, $text));
     }
 
     /**

@@ -21,25 +21,25 @@ class Link implements Item
     protected $url;
 
     /**
-     * @param string $text
      * @param string $url
+     * @param string $text
      */
-    private function __construct(string $text, string $url)
+    private function __construct(string $url, string $text)
     {
-        $this->text = $text;
         $this->url = $url;
+        $this->text = $text;
         $this->active = false;
     }
 
     /**
-     * @param string $text
      * @param string $url
+     * @param string $text
      *
      * @return static
      */
-    public static function create(string $text, string $url)
+    public static function create(string $url, string $text)
     {
-        return new static($text, $url);
+        return new static($url, $text);
     }
 
     /**

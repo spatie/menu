@@ -11,7 +11,7 @@ class LinkSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedThrough('create', ['Home', 'https://spatie.be']);
+        $this->beConstructedThrough('create', ['https://spatie.be', 'Home']);
     }
 
     function it_is_initializable()
@@ -38,28 +38,28 @@ class LinkSpec extends ObjectBehavior
 
     function it_can_retrieve_a_segment_from_an_absolute_url()
     {
-        $this->beConstructedThrough('create', ['Open Source', 'https://spatie.be/opensource']);
+        $this->beConstructedThrough('create', ['https://spatie.be/opensource', 'Home']);
 
         $this->segment(1)->shouldBe('opensource');
     }
 
     function it_can_retrieve_a_segment_from_a_relative_url()
     {
-        $this->beConstructedThrough('create', ['Open Source', '/opensource']);
+        $this->beConstructedThrough('create', ['/opensource', 'Open Source']);
 
         $this->segment(1)->shouldBe('opensource');
     }
 
     function it_can_be_rendered()
     {
-        $this->beConstructedThrough('create', ['Open Source', '/opensource']);
+        $this->beConstructedThrough('create', ['/opensource', 'Open Source']);
 
         $this->render()->shouldReturn('<li><a href="/opensource">Open Source</a></li>');
     }
 
     function it_has_an_active_class_when_rendered_active()
     {
-        $this->beConstructedThrough('create', ['Open Source', '/opensource']);
+        $this->beConstructedThrough('create', ['/opensource', 'Open Source']);
         $this->setActive();
 
         $this->render()->shouldReturn('<li class="active"><a href="/opensource">Open Source</a></li>');

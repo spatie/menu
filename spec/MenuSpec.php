@@ -57,7 +57,7 @@ class MenuSpec extends ObjectBehavior
     function it_can_manipulate_a_specific_type_of_items_with_a_typehint(Item $item)
     {
         // We can't mock this one since manipulate depends on an `instanceof` call
-        $link = Link::create('Spatie', 'https://spatie.be');
+        $link = Link::create('https://spatie.be', 'Spatie');
 
         $this->addItem($item);
         $this->addItem($link);
