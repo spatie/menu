@@ -8,12 +8,17 @@ use Spatie\Menu\Items\Link;
 use Spatie\Menu\Items\RawHtml;
 use Spatie\Menu\Traits\Collection;
 use Spatie\Menu\Traits\HtmlElement;
-use function Spatie\Menu\callable_parameter_types;
 
 class Menu
 {
     use HtmlElement, Collection;
 
+    /** @var \Spatie\Menu\Item */
+    protected $header;
+
+    /**
+     * @param \Spatie\Menu\Item[] ...$items
+     */
     private function __construct(Item ...$items)
     {
         $this->items = $items;
@@ -48,6 +53,22 @@ class Menu
     public function addHtml(string $html)
     {
         return $this->addItem(RawHtml::create($html));
+    }
+
+    /**
+     * @param \Spatie\Menu\Item|string $header
+     *
+     * @return $this
+     */
+    public function setHeader($header)
+    {
+        if (is_string($header)) {
+            $header = RawHtml::create($header);
+        }
+
+        $this->header = $header;
+
+        return $this;
     }
 
     /**
@@ -115,8 +136,12 @@ class Menu
      */
     public function render() : string
     {
-        return $this->renderHtml('ul', $this->mapAndJoin(function (Item $item) {
+        $header = $this->header ? $this->header->render() : '';
+
+        $menu = $this->renderHtml('ul', $this->mapAndJoin(function (Item $item) {
             return $item->render();
         }));
+
+        return $header . $menu;
     }
 }

@@ -40,6 +40,39 @@ class MenuSpec extends ObjectBehavior
         $this->render()->shouldReturnHtml('<ul><li></li></ul>');
     }
 
+    function it_renders_a_header_from_an_item(Item $header, Item $item)
+    {
+        $header->render()->willReturn('<h2>Header</h2>');
+        $item->render()->willReturn('<li></li>');
+
+        $this->setHeader($header);
+        $this->addItem($item);
+
+        $this->render()->shouldReturnHtml('
+            <h2>Header</h2>
+            <ul>
+                <li>
+                </li>
+            </ul>
+        ');
+    }
+
+    function it_renders_a_header_from_a_string(Item $item)
+    {
+        $item->render()->willReturn('<li></li>');
+
+        $this->setHeader('<h2>Header</h2>');
+        $this->addItem($item);
+
+        $this->render()->shouldReturnHtml('
+            <h2>Header</h2>
+            <ul>
+                <li>
+                </li>
+            </ul>
+        ');
+    }
+
     function it_can_manipulate_items(Item $item)
     {
         $this->addItem($item);
