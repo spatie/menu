@@ -18,6 +18,11 @@
     "require": {
         "php" : "^7.0"
     },
+    "require-dev": {
+        "bossa/phpspec2-expect": "^1.0",
+        "phpspec/phpspec": "^2.4.1",
+        "phpspec/prophecy": "^1.6"
+    },
     "autoload": {
         "psr-4": {
             "Spatie\\Menu\\": "src"
@@ -30,9 +35,5 @@
     },
     "scripts": {
         "test": "vendor/bin/phpspec"
-    },
-    "require-dev": {
-        "phpspec/phpspec": "^2.4.1",
-        "bossa/phpspec2-expect": "^1.0"
     }
 }
