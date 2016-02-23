@@ -28,7 +28,7 @@ trait HtmlElement
      *
      * @return static
      */
-    public function addAttribute(string $attribute, $value = null)
+    public function setAttribute(string $attribute, $value = null)
     {
         $this->attributes[$attribute] = $value;
 

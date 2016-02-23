@@ -19,23 +19,23 @@ class HtmlElementStubSpec extends ObjectBehavior
 
     function it_accepts_attributes()
     {
-        $this->addAttribute('foo', 'bar');
+        $this->setAttribute('foo', 'bar');
 
         $this->attributes()->shouldBeLike(['foo' => 'bar']);
     }
 
     function it_accepts_attributes_without_values()
     {
-        $this->addAttribute('foo');
+        $this->setAttribute('foo');
 
         $this->attributes()->shouldBeLike(['foo' => null]);
     }
 
     function it_renders_an_html_element()
     {
-        $this->addAttribute('class', 'menu col-md-6');
-        $this->addAttribute('id', 'menu');
-        $this->addAttribute('data-menu');
+        $this->setAttribute('class', 'menu col-md-6');
+        $this->setAttribute('id', 'menu');
+        $this->setAttribute('data-menu');
 
         $this->renderHtml()->shouldReturnHtml('
             <ul class="menu col-md-6" id="menu" data-menu></ul>
@@ -44,8 +44,8 @@ class HtmlElementStubSpec extends ObjectBehavior
 
     function it_only_adds_a_class_attribute_it_necessary()
     {
-        $this->addAttribute('id', 'menu');
-        $this->addAttribute('data-menu');
+        $this->setAttribute('id', 'menu');
+        $this->setAttribute('data-menu');
 
         $this->renderHtml()->shouldReturnHtml('
             <ul id="menu" data-menu></ul>
@@ -55,9 +55,9 @@ class HtmlElementStubSpec extends ObjectBehavior
     function it_provides_a_fluent_interface()
     {
         $this
-            ->addAttribute('class', 'menu col-md-6')
-            ->addAttribute('id', 'menu')
-            ->addAttribute('data-menu');
+            ->setAttribute('class', 'menu col-md-6')
+            ->setAttribute('id', 'menu')
+            ->setAttribute('data-menu');
 
         $this->renderHtml()->shouldReturnHtml('
             <ul class="menu col-md-6" id="menu" data-menu></ul>
