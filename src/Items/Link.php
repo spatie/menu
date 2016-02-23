@@ -87,12 +87,16 @@ class Link implements Item
     /**
      * @return string
      */
+    protected function element() : string
+    {
+        return 'a';
+    }
+
+    /**
+     * @return string
+     */
     public function render() : string
     {
-        return $this->renderHtml(
-            'li',
-            "<a href=\"{$this->url}\">{$this->text}</a>",
-            $this->isActive() ? ['active'] : []
-        );
+        return $this->renderHtml($this->text, ['href' => $this->url]);
     }
 }

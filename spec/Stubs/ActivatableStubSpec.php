@@ -2,7 +2,6 @@
 
 namespace spec\Spatie\Menu\Stubs;
 
-use Prophecy\Argument;
 use Spatie\Menu\Stubs\ActivatableStub;
 use spec\Spatie\Menu\ObjectBehavior;
 

@@ -4,31 +4,30 @@ namespace Spatie\Menu\Traits;
 
 trait HtmlElement
 {
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $attributes = [];
 
-    /** @var array */
-    protected $classNames = [];
+    /**
+     * @return string
+     */
+    abstract protected function element() : string;
 
+    /**
+     * @return array
+     */
     public function attributes() : array
     {
         return $this->attributes;
     }
 
-    public function classNames() : array
-    {
-        return $this->classNames;
-    }
-
-    /** @return static */
-    public function addClass(string $className)
-    {
-        $this->classNames[] = $className;
-
-        return $this;
-    }
-
-    /** @return static */
+    /**
+     * @param string $attribute
+     * @param null $value
+     *
+     * @return static
+     */
     public function addAttribute(string $attribute, $value = null)
     {
         $this->attributes[$attribute] = $value;
@@ -36,24 +35,14 @@ trait HtmlElement
         return $this;
     }
 
-    public function renderHtml(string $element, string $innerHtml = '', array $extraClassNames = [])
+    /**
+     * @param array $overrides
+     *
+     * @return string
+     */
+    protected function renderAttributes(array $overrides = []) : string
     {
-        $attributes = $this->renderAttributes($extraClassNames);
-
-        $openingTag = !empty($attributes) ? "<{$element} {$attributes}>" : "<{$element}>";
-        $closingTag = "</{$element}>";
-
-        return "{$openingTag}{$innerHtml}{$closingTag}";
-    }
-
-    protected function renderAttributes(array $extraClassNames = []) : string
-    {
-        $attributes = $this->attributes;
-        $classNames = array_merge($this->classNames, $extraClassNames);
-
-        if (! empty($classNames)) {
-            $attributes['class'] = implode(' ', $classNames);
-        }
+        $attributes = array_merge($this->attributes, $overrides);
 
         if (! count($attributes)) {
             return '';
@@ -62,6 +51,7 @@ trait HtmlElement
         $attributeStrings = [];
 
         foreach ($attributes as $attribute => $value) {
+
             if (empty($value)) {
                 $attributeStrings[] = $attribute;
                 continue;
@@ -71,5 +61,21 @@ trait HtmlElement
         }
 
         return implode(' ', $attributeStrings);
+    }
+
+    /**
+     * @param string $innerHtml
+     * @param array $overrides
+     *
+     * @return string
+     */
+    public function renderHtml(string $innerHtml = '', array $overrides = [])
+    {
+        $attributes = $this->renderAttributes($overrides);
+
+        $openingTag = !empty($attributes) ? "<{$this->element()} {$attributes}>" : "<{$this->element()}>";
+        $closingTag = "</{$this->element()}>";
+
+        return "{$openingTag}{$innerHtml}{$closingTag}";
     }
 }

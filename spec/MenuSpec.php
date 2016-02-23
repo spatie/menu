@@ -2,7 +2,6 @@
 
 namespace spec\Spatie\Menu;
 
-use Prophecy\Argument;
 use Spatie\Menu\Item;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Menu;
@@ -26,24 +25,69 @@ class MenuSpec extends ObjectBehavior
         $this->items()->shouldHaveCount(2);
     }
 
+    function it_accepts_links()
+    {
+
+    }
+
+    function it_accepts_raw_html()
+    {
+
+    }
+
+    function it_accepts_submenus()
+    {
+
+    }
+
     function it_renders_an_empty_list_if_there_arent_any_items()
     {
-        $this->render()->shouldReturnHtml('<ul></ul>');
+        $this->render()->shouldReturnHtml('
+            <ul></ul>
+        ');
     }
 
     function it_renders_its_items(Item $item)
     {
-        $item->render()->willReturn('<li></li>');
+        $item->isActive()->willReturn(false);
+        $item->render()->willReturn('<a href>Item</a>');
 
         $this->addItem($item);
 
-        $this->render()->shouldReturnHtml('<ul><li></li></ul>');
+        $this->render()->shouldReturnHtml('
+            <ul>
+                <li><a href>Item</a></li>
+            </ul>
+        ');
     }
 
-    function it_renders_a_header_from_an_item(Item $header, Item $item)
+    function it_renders_a_header_from_an_item(Item $header)
     {
         $header->render()->willReturn('<h2>Header</h2>');
-        $item->render()->willReturn('<li></li>');
+
+        $this->setHeader($header);
+
+        $this->render()->shouldReturnHtml('
+            <h2>Header</h2>
+            <ul></ul>
+        ');
+    }
+
+    function it_renders_a_header_from_a_string()
+    {
+        $this->setHeader('<h2>Header</h2>');
+
+        $this->render()->shouldReturnHtml('
+            <h2>Header</h2>
+            <ul></ul>
+        ');
+    }
+
+    function it_renders_items_and_a_header(Item $header, Item $item)
+    {
+        $header->render()->willReturn('<h2>Header</h2>');
+        $item->isActive()->willReturn(false);
+        $item->render()->willReturn('<a href>Item</a>');
 
         $this->setHeader($header);
         $this->addItem($item);
@@ -52,56 +96,19 @@ class MenuSpec extends ObjectBehavior
             <h2>Header</h2>
             <ul>
                 <li>
+                    <a href>Item</a>
                 </li>
             </ul>
         ');
     }
 
-    function it_renders_a_header_from_a_string(Item $item)
+    function it_can_set_specific_types_of_children_active()
     {
-        $item->render()->willReturn('<li></li>');
 
-        $this->setHeader('<h2>Header</h2>');
-        $this->addItem($item);
-
-        $this->render()->shouldReturnHtml('
-            <h2>Header</h2>
-            <ul>
-                <li>
-                </li>
-            </ul>
-        ');
     }
 
-    function it_can_manipulate_items(Item $item)
+    function it_adds_attributes_to_the_ul_tag()
     {
-        $this->addItem($item);
 
-        $i = 0;
-
-        $this->manipulate(function ($item) use (&$i) {
-            expect($item)->toBe($item);
-            $i++;
-        });
-
-        expect($i)->toBe(1);
-    }
-
-    function it_can_manipulate_a_specific_type_of_items_with_a_typehint(Item $item)
-    {
-        // We can't mock this one since manipulate depends on an `instanceof` call
-        $link = Link::create('https://spatie.be', 'Spatie');
-
-        $this->addItem($item);
-        $this->addItem($link);
-
-        $i = 0;
-
-        $this->manipulate(function (Link $link) use (&$i) {
-            expect($link)->toBe($link);
-            $i++;
-        });
-
-        expect($i)->toBe(1);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace spec\Spatie\Menu\Items;
 
-use Prophecy\Argument;
 use Spatie\Menu\Items\RawHtml;
 use spec\Spatie\Menu\ObjectBehavior;
 
@@ -20,6 +19,6 @@ class RawHtmlSpec extends ObjectBehavior
 
     function it_renders_its_html_contents()
     {
-        $this->render()->shouldReturn('<li><span>HTML</span></li>');
+        $this->render()->shouldReturn('<span>HTML</span>');
     }
 }

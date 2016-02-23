@@ -2,8 +2,8 @@
 
 namespace spec\Spatie\Menu\Stubs;
 
-use Prophecy\Argument;
 use Spatie\Menu\Item;
+use Spatie\Menu\Items\Link;
 use Spatie\Menu\Stubs\CollectionStub;
 use spec\Spatie\Menu\ObjectBehavior;
 
@@ -61,5 +61,37 @@ class CollectionStubSpec extends ObjectBehavior
         $this->mapAndJoin(function(Item $item) {
             return $item->render();
         })->shouldBeLike('foobar');
+    }
+
+    function it_can_manipulate_items(Item $item)
+    {
+        $this->addItem($item);
+
+        $i = 0;
+
+        $this->manipulate(function ($item) use (&$i) {
+            expect($item)->toBe($item);
+            $i++;
+        });
+
+        expect($i)->toBe(1);
+    }
+
+    function it_can_manipulate_a_specific_type_of_items_with_a_typehint(Item $item)
+    {
+        // We can't mock this one since manipulate depends on an `instanceof` call
+        $link = Link::create('https://spatie.be', 'Spatie');
+
+        $this->addItem($item);
+        $this->addItem($link);
+
+        $i = 0;
+
+        $this->manipulate(function (Link $link) use (&$i) {
+            expect($link)->toBe($link);
+            $i++;
+        });
+
+        expect($i)->toBe(1);
     }
 }

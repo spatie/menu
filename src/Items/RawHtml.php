@@ -8,7 +8,7 @@ use Spatie\Menu\Traits\HtmlElement;
 
 class RawHtml implements Item
 {
-    use Activatable, HtmlElement;
+    use Activatable;
 
     /**
      * @var string
@@ -47,10 +47,6 @@ class RawHtml implements Item
      */
     public function render() : string
     {
-        return $this->renderHtml(
-            'li',
-            $this->html,
-            $this->isActive() ? ['active'] : []
-        );
+        return $this->html;
     }
 }

@@ -2,18 +2,19 @@
 
 namespace Spatie\Menu;
 
-use ReflectionFunction;
-use ReflectionParameter;
+use Spatie\Menu\Helpers\MenuItemDisplayer;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Items\RawHtml;
 use Spatie\Menu\Traits\Collection;
 use Spatie\Menu\Traits\HtmlElement;
 
-class Menu
+class Menu implements Item
 {
-    use HtmlElement, Collection;
+    use Collection, HtmlElement;
 
-    /** @var \Spatie\Menu\Item */
+    /**
+     * @var \Spatie\Menu\Item
+     */
     protected $header;
 
     /**
@@ -56,6 +57,22 @@ class Menu
     }
 
     /**
+     * @param callable $bootstrap
+     *
+     * @return $this
+     */
+    public function addMenu(callable $bootstrap)
+    {
+        $menu = Menu::create();
+
+        $bootstrap($menu);
+
+        $this->addItem($menu);
+
+        return $this;
+    }
+
+    /**
      * @param \Spatie\Menu\Item|string $header
      *
      * @return $this
@@ -72,24 +89,17 @@ class Menu
     }
 
     /**
-     * @param callable $callable
-     *
-     * @return static
+     * @return bool
      */
-    public function manipulate(callable $callable)
+    public function isActive() : bool
     {
-        $type = $this->getTypeToManipulate($callable);
-
-        foreach($this->items as $item) {
-
-            if ($type && ! $item instanceof $type) {
-                continue;
+        foreach ($this->items as $item) {
+            if ($item->isActive()) {
+                return true;
             }
-
-            $callable($item);
         }
 
-        return $this;
+        return false;
     }
 
     /**
@@ -116,19 +126,11 @@ class Menu
     }
 
     /**
-     * @param callable $callable
-     *
-     * @return string|null
+     * @return string
      */
-    protected function getTypeToManipulate(callable $callable)
+    protected function element() : string
     {
-        $reflection = new ReflectionFunction($callable);
-
-        $parameterTypes = array_map(function (ReflectionParameter $parameter) {
-            return $parameter->getClass() ? $parameter->getClass()->name : null;
-        }, $reflection->getParameters());
-
-        return $parameterTypes[0] ?? null;
+        return 'ul';
     }
 
     /**
@@ -136,12 +138,14 @@ class Menu
      */
     public function render() : string
     {
-        $header = $this->header ? $this->header->render() : '';
+        $header = empty($this->header) ? '' : $this->header->render();
 
-        $menu = $this->renderHtml('ul', $this->mapAndJoin(function (Item $item) {
-            return $item->render();
-        }));
+        $menu = $this->renderHtml(
+            $this->mapAndJoin(function (Item $item) {
+                return MenuItemDisplayer::render($item);
+            })
+        );
 
-        return $header . $menu;
+        return "{$header}{$menu}";
     }
 }

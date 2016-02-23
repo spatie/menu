@@ -2,7 +2,6 @@
 
 namespace spec\Spatie\Menu\Items;
 
-use Prophecy\Argument;
 use Spatie\Menu\Item;
 use Spatie\Menu\Items\Link;
 use spec\Spatie\Menu\ObjectBehavior;
@@ -54,14 +53,6 @@ class LinkSpec extends ObjectBehavior
     {
         $this->beConstructedThrough('create', ['/opensource', 'Open Source']);
 
-        $this->render()->shouldReturn('<li><a href="/opensource">Open Source</a></li>');
-    }
-
-    function it_has_an_active_class_when_rendered_active()
-    {
-        $this->beConstructedThrough('create', ['/opensource', 'Open Source']);
-        $this->setActive();
-
-        $this->render()->shouldReturn('<li class="active"><a href="/opensource">Open Source</a></li>');
+        $this->render()->shouldReturn('<a href="/opensource">Open Source</a>');
     }
 }
