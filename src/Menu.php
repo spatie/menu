@@ -84,16 +84,12 @@ class Menu implements Item
     }
 
     /**
-     * @param callable $bootstrap
+     * @param \Spatie\Menu\Menu $menu
      *
-     * @return $this
+     * @return static
      */
-    public function addMenu(callable $bootstrap)
+    public function addMenu(Menu $menu)
     {
-        $menu = new static;
-
-        $bootstrap($menu);
-
         $this->addItem($menu);
 
         return $this;
@@ -102,7 +98,7 @@ class Menu implements Item
     /**
      * @param \Spatie\Menu\Item|string $before
      *
-     * @return $this
+     * @return static
      */
     public function before($before)
     {
