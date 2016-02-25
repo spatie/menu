@@ -90,7 +90,7 @@ class Menu implements Item
      */
     public function addMenu(callable $bootstrap)
     {
-        $menu = Menu::create();
+        $menu = new static;
 
         $bootstrap($menu);
 
