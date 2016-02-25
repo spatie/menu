@@ -14,11 +14,9 @@ class MenuItemDisplayerSpec extends ObjectBehavior
 
     function it_renders_list_elements()
     {
-
     }
 
     function it_adds_a_class_if_the_item_is_active()
     {
-
     }
 }

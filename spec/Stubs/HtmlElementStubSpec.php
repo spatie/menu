@@ -66,6 +66,5 @@ class HtmlElementStubSpec extends ObjectBehavior
 
     function it_accepts_extra_attributes()
     {
-
     }
 }

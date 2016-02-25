@@ -61,11 +61,11 @@ class MenuSpec extends ObjectBehavior
         ');
     }
 
-    function it_renders_a_header_from_an_item(Item $header)
+    function it_renders_before_content_from_an_item(Item $before)
     {
-        $header->render()->willReturn('<h2>Header</h2>');
+        $before->render()->willReturn('<h2>Header</h2>');
 
-        $this->setHeader($header);
+        $this->before($before);
 
         $this->render()->shouldReturnHtml('
             <h2>Header</h2>
@@ -73,9 +73,9 @@ class MenuSpec extends ObjectBehavior
         ');
     }
 
-    function it_renders_a_header_from_a_string()
+    function it_renders_before_content_from_a_string()
     {
-        $this->setHeader('<h2>Header</h2>');
+        $this->before('<h2>Header</h2>');
 
         $this->render()->shouldReturnHtml('
             <h2>Header</h2>
@@ -83,13 +83,13 @@ class MenuSpec extends ObjectBehavior
         ');
     }
 
-    function it_renders_items_and_a_header(Item $header, Item $item)
+    function it_renders_items_and_before_content(Item $before, Item $item)
     {
-        $header->render()->willReturn('<h2>Header</h2>');
+        $before->render()->willReturn('<h2>Header</h2>');
         $item->isActive()->willReturn(false);
         $item->render()->willReturn('<a href>Item</a>');
 
-        $this->setHeader($header);
+        $this->before($before);
         $this->addItem($item);
 
         $this->render()->shouldReturnHtml('
@@ -102,13 +102,23 @@ class MenuSpec extends ObjectBehavior
         ');
     }
 
+    function it_renders_after_content_from_an_item(Item $after)
+    {
+    }
+
+    function it_renders_after_content_from_a_string()
+    {
+    }
+
+    function it_renders_items_and_after_content(Item $after, Item $item)
+    {
+    }
+
     function it_can_set_specific_types_of_children_active()
     {
-
     }
 
     function it_adds_attributes_to_the_ul_tag()
     {
-
     }
 }

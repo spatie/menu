@@ -15,7 +15,7 @@ class Menu implements Item
     /**
      * @var \Spatie\Menu\Item
      */
-    protected $header;
+    protected $before;
 
     /**
      * @param \Spatie\Menu\Item[] ...$items
@@ -73,17 +73,17 @@ class Menu implements Item
     }
 
     /**
-     * @param \Spatie\Menu\Item|string $header
+     * @param \Spatie\Menu\Item|string $before
      *
      * @return $this
      */
-    public function setHeader($header)
+    public function before($before)
     {
-        if (is_string($header)) {
-            $header = RawHtml::create($header);
+        if (is_string($before)) {
+            $before = RawHtml::create($before);
         }
 
-        $this->header = $header;
+        $this->before = $before;
 
         return $this;
     }
@@ -138,7 +138,7 @@ class Menu implements Item
      */
     public function render() : string
     {
-        $header = empty($this->header) ? '' : $this->header->render();
+        $before = empty($this->before) ? '' : $this->before->render();
 
         $menu = $this->renderHtml(
             $this->mapAndJoin(function (Item $item) {
@@ -146,6 +146,6 @@ class Menu implements Item
             })
         );
 
-        return "{$header}{$menu}";
+        return "{$before}{$menu}";
     }
 }
