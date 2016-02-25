@@ -121,4 +121,17 @@ class MenuSpec extends ObjectBehavior
     function it_adds_attributes_to_the_ul_tag()
     {
     }
+
+    function it_can_prefix_links()
+    {
+        $this
+            ->setLinkPrefix('/opensource')
+            ->addLink('laravel', 'Laravel');
+
+        $this->render()->shouldReturnHtml('
+            <ul>
+                <li><a href="/opensource/laravel">Laravel</a></li>
+            </ul>
+        ');
+    }
 }

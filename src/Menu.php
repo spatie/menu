@@ -18,6 +18,11 @@ class Menu implements Item
     protected $before;
 
     /**
+     * @var string
+     */
+    protected $linkPrefix;
+
+    /**
      * @param \Spatie\Menu\Item[] ...$items
      */
     private function __construct(Item ...$items)
@@ -43,7 +48,29 @@ class Menu implements Item
      */
     public function addLink(string $url, string $text)
     {
-        return $this->addItem(Link::create($url, $text));
+        return $this->addItem(Link::create($this->prefixLink($url), $text));
+    }
+
+    /**
+     * @param string $prefix
+     *
+     * @return static
+     */
+    public function setLinkPrefix(string $prefix)
+    {
+        $this->linkPrefix = rtrim($prefix, '/');
+
+        return $this;
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return string
+     */
+    protected function prefixLink(string $url) : string
+    {
+        return empty($this->linkPrefix) ? $url : $this->linkPrefix . '/' . trim($url, '/');
     }
 
     /**
