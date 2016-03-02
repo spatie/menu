@@ -2,24 +2,24 @@
 
 namespace Spatie\Menu;
 
+use Spatie\HtmlElement\Html;
 use Spatie\Menu\Helpers\MenuItemDisplayer;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Items\RawHtml;
 use Spatie\Menu\Traits\Collection;
-use Spatie\Menu\Traits\HtmlElement;
+use Spatie\Menu\Traits\HtmlAttributes;
 
 class Menu implements Item
 {
-    use Collection, HtmlElement;
+    use Collection, HtmlAttributes;
 
-    /**
-     * @var \Spatie\Menu\Item
-     */
-    protected $before;
+    /** @var string */
+    protected $before = '';
 
-    /**
-     * @var string
-     */
+    /** @var string */
+    protected $after = '';
+
+    /** @var string */
     protected $linkPrefix;
 
     /**
@@ -38,6 +38,18 @@ class Menu implements Item
     public static function create(array $items = [])
     {
         return new static(...$items);
+    }
+
+    /**
+     * @param \Spatie\Menu\Item $item
+     *
+     * @return static
+     */
+    public function add(Item $item)
+    {
+        $this->items[] = $item;
+
+        return $this;
     }
 
     /**
@@ -84,29 +96,25 @@ class Menu implements Item
     }
 
     /**
-     * @param \Spatie\Menu\Menu $menu
+     * @param string $before
      *
      * @return static
      */
-    public function addMenu(Menu $menu)
+    public function before(string $before)
     {
-        $this->addItem($menu);
+        $this->before = $before;
 
         return $this;
     }
 
     /**
-     * @param \Spatie\Menu\Item|string $before
+     * @param string $after
      *
      * @return static
      */
-    public function before($before)
+    public function after(string $after)
     {
-        if (is_string($before)) {
-            $before = RawHtml::create($before);
-        }
-
-        $this->before = $before;
+        $this->after = $after;
 
         return $this;
     }
@@ -151,24 +159,12 @@ class Menu implements Item
     /**
      * @return string
      */
-    protected function element() : string
-    {
-        return 'ul';
-    }
-
-    /**
-     * @return string
-     */
     public function render() : string
     {
-        $before = empty($this->before) ? '' : $this->before->render();
+        $menu = Html::el('ul', $this->attributes->toArray(), $this->map(function (Item $item) {
+            return MenuItemDisplayer::render($item);
+        }));
 
-        $menu = $this->renderHtml(
-            $this->mapAndJoin(function (Item $item) {
-                return MenuItemDisplayer::render($item);
-            })
-        );
-
-        return "{$before}{$menu}";
+        return "{$this->before}{$menu}{$this->after}";
     }
 }

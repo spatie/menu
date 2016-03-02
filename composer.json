@@ -16,7 +16,9 @@
         }
     ],
     "require": {
-        "php" : "^7.0"
+        "php" : "^7.0",
+        "spatie/html-element": "^0.1.0",
+        "phpunit/phpunit": "^5.2"
     },
     "require-dev": {
         "bossa/phpspec2-expect": "^1.0",

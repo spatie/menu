@@ -2,32 +2,30 @@
 
 namespace Spatie\Menu\Items;
 
+use Spatie\HtmlElement\Html;
 use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
-use Spatie\Menu\Traits\HtmlElement;
+use Spatie\Menu\Traits\HtmlAttributes;
 
 class Link implements Item
 {
-    use Activatable, HtmlElement;
+    use Activatable, HtmlAttributes;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $text;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $url;
 
     /**
      * @param string $url
      * @param string $text
      */
-    private function __construct(string $url, string $text)
+    private function __construct(string $url, string $text, array $attributes = [])
     {
         $this->url = $url;
         $this->text = $text;
+        $this->attributes = $attributes;
         $this->active = false;
     }
 
@@ -87,16 +85,8 @@ class Link implements Item
     /**
      * @return string
      */
-    protected function element() : string
-    {
-        return 'a';
-    }
-
-    /**
-     * @return string
-     */
     public function render() : string
     {
-        return $this->renderHtml($this->text, ['href' => $this->url]);
+        return Html::el('a', array_merge($this->attributes(), ['href' => $this->url]), $this->text());
     }
 }
