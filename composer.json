@@ -1,11 +1,12 @@
 {
     "name": "spatie/menu",
-    "description": ":package_description",
+    "description": "Html menu generator",
     "keywords": [
         "spatie",
-        "navigation"
+        "navigation",
+        "menu"
     ],
-    "homepage": "https://github.com/spatie/navigation",
+    "homepage": "https://github.com/spatie/menu",
     "license": "MIT",
     "authors": [
         {
