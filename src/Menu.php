@@ -2,22 +2,25 @@
 
 namespace Spatie\Menu;
 
+use ReflectionFunction;
+use ReflectionParameter;
 use Spatie\HtmlElement\Html;
-use Spatie\Menu\Helpers\MenuItemDisplayer;
 use Spatie\Menu\Items\Link;
-use Spatie\Menu\Items\RawHtml;
-use Spatie\Menu\Traits\Collection;
 use Spatie\Menu\Traits\HtmlAttributes;
+use Spatie\Menu\Traits\ParentAttributes;
 
 class Menu implements Item
 {
-    use Collection, HtmlAttributes;
+    use HtmlAttributes, ParentAttributes;
+
+    /** @var array */
+    protected $items = [];
 
     /** @var string */
-    protected $before = '';
+    protected $prepend = '';
 
     /** @var string */
-    protected $after = '';
+    protected $append = '';
 
     /** @var string */
     protected $linkPrefix;
@@ -35,7 +38,7 @@ class Menu implements Item
      *
      * @return static
      */
-    public static function create(array $items = [])
+    public static function new(array $items = [])
     {
         return new static(...$items);
     }
@@ -53,14 +56,50 @@ class Menu implements Item
     }
 
     /**
-     * @param string $url
-     * @param string $text
+     * @param callable $callable
+     *
+     * @return array
+     */
+    public function map(callable $callable) : array
+    {
+        return array_map($callable, $this->items);
+    }
+
+    /**
+     * @param callable $callable
      *
      * @return static
      */
-    public function addLink(string $url, string $text)
+    public function manipulate(callable $callable)
     {
-        return $this->addItem(Link::create($this->prefixLink($url), $text));
+        $type = $this->determineTypeToManipulate($callable);
+
+        foreach($this->items as $item) {
+
+            if ($type && ! $item instanceof $type) {
+                continue;
+            }
+
+            $callable($item);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param callable $callable
+     *
+     * @return string|null
+     */
+    protected function determineTypeToManipulate(callable $callable)
+    {
+        $reflection = new ReflectionFunction($callable);
+
+        $parameterTypes = array_map(function (ReflectionParameter $parameter) {
+            return $parameter->getClass() ? $parameter->getClass()->name : null;
+        }, $reflection->getParameters());
+
+        return $parameterTypes[0] ?? null;
     }
 
     /**
@@ -68,53 +107,33 @@ class Menu implements Item
      *
      * @return static
      */
-    public function setLinkPrefix(string $prefix)
+    public function prefixLinks(string $prefix)
     {
-        $this->linkPrefix = rtrim($prefix, '/');
+        return $this->manipulate(function (Link $link) use ($prefix) {
+            $link->prefix($prefix);
+        });
+    }
+
+    /**
+     * @param string $prepend
+     *
+     * @return static
+     */
+    public function prepend(string $prepend)
+    {
+        $this->prepend = $prepend;
 
         return $this;
     }
 
     /**
-     * @param string $url
-     *
-     * @return string
-     */
-    protected function prefixLink(string $url) : string
-    {
-        return empty($this->linkPrefix) ? $url : $this->linkPrefix . '/' . trim($url, '/');
-    }
-
-    /**
-     * @param string $html
+     * @param string $append
      *
      * @return static
      */
-    public function addHtml(string $html)
+    public function append(string $append)
     {
-        return $this->addItem(RawHtml::create($html));
-    }
-
-    /**
-     * @param string $before
-     *
-     * @return static
-     */
-    public function before(string $before)
-    {
-        $this->before = $before;
-
-        return $this;
-    }
-
-    /**
-     * @param string $after
-     *
-     * @return static
-     */
-    public function after(string $after)
-    {
-        $this->after = $after;
+        $this->append = $append;
 
         return $this;
     }
@@ -140,7 +159,7 @@ class Menu implements Item
      */
     public function setActive(callable $callable)
     {
-        $type = $this->getTypeToManipulate($callable);
+        $type = $this->determineTypeToManipulate($callable);
 
         foreach($this->items as $item) {
 
@@ -161,10 +180,19 @@ class Menu implements Item
      */
     public function render() : string
     {
-        $menu = Html::el('ul', $this->attributes->toArray(), $this->map(function (Item $item) {
-            return MenuItemDisplayer::render($item);
-        }));
+        $menu = Html::el(
+            'ul',
+            $this->attributes()->toArray(),
+            $this->map(function (Item $item) {
 
-        return "{$this->before}{$menu}{$this->after}";
+                return Html::el(
+                    $item->isActive() ? 'li.active' : 'li',
+                    $item->getParentAttributes(),
+                    $item->render()
+                );
+            })
+        );
+
+        return "{$this->prepend}{$menu}{$this->append}";
     }
 }

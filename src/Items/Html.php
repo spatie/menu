@@ -5,10 +5,11 @@ namespace Spatie\Menu\Items;
 use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
 use Spatie\Menu\Traits\HtmlElement;
+use Spatie\Menu\Traits\ParentAttributes;
 
-class RawHtml implements Item
+class Html implements Item
 {
-    use Activatable;
+    use Activatable, ParentAttributes;
 
     /**
      * @var string
@@ -29,7 +30,7 @@ class RawHtml implements Item
      *
      * @return static
      */
-    public static function create(string $html)
+    public static function raw(string $html)
     {
         return new static($html);
     }

@@ -17,13 +17,10 @@
     ],
     "require": {
         "php" : "^7.0",
-        "spatie/html-element": "^0.1.0",
-        "phpunit/phpunit": "^5.2"
+        "spatie/html-element": "^0.5.0"
     },
     "require-dev": {
-        "bossa/phpspec2-expect": "^1.0",
-        "phpspec/phpspec": "^2.4.1",
-        "phpspec/prophecy": "^1.6"
+        "phpunit/phpunit": "^5.2"
     },
     "autoload": {
         "psr-4": {
@@ -32,10 +29,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Spatie\\Menu\\": "spec"
+            "Spatie\\Menu\\Test\\": "tests"
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpspec"
+        "test": "vendor/bin/phpunit"
     }
 }

@@ -2,14 +2,15 @@
 
 namespace Spatie\Menu\Items;
 
-use Spatie\HtmlElement\Html;
+use Spatie\HtmlElement\Html as HtmlElement;
 use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
 use Spatie\Menu\Traits\HtmlAttributes;
+use Spatie\Menu\Traits\ParentAttributes;
 
 class Link implements Item
 {
-    use Activatable, HtmlAttributes;
+    use Activatable, HtmlAttributes, ParentAttributes;
 
     /** @var string */
     protected $text;
@@ -21,11 +22,10 @@ class Link implements Item
      * @param string $url
      * @param string $text
      */
-    private function __construct(string $url, string $text, array $attributes = [])
+    private function __construct(string $url, string $text)
     {
         $this->url = $url;
         $this->text = $text;
-        $this->attributes = $attributes;
         $this->active = false;
     }
 
@@ -35,7 +35,7 @@ class Link implements Item
      *
      * @return static
      */
-    public static function create(string $url, string $text)
+    public static function to(string $url, string $text)
     {
         return new static($url, $text);
     }
@@ -83,10 +83,26 @@ class Link implements Item
     }
 
     /**
+     * @param string $prefix
+     *
+     * @return static
+     */
+    public function prefix(string $prefix)
+    {
+        $this->url = $prefix . '/' . ltrim($this->url, '/');
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function render() : string
     {
-        return Html::el('a', array_merge($this->attributes(), ['href' => $this->url]), $this->text());
+        return HtmlElement::el(
+            "a[href={$this->url}]",
+            $this->attributes()->toArray(),
+            $this->text
+        );
     }
 }
