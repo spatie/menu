@@ -22,8 +22,8 @@ class Menu implements Item
     /** @var string */
     protected $append = '';
 
-    /** @var string */
-    protected $linkPrefix;
+    /** @var array */
+    protected $filters = [];
 
     /**
      * @param \Spatie\Menu\Item[] ...$items
@@ -50,9 +50,31 @@ class Menu implements Item
      */
     public function add(Item $item)
     {
+        if ($this->applyFilters($item) === false) {
+            return $this;
+        }
+
         $this->items[] = $item;
 
         return $this;
+    }
+
+    protected function applyFilters(Item $item) : bool
+    {
+        foreach ($this->filters as $filter) {
+
+            $type = $this->determineTypeToManipulate($filter);
+
+            if ($type && ! $item instanceof $type) {
+                continue;
+            }
+
+            if ($filter($item) === false) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -70,7 +92,7 @@ class Menu implements Item
      *
      * @return static
      */
-    public function manipulate(callable $callable)
+    public function each(callable $callable)
     {
         $type = $this->determineTypeToManipulate($callable);
 
@@ -82,6 +104,26 @@ class Menu implements Item
 
             $callable($item);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param callable $callable
+     *
+     * @return $this
+     */
+    public function addFilter(callable $callable)
+    {
+        $this->filters[] = $callable;
+
+        return $this;
+    }
+
+    public function applyToAll(callable $callable)
+    {
+        $this->each($callable);
+        $this->addFilter($callable);
 
         return $this;
     }
@@ -109,7 +151,7 @@ class Menu implements Item
      */
     public function prefixLinks(string $prefix)
     {
-        return $this->manipulate(function (Link $link) use ($prefix) {
+        return $this->applyToAll(function (Link $link) use ($prefix) {
             $link->prefix($prefix);
         });
     }
@@ -184,7 +226,6 @@ class Menu implements Item
             'ul',
             $this->attributes()->toArray(),
             $this->map(function (Item $item) {
-
                 return Html::el(
                     $item->isActive() ? 'li.active' : 'li',
                     $item->getParentAttributes(),
