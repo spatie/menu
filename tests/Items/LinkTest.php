@@ -11,7 +11,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'Home',
-            Link::to('https://spatie.be', 'Home')->text()
+            Link::to('https://spatie.be', 'Home')->getText()
         );
     }
 
@@ -20,7 +20,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'https://spatie.be',
-            Link::to('https://spatie.be', 'Home')->url()
+            Link::to('https://spatie.be', 'Home')->getUrl()
         );
     }
 
@@ -83,7 +83,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             '/foo/bar',
-            Link::to('/bar', 'Bar')->prefix('/foo')->url()
+            Link::to('/bar', 'Bar')->prefix('/foo')->getUrl()
         );
     }
 }

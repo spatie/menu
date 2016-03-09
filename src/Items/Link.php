@@ -43,7 +43,7 @@ class Link implements Item
     /**
      * @return string
      */
-    public function text() : string
+    public function getText() : string
     {
         return $this->text;
     }
@@ -51,7 +51,7 @@ class Link implements Item
     /**
      * @return string
      */
-    public function url() : string
+    public function getUrl() : string
     {
         return $this->url;
     }
