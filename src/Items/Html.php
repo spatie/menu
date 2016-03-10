@@ -11,21 +11,21 @@ class Html implements Item
 {
     use Activatable, ParentAttributes;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $html;
 
     /**
      * @param string $html
      */
-    private function __construct(string $html)
+    protected function __construct(string $html)
     {
         $this->html = $html;
         $this->active = false;
     }
 
     /**
+     * Create an item containing a chunk of raw html.
+     *
      * @param string $html
      *
      * @return static
@@ -38,7 +38,7 @@ class Html implements Item
     /**
      * @return string
      */
-    public function html() : string
+    public function getHtml() : string
     {
         return $this->html;
     }

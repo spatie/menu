@@ -9,6 +9,9 @@ trait HtmlAttributes
     /** @var \Spatie\HtmlElement\Attributes */
     private $htmlAttributes;
 
+    /**
+     * @return \Spatie\HtmlElement\Attributes
+     */
     protected function attributes() : Attributes
     {
         if ($this->htmlAttributes === null) {
@@ -22,7 +25,7 @@ trait HtmlAttributes
      * @param string $attribute
      * @param string $value
      *
-     * @return static
+     * @return $this
      */
     public function setAttribute(string $attribute, string $value = '')
     {

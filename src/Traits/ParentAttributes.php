@@ -9,6 +9,9 @@ trait ParentAttributes
     /** @var \Spatie\HtmlElement\Attributes */
     private $parentAttributes;
 
+    /**
+     * @return \Spatie\HtmlElement\Attributes
+     */
     protected function parentAttributes() : Attributes
     {
         if ($this->parentAttributes === null) {
@@ -18,6 +21,12 @@ trait ParentAttributes
         return $this->parentAttributes;
     }
 
+    /**
+     * Return an array of attributes to apply on the parent. This generally means the attributes
+     * that should be applied on the <li> tag.
+     *
+     * @return array
+     */
     public function getParentAttributes() : array
     {
         return $this->parentAttributes()->toArray();
@@ -27,7 +36,7 @@ trait ParentAttributes
      * @param string $attribute
      * @param string $value
      *
-     * @return static
+     * @return $this
      */
     public function setParentAttribute(string $attribute, string $value = '')
     {

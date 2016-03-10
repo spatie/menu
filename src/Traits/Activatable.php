@@ -4,9 +4,7 @@ namespace Spatie\Menu\Traits;
 
 trait Activatable
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $active = false;
 
     /**
@@ -18,7 +16,7 @@ trait Activatable
     }
 
     /**
-     * @return static
+     * @return $this
      */
     public function setActive()
     {
@@ -28,7 +26,7 @@ trait Activatable
     }
 
     /**
-     * @return static
+     * @return $this
      */
     public function setInactive()
     {

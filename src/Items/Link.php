@@ -22,7 +22,7 @@ class Link implements Item
      * @param string $url
      * @param string $text
      */
-    private function __construct(string $url, string $text)
+    protected function __construct(string $url, string $text)
     {
         $this->url = $url;
         $this->text = $text;
@@ -40,17 +40,11 @@ class Link implements Item
         return new static($url, $text);
     }
 
-    /**
-     * @return string
-     */
     public function getText() : string
     {
         return $this->text;
     }
 
-    /**
-     * @return string
-     */
     public function getUrl() : string
     {
         return $this->url;
@@ -85,7 +79,7 @@ class Link implements Item
     /**
      * @param string $prefix
      *
-     * @return static
+     * @return $this
      */
     public function prefix(string $prefix)
     {
