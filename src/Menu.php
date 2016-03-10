@@ -304,6 +304,9 @@ class Menu implements Item
         return "{$this->prepend}{$menu}{$this->append}";
     }
 
+    /**
+     * @return string
+     */
     public function __toString() : string
     {
         return $this->render();
