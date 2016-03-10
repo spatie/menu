@@ -74,10 +74,9 @@ class Menu implements Item
     protected function applyFilters(Item $item) : bool
     {
         foreach ($this->filters as $filter) {
-
             $type = $this->determineFirstParamaterType($filter);
 
-            if ($type && ! $item instanceof $type) {
+            if ($type && !$item instanceof $type) {
                 continue;
             }
 
@@ -124,9 +123,8 @@ class Menu implements Item
     {
         $type = $this->determineFirstParamaterType($callable);
 
-        foreach($this->items as $item) {
-
-            if ($type && ! $item instanceof $type) {
+        foreach ($this->items as $item) {
+            if ($type && !$item instanceof $type) {
                 continue;
             }
 
@@ -258,9 +256,8 @@ class Menu implements Item
     {
         $type = $this->determineFirstParamaterType($callable);
 
-        foreach($this->items as $item) {
-
-            if ($type && ! $item instanceof $type) {
+        foreach ($this->items as $item) {
+            if ($type && !$item instanceof $type) {
                 continue;
             }
 

@@ -4,7 +4,6 @@ namespace Spatie\Menu\Items;
 
 use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
-use Spatie\Menu\Traits\HtmlElement;
 use Spatie\Menu\Traits\ParentAttributes;
 
 class Html implements Item

@@ -40,11 +40,17 @@ class Link implements Item
         return new static($url, $text);
     }
 
+    /**
+     * @return string
+     */
     public function getText() : string
     {
         return $this->text;
     }
 
+    /**
+     * @return string
+     */
     public function getUrl() : string
     {
         return $this->url;
@@ -73,7 +79,7 @@ class Link implements Item
             )
         );
 
-        return $segments[$index-1] ?? null;
+        return $segments[$index - 1] ?? null;
     }
 
     /**
@@ -83,7 +89,7 @@ class Link implements Item
      */
     public function prefix(string $prefix)
     {
-        $this->url = $prefix . '/' . ltrim($this->url, '/');
+        $this->url = $prefix.'/'.ltrim($this->url, '/');
 
         return $this;
     }
