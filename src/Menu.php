@@ -74,18 +74,31 @@ class Menu implements Item
     protected function applyFilters(Item $item) : bool
     {
         foreach ($this->filters as $filter) {
-            $type = $this->determineFirstParameterType($filter);
-
-            if ($type !== null && !$item instanceof $type) {
-                continue;
-            }
-
-            if ($filter($item) === false) {
+            if ($this->applyFilter($filter, $item) === false) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * Apply a filter to an item. Returns the result of the filter.
+     *
+     * @param callable $filter
+     * @param \Spatie\Menu\Item $item
+     *
+     * @return mixed
+     */
+    protected function applyFilter(callable $filter, Item $item)
+    {
+        $type = $this->determineFirstParameterType($filter);
+
+        if ($type !== null && !$item instanceof $type) {
+            return;
+        }
+
+        return $filter($item);
     }
 
     /**
