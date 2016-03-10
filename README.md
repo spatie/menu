@@ -1,15 +1,13 @@
-# :package_name
+# menu
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/spatie/:package_name/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
+[![Build Status](https://img.shields.io/travis/spatie/menu/master.svg?style=flat-square)](https://travis-ci.org/spatie/menu)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/315e0520-ff38-4441-9b6a-ebb6efe3bcb2.svg?style=flat-square)](https://insight.sensiolabs.com/projects/315e0520-ff38-4441-9b6a-ebb6efe3bcb2)
-[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/:package_name.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/:package_name)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
+[![Quality Score](https://img.shields.io/scrutinizer/g/spatie/menu.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/menu)
+[![Total Downloads](https://img.shields.io/packagist/dt/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 
 > **WORK IN PROGRESS**
-
-**Note:** Replace ```:author_name``` ```:author_username``` ```:author_website``` ```:author_email``` ```:package_name``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
 PSRs you support to avoid any confusion with users and contributors.
@@ -18,17 +16,9 @@ Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview 
 
 ## Install
 
-**Note:** Remove this paragraph if you are building a public package
-This package is custom built for [Spatie](https://spatie.be) projects and is therefore not registered on packagist. 
-In order to install it via composer you must specify this extra repository in `composer.json`:
-
-```json
-"repositories": [ { "type": "composer", "url": "https://satis.spatie.be/" } ]
-```
-
 You can install the package via composer:
 ``` bash
-$ composer require spatie/:package_name
+$ composer require spatie/menu
 ```
 
 ## Usage
@@ -58,7 +48,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Sebastian De Deyne](https://github.com/sebastiandedeyne)
 - [All Contributors](../../contributors)
 
 ## About Spatie
