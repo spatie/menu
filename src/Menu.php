@@ -74,9 +74,9 @@ class Menu implements Item
     protected function applyFilters(Item $item) : bool
     {
         foreach ($this->filters as $filter) {
-            $type = $this->determineFirstParamaterType($filter);
+            $type = $this->determineFirstParameterType($filter);
 
-            if ($type && !$item instanceof $type) {
+            if ($type !== null && !$item instanceof $type) {
                 continue;
             }
 
@@ -98,11 +98,11 @@ class Menu implements Item
      */
     public function map(callable $callable) : array
     {
-        $type = $this->determineFirstParamaterType($callable);
+        $type = $this->determineFirstParameterType($callable);
 
         $items = $this->items;
 
-        if ($type) {
+        if ($type !== null) {
             $items = array_filter($items, function (Item $item) use ($type) {
                 return $item instanceof $type;
             });
@@ -121,10 +121,10 @@ class Menu implements Item
      */
     public function each(callable $callable)
     {
-        $type = $this->determineFirstParamaterType($callable);
+        $type = $this->determineFirstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if ($type && !$item instanceof $type) {
+            if ($type !== null && !$item instanceof $type) {
                 continue;
             }
 
@@ -174,7 +174,7 @@ class Menu implements Item
      *
      * @return string|null
      */
-    protected function determineFirstParamaterType(callable $callable)
+    protected function determineFirstParameterType(callable $callable)
     {
         $reflection = new ReflectionFunction($callable);
 
@@ -254,7 +254,7 @@ class Menu implements Item
      */
     public function setActive(callable $callable)
     {
-        $type = $this->determineFirstParamaterType($callable);
+        $type = $this->determineFirstParameterType($callable);
 
         foreach ($this->items as $item) {
             if ($type && !$item instanceof $type) {
