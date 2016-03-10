@@ -270,7 +270,7 @@ class Menu implements Item
         $type = $this->determineFirstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if ($type && !$item instanceof $type) {
+            if ($type !== null && !$item instanceof $type) {
                 continue;
             }
 
