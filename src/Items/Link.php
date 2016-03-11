@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu\Items;
 
-use Spatie\HtmlElement\Html as HtmlElement;
+use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
 use Spatie\Menu\Traits\HtmlAttributes;
@@ -99,7 +99,7 @@ class Link implements Item
      */
     public function render() : string
     {
-        return HtmlElement::el(
+        return HtmlElement::render(
             "a[href={$this->url}]",
             $this->attributes()->toArray(),
             $this->text

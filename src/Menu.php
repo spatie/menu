@@ -4,7 +4,7 @@ namespace Spatie\Menu;
 
 use ReflectionFunction;
 use ReflectionParameter;
-use Spatie\HtmlElement\Html;
+use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
@@ -321,11 +321,11 @@ class Menu implements Item
      */
     public function render() : string
     {
-        $menu = Html::el(
+        $menu = HtmlElement::render(
             'ul',
             $this->attributes()->toArray(),
             $this->map(function (Item $item) {
-                return Html::el(
+                return HtmlElement::render(
                     $item->isActive() ? 'li.active' : 'li',
                     $item->getParentAttributes(),
                     $item->render()
