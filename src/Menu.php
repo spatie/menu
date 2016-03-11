@@ -42,7 +42,7 @@ class Menu implements Item
      */
     public static function new(array $items = [])
     {
-        return new static(...$items);
+        return new static(...array_values($items));
     }
 
     /**
