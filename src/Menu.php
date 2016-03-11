@@ -227,6 +227,23 @@ class Menu implements Item
     }
 
     /**
+     * Prepend the menu with a string of html on render if a certain condition is met.
+     *
+     * @param bool $condition
+     * @param string $prepend
+     *
+     * @return $this
+     */
+    public function prependIf(bool $condition, string $prepend)
+    {
+        if ($condition) {
+            $this->prepend($prepend);
+        }
+
+       return $this;
+    }
+
+    /**
      * Append a string of html to the menu on render.
      *
      * @param string $append
@@ -236,6 +253,23 @@ class Menu implements Item
     public function append(string $append)
     {
         $this->append = $append;
+
+        return $this;
+    }
+
+    /**
+     * Append the menu with a string of html on render if a certain condition is met.
+     *
+     * @param bool $condition
+     * @param string $append
+     *
+     * @return $this
+     */
+    public function appendIf(bool $condition, string $append)
+    {
+        if ($condition) {
+            $this->append($append);
+        }
 
         return $this;
     }
@@ -283,8 +317,6 @@ class Menu implements Item
     }
 
     /**
-     * Render the menu in html.
-     *
      * @return string
      */
     public function render() : string
