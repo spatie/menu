@@ -303,17 +303,15 @@ class Menu implements Item
     {
         $type = $this->determineFirstParameterType($callable);
 
-        foreach ($this->items as $item) {
+        return $this->applyToAll(function (Item $item) use ($callable, $type) {
             if ($type !== null && !$item instanceof $type) {
-                continue;
+                return;
             }
 
             if ($callable($item)) {
                 $item->setActive();
             }
-        }
-
-        return $this;
+        });
     }
 
     /**
