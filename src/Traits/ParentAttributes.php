@@ -7,18 +7,11 @@ use Spatie\HtmlElement\Attributes;
 trait ParentAttributes
 {
     /** @var \Spatie\HtmlElement\Attributes */
-    private $parentAttributes;
+    protected $parentAttributes;
 
-    /**
-     * @return \Spatie\HtmlElement\Attributes
-     */
-    protected function parentAttributes() : Attributes
+    protected function bootParentAttributes()
     {
-        if ($this->parentAttributes === null) {
-            $this->parentAttributes = new Attributes();
-        }
-
-        return $this->parentAttributes;
+        $this->parentAttributes = new Attributes();
     }
 
     /**
@@ -29,7 +22,7 @@ trait ParentAttributes
      */
     public function getParentAttributes() : array
     {
-        return $this->parentAttributes()->toArray();
+        return $this->parentAttributes->toArray();
     }
 
     /**
@@ -40,7 +33,7 @@ trait ParentAttributes
      */
     public function setParentAttribute(string $attribute, string $value = '')
     {
-        $this->parentAttributes()->setAttribute($attribute, $value);
+        $this->parentAttributes->setAttribute($attribute, $value);
 
         return $this;
     }
@@ -52,7 +45,7 @@ trait ParentAttributes
      */
     public function addParentClass(string $class)
     {
-        $this->parentAttributes()->addClass($class);
+        $this->parentAttributes->addClass($class);
 
         return $this;
     }

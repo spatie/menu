@@ -2,12 +2,11 @@
 
 namespace Spatie\Menu;
 
-use ReflectionFunction;
-use ReflectionParameter;
 use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
+use function Spatie\Menu\first_parameter_type;
 
 class Menu implements Item
 {
@@ -31,6 +30,9 @@ class Menu implements Item
     protected function __construct(Item ...$items)
     {
         $this->items = $items;
+
+        $this->bootHtmlAttributes();
+        $this->bootParentAttributes();
     }
 
     /**
@@ -55,8 +57,8 @@ class Menu implements Item
      */
     public function add(Item $item)
     {
-        if ($this->applyFilters($item) === false) {
-            return $this;
+        foreach ($this->filters as $filter) {
+            $this->applyFilter($filter, $item);
         }
 
         $this->items[] = $item;
@@ -65,63 +67,20 @@ class Menu implements Item
     }
 
     /**
-     * Applies all the currently registered filters to an item.
-     *
-     * @param \Spatie\Menu\Item $item
-     *
-     * @return bool
-     */
-    protected function applyFilters(Item $item) : bool
-    {
-        foreach ($this->filters as $filter) {
-            if ($this->applyFilter($filter, $item) === false) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Apply a filter to an item. Returns the result of the filter.
      *
      * @param callable $filter
      * @param \Spatie\Menu\Item $item
-     *
-     * @return mixed
      */
     protected function applyFilter(callable $filter, Item $item)
     {
-        $type = $this->determineFirstParameterType($filter);
+        $type = first_parameter_type($filter);
 
         if ($type !== null && !$item instanceof $type) {
             return;
         }
 
-        return $filter($item);
-    }
-
-    /**
-     * Map through all the items and return an array containing the result. If you typehint the
-     * item parameter in the callable, it wil only be applied to items of that type.
-     *
-     * @param callable $callable
-     *
-     * @return array
-     */
-    public function map(callable $callable) : array
-    {
-        $type = $this->determineFirstParameterType($callable);
-
-        $items = $this->items;
-
-        if ($type !== null) {
-            $items = array_filter($items, function (Item $item) use ($type) {
-                return $item instanceof $type;
-            });
-        }
-
-        return array_map($callable, $items);
+        $filter($item);
     }
 
     /**
@@ -134,7 +93,7 @@ class Menu implements Item
      */
     public function each(callable $callable)
     {
-        $type = $this->determineFirstParameterType($callable);
+        $type = first_parameter_type($callable);
 
         foreach ($this->items as $item) {
             if ($type !== null && !$item instanceof $type) {
@@ -149,7 +108,7 @@ class Menu implements Item
 
     /**
      * Register a filter to the menu. When an item is added, all filters will be applied to the
-     * item. If a filter returns false, the item won't be added. If you typehint the item
+     * item. If you typehint the item
      * parameter in the callable, it wil only be applied to items of that type.
      *
      * @param callable $callable
@@ -178,24 +137,6 @@ class Menu implements Item
         $this->registerFilter($callable);
 
         return $this;
-    }
-
-    /**
-     * Determine the type of the first parameter of a callable.
-     *
-     * @param callable $callable
-     *
-     * @return string|null
-     */
-    protected function determineFirstParameterType(callable $callable)
-    {
-        $reflection = new ReflectionFunction($callable);
-
-        $parameterTypes = array_map(function (ReflectionParameter $parameter) {
-            return $parameter->getClass() ? $parameter->getClass()->name : null;
-        }, $reflection->getParameters());
-
-        return $parameterTypes[0] ?? null;
     }
 
     /**
@@ -237,10 +178,10 @@ class Menu implements Item
     public function prependIf(bool $condition, string $prepend)
     {
         if ($condition) {
-            $this->prepend($prepend);
+            return $this->prepend($prepend);
         }
 
-       return $this;
+        return $this;
     }
 
     /**
@@ -263,12 +204,12 @@ class Menu implements Item
      * @param bool $condition
      * @param string $append
      *
-     * @return $this
+     * @return static
      */
     public function appendIf(bool $condition, string $append)
     {
         if ($condition) {
-            $this->append($append);
+            return $this->append($append);
         }
 
         return $this;
@@ -313,14 +254,25 @@ class Menu implements Item
         throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
     }
 
+    /**
+     * @param string $pattern
+     * @param string $root
+     *
+     * @throws \Exception
+     */
     public function setActiveFromPattern(string $pattern, string $root = '')
     {
-        // ...
+        throw new \Exception('Todo');
     }
 
+    /**
+     * @param callable $callable
+     *
+     * @return $this
+     */
     public function setActiveFromCallable(callable $callable)
     {
-        $type = $this->determineFirstParameterType($callable);
+        $type = first_parameter_type($callable);
 
         return $this->applyToAll(function (Item $item) use ($callable, $type) {
             if ($type !== null && !$item instanceof $type) {
@@ -338,19 +290,19 @@ class Menu implements Item
      */
     public function render() : string
     {
-        $menu = HtmlElement::render(
+        $contents = HtmlElement::render(
             'ul',
-            $this->attributes()->toArray(),
-            $this->map(function (Item $item) {
+            $this->htmlAttributes->toArray(),
+            array_map(function (Item $item) {
                 return HtmlElement::render(
                     $item->isActive() ? 'li.active' : 'li',
                     $item->getParentAttributes(),
                     $item->render()
                 );
-            })
+            }, $this->items)
         );
 
-        return "{$this->prepend}{$menu}{$this->append}";
+        return "{$this->prepend}{$contents}{$this->append}";
     }
 
     /**

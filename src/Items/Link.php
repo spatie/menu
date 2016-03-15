@@ -27,6 +27,9 @@ class Link implements Item
         $this->url = $url;
         $this->text = $text;
         $this->active = false;
+
+        $this->bootHtmlAttributes();
+        $this->bootParentAttributes();
     }
 
     /**
@@ -101,7 +104,7 @@ class Link implements Item
     {
         return HtmlElement::render(
             "a[href={$this->url}]",
-            $this->attributes()->toArray(),
+            $this->htmlAttributes->toArray(),
             $this->text
         );
     }
