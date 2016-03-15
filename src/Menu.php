@@ -295,11 +295,30 @@ class Menu implements Item
      * If you typehint the item parameter in the callable, it wil only be applied to items of
      * that type.
      *
-     * @param callable $callable
+     * @param callable|string $patternOrCallable
+     * @param string $root
      *
      * @return $this
      */
-    public function setActive(callable $callable)
+    public function setActive($patternOrCallable, string $root = '')
+    {
+        if (is_string($patternOrCallable)) {
+            return $this->setActiveFromPattern($patternOrCallable, $root);
+        }
+
+        if (is_callable($patternOrCallable)) {
+            return $this->setActiveFromCallable();
+        }
+
+        throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
+    }
+
+    public function setActiveFromPattern(string $pattern, string $root = '')
+    {
+        // ...
+    }
+
+    public function setActiveFromCallable(callable $callable)
     {
         $type = $this->determineFirstParameterType($callable);
 
