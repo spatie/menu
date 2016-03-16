@@ -6,7 +6,6 @@ use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Items\Link;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
-use function Spatie\Menu\first_parameter_type;
 
 class Menu implements Item
 {
@@ -76,7 +75,7 @@ class Menu implements Item
     {
         $type = first_parameter_type($filter);
 
-        if ($type !== null && !$item instanceof $type) {
+        if (!item_matches_type($item, $type)) {
             return;
         }
 
@@ -96,7 +95,7 @@ class Menu implements Item
         $type = first_parameter_type($callable);
 
         foreach ($this->items as $item) {
-            if ($type !== null && !$item instanceof $type) {
+            if (!item_matches_type($item, $type)) {
                 continue;
             }
 
@@ -241,28 +240,58 @@ class Menu implements Item
      *
      * @return $this
      */
-    public function setActive($patternOrCallable, string $root = '')
+    public function setActive($patternOrCallable, string $root = '/')
     {
         if (is_string($patternOrCallable)) {
-            return $this->setActiveFromPattern($patternOrCallable, $root);
+            return $this->setActiveFromUrl($patternOrCallable, $root);
         }
 
         if (is_callable($patternOrCallable)) {
-            return $this->setActiveFromCallable();
+            return $this->setActiveFromCallable($patternOrCallable);
         }
 
         throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
     }
 
     /**
-     * @param string $pattern
+     * @param string $url
      * @param string $root
      *
-     * @throws \Exception
+     * @return $this
      */
-    public function setActiveFromPattern(string $pattern, string $root = '')
+    public function setActiveFromUrl(string $url, string $root = '/')
     {
-        throw new \Exception('Todo');
+        $requestUrl = url_parts($url);
+        $requestRoot = strip_trailing_slashes($root, '/');
+
+        $this->applyToAll(function (Link $link) use ($requestUrl, $requestRoot) {
+
+            $url = url_parts($link->getUrl());
+
+            // If the menu item is on a different host it can't be active.
+            if ($url['host'] !== '' && $url['host'] !== $requestUrl['host']) {
+                return;
+            }
+
+            // If the request url or the link url is on the root, only set exact matches active.
+            if (
+                $requestUrl['path'] === $requestRoot ||
+                $url['path'] === $requestRoot
+            ) {
+                if ($url['path'] === $requestUrl['path']) {
+                    $link->setActive();
+                }
+
+                return;
+            }
+
+            // The menu item is active if it's path starts with the request path.
+            if (strpos($url['path'], $requestUrl['path']) === 0) {
+                $link->setActive();
+            };
+        });
+
+        return $this;
     }
 
     /**
@@ -275,7 +304,7 @@ class Menu implements Item
         $type = first_parameter_type($callable);
 
         return $this->applyToAll(function (Item $item) use ($callable, $type) {
-            if ($type !== null && !$item instanceof $type) {
+            if (!item_matches_type($item, $type)) {
                 return;
             }
 

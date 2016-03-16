@@ -2,15 +2,8 @@
 
 namespace Spatie\Menu\Test;
 
-use Spatie\Menu\Item;
-
-class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
-    public function assertRenders(string $expected, Item $item, string $message = '')
-    {
-        $this->assertEquals($expected, $item->render(), $message);
-    }
-
     public function assertHtmlEquals(string $expected, string $actual, string $message = '')
     {
         $this->assertEquals(
