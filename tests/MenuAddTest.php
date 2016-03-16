@@ -16,7 +16,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_an_item()
+    function an_item_can_be_added()
     {
         $this->menu = Menu::new()->add(Link::to('#', 'Hello'));
 
@@ -28,7 +28,19 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_multiple_items()
+    function a_link_can_be_added()
+    {
+        $this->menu = Menu::new()->link('#', 'Hello');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="#">Hello</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function multiple_items_can_be_added()
     {
         $this->menu = Menu::new()
             ->add(Link::to('#', 'Hello'))
@@ -56,7 +68,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_submenus()
+    function submenus_can_be_added()
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
@@ -87,6 +99,48 @@ class MenuAddTest extends MenuTestCase
                 <li class="active">
                     <ul>
                         <li class="active"><a href="#">In Too Deep</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_be_filled_from_an_array()
+    {
+        $this->menu = Menu::new()
+            ->fill([
+                '/' => 'Home',
+                '/about' => 'About',
+            ]);
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_be_filled_from_an_array_of_nested_menus()
+    {
+        $this->menu = Menu::new()
+            ->fill([
+                '/' => 'Home',
+                '/about' => [
+                    'biography' => 'Biography',
+                    'contact' => 'Contact',
+                ],
+            ]);
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <ul>
+                        <li><a href="/about/biography">Biography</a></li>
+                        <li><a href="/about/contact">Contact</a></li>
                     </ul>
                 </li>
             </ul>
