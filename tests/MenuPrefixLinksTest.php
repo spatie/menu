@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu\Test;
 
-use Spatie\Menu\Items\Link;
+use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
 
 class MenuPrefixLinksTest extends MenuTestCase

@@ -1,9 +1,8 @@
 <?php
 
-namespace Spatie\Menu\Items;
+namespace Spatie\Menu;
 
 use Spatie\HtmlElement\HtmlElement;
-use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;

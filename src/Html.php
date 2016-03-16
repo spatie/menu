@@ -1,8 +1,7 @@
 <?php
 
-namespace Spatie\Menu\Items;
+namespace Spatie\Menu;
 
-use Spatie\Menu\Item;
 use Spatie\Menu\Traits\Activatable;
 use Spatie\Menu\Traits\ParentAttributes;
 

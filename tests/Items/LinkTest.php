@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu\Test\Items;
 
-use Spatie\Menu\Items\Link;
+use Spatie\Menu\Link;
 
 class LinkTest extends \PHPUnit_Framework_TestCase
 {

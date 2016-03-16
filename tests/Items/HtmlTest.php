@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu\Test\Items;
 
-use Spatie\Menu\Items\Html;
+use Spatie\Menu\Html;
 
 class HtmlTest extends \PHPUnit_Framework_TestCase
 {
