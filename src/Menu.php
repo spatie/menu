@@ -2,11 +2,12 @@
 
 namespace Spatie\Menu;
 
+use Countable;
 use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Menu implements Item
+class Menu implements Countable, Item
 {
     use HtmlAttributes, ParentAttributes;
 
@@ -364,6 +365,14 @@ class Menu implements Item
         );
 
         return "{$this->prepend}{$contents}{$this->append}";
+    }
+
+    /**
+     * @return int
+     */
+    public function count() : int
+    {
+        return count($this->items);
     }
 
     /**
