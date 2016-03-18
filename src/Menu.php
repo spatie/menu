@@ -341,10 +341,14 @@ class Menu implements Countable, Item
 
     /**
      * @param string $class
+     *
+     * @return $this
      */
     public function setActiveClass(string $class)
     {
         $this->activeClass = $class;
+
+        return $this;
     }
 
     /**
