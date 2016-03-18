@@ -77,20 +77,6 @@ class Menu implements Item
         return $this->add(Link::to($url, $text));
     }
 
-    public function fill(array $map)
-    {
-        foreach($map as $url => $text) {
-            if (is_array($text)) {
-                $this->add(Menu::new()->fill($text)->prefixLinks($url));
-                continue;
-            }
-
-            $this->link($url, $text);
-        }
-
-        return $this;
-    }
-
     /**
      * Apply a filter to an item. Returns the result of the filter.
      *

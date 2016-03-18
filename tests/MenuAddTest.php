@@ -104,46 +104,4 @@ class MenuAddTest extends MenuTestCase
             </ul>
         ');
     }
-
-    /** @test */
-    function it_can_be_filled_from_an_array()
-    {
-        $this->menu = Menu::new()
-            ->fill([
-                '/' => 'Home',
-                '/about' => 'About',
-            ]);
-
-        $this->assertRenders('
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    function it_can_be_filled_from_an_array_of_nested_menus()
-    {
-        $this->menu = Menu::new()
-            ->fill([
-                '/' => 'Home',
-                '/about' => [
-                    'biography' => 'Biography',
-                    'contact' => 'Contact',
-                ],
-            ]);
-
-        $this->assertRenders('
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li>
-                    <ul>
-                        <li><a href="/about/biography">Biography</a></li>
-                        <li><a href="/about/contact">Contact</a></li>
-                    </ul>
-                </li>
-            </ul>
-        ');
-    }
 }
