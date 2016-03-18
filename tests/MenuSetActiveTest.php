@@ -118,4 +118,26 @@ class MenuSetActiveTest extends MenuTestCase
             </ul>
         ');
     }
+
+    function it_can_render_a_custom_active_class()
+    {
+        $this->menu = Menu::new()
+            ->setActiveClass('-active')
+            ->add(Link::to('/', 'Home'))
+            ->add(Link::to('/disclaimer', 'Disclaimer'))
+            ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+            ->setActive('http://example.com/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="-active">
+                    <a href="/disclaimer">Disclaimer</a>
+                </li>
+                <li class="-active">
+                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
 }

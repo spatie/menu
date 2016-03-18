@@ -22,6 +22,9 @@ class Menu implements Item
     /** @var array */
     protected $filters = [];
 
+    /** @var string */
+    protected $activeClass = 'active';
+
     /**
      * @param \Spatie\Menu\Item[] ...$items
      */
@@ -336,6 +339,14 @@ class Menu implements Item
     }
 
     /**
+     * @param string $class
+     */
+    public function setActiveClass(string $class)
+    {
+        $this->activeClass = $class;
+    }
+
+    /**
      * @return string
      */
     public function render() : string
@@ -345,7 +356,7 @@ class Menu implements Item
             $this->htmlAttributes->toArray(),
             array_map(function (Item $item) {
                 return HtmlElement::render(
-                    $item->isActive() ? 'li.active' : 'li',
+                    $item->isActive() ? "li.{$this->activeClass}" : 'li',
                     $item->getParentAttributes(),
                     $item->render()
                 );
