@@ -309,6 +309,12 @@ class Menu implements Countable, Item
 
                 return;
             }
+            
+            // If the request path is empty and it isn't the root, there's most likely a
+            // configuration error, and the item isn't active.
+            if (empty($url['path'])) {
+                return;
+            }
 
             // The menu item is active if it's path starts with the request path.
             if (strpos($url['path'], $requestUrl['path']) === 0) {
