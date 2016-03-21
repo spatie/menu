@@ -74,11 +74,23 @@ class Menu implements Countable, Item
      * @param string $url
      * @param string $text
      *
-     * @return \Spatie\Menu\Menu
+     * @return $this
      */
     public function link(string $url, string $text)
     {
         return $this->add(Link::to($url, $text));
+    }
+
+    /**
+     * Shortcut function to add raw html to the menu.
+     *
+     * @param string $html
+     *
+     * @return $this
+     */
+    public function html(string $html)
+    {
+        return $this->add(Html::raw($html));
     }
 
     /**
