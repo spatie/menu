@@ -50,8 +50,8 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Add an item to the menu. This also applies all registered filters on the item. If a filter
-     * returns false, the item won't be added.
+     * Add an item to the menu. This also applies all registered filters to the
+     * item.
      *
      * @param \Spatie\Menu\Item $item
      *
@@ -94,25 +94,9 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Apply a filter to an item. Returns the result of the filter.
-     *
-     * @param callable $filter
-     * @param \Spatie\Menu\Item $item
-     */
-    protected function applyFilter(callable $filter, Item $item)
-    {
-        $type = first_parameter_type($filter);
-
-        if (!item_matches_type($item, $type)) {
-            return;
-        }
-
-        $filter($item);
-    }
-
-    /**
      * Iterate over all the items and apply a callback. If you typehint the
-     * item parameter in the callable, it wil only be applied to items of that type.
+     * item parameter in the callable, it wil only be applied to items of that
+     * type.
      *
      * @param callable $callable
      *
@@ -134,9 +118,9 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Register a filter to the menu. When an item is added, all filters will be applied to the
-     * item. If you typehint the item
-     * parameter in the callable, it wil only be applied to items of that type.
+     * Register a filter to the menu. When an item is added, all filters will be
+     * applied to the item. If you typehint the item parameter in the callable, it
+     * will only be applied to items of that type.
      *
      * @param callable $callable
      *
@@ -150,9 +134,26 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Apply a callable to all existing items, and register it as a filter so it will get applied
-     * to all new items too. If you typehint the item parameter in the callable, it wil only be
-     * applied to items of that type.
+     * Apply a filter to an item. Returns the result of the filter.
+     *
+     * @param callable $filter
+     * @param \Spatie\Menu\Item $item
+     */
+    protected function applyFilter(callable $filter, Item $item)
+    {
+        $type = first_parameter_type($filter);
+
+        if (!item_matches_type($item, $type)) {
+            return;
+        }
+
+        $filter($item);
+    }
+
+    /**
+     * Apply a callable to all existing items, and register it as a filter so it
+     * will get applied to all new items too. If you typehint the item parameter
+     * in the callable, it wil only be applied to items of that type.
      *
      * @param callable $callable
      *
@@ -167,7 +168,7 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Prepend a string of html to the menu on render.
+     * Prefix all the links in the menu.
      *
      * @param string $prefix
      *
@@ -195,7 +196,8 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Prepend the menu with a string of html on render if a certain condition is met.
+     * Prepend the menu with a string of html on render if a certain condition is
+     * met.
      *
      * @param bool $condition
      * @param string $prepend
@@ -226,7 +228,8 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Append the menu with a string of html on render if a certain condition is met.
+     * Append the menu with a string of html on render if a certain condition is
+     * met.
      *
      * @param bool $condition
      * @param string $append
@@ -259,23 +262,23 @@ class Menu implements Countable, Item
     }
 
     /**
-     * Set multiple items in the menu as active based on a callable that filters through items.
-     * If you typehint the item parameter in the callable, it wil only be applied to items of
-     * that type.
+     * Set multiple items in the menu as active based on a callable that filters
+     * through items. If you typehint the item parameter in the callable, it will
+     * only be applied to items of that type.
      *
-     * @param callable|string $patternOrCallable
+     * @param callable|string $urlOrCallable
      * @param string $root
      *
      * @return $this
      */
-    public function setActive($patternOrCallable, string $root = '/')
+    public function setActive($urlOrCallable, string $root = '/')
     {
-        if (is_string($patternOrCallable)) {
-            return $this->setActiveFromUrl($patternOrCallable, $root);
+        if (is_string($urlOrCallable)) {
+            return $this->setActiveFromUrl($urlOrCallable, $root);
         }
 
-        if (is_callable($patternOrCallable)) {
-            return $this->setActiveFromCallable($patternOrCallable);
+        if (is_callable($urlOrCallable)) {
+            return $this->setActiveFromCallable($urlOrCallable);
         }
 
         throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
@@ -286,13 +289,13 @@ class Menu implements Countable, Item
      *
      * /, /about, /contact => request to /about will set the about link active.
      *
-     * /en, /en/about, /en/contact => request to /en won't set /en active if the request root
-     *                                is set to /en.
+     * /en, /en/about, /en/contact => request to /en won't set /en active if the
+     *                                request root is set to /en.
      *
      * @param string $url The current request url.
-     * @param string $root If the link's URL is an exact match with the request root, the
-     *                            link won't be set active. This behavior is to avoid having home
-     *                            links active on every request.
+     * @param string $root If the link's URL is an exact match with the request
+     *                     root, the link won't be set active. This behavior is
+     *                     to avoid having home links active on every request.
      *
      * @return $this
      */
@@ -321,7 +324,7 @@ class Menu implements Countable, Item
 
                 return;
             }
-            
+
             // If the request path is empty and it isn't the root, there's most likely a
             // configuration error, and the item isn't active.
             if (empty($url['path'])) {
