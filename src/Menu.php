@@ -361,6 +361,8 @@ class Menu implements Countable, Item
     }
 
     /**
+     * Set the class name that will be used on active items for this menu.
+     *
      * @param string $class
      *
      * @return $this
@@ -373,6 +375,8 @@ class Menu implements Countable, Item
     }
 
     /**
+     * Render the menu.
+     *
      * @return string
      */
     public function render() : string
@@ -393,6 +397,8 @@ class Menu implements Countable, Item
     }
 
     /**
+     * The amount of items in the menu.
+     *
      * @return int
      */
     public function count() : int
