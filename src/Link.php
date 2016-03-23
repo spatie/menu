@@ -7,7 +7,7 @@ use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Link implements Item, Activatable
+class Link implements Item, Activatable, HasUrl
 {
     use ActivatableTrait, HtmlAttributes, ParentAttributes;
 

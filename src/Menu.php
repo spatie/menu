@@ -308,7 +308,7 @@ class Menu implements Countable, Item
         $requestUrl = url_parts($url);
         $requestRoot = strip_trailing_slashes($root, '/');
 
-        $this->applyToAll(function (Link $link) use ($requestUrl, $requestRoot) {
+        $this->applyToAll(function (HasUrl $link) use ($requestUrl, $requestRoot) {
 
             $url = url_parts($link->getUrl());
 
