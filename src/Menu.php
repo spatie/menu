@@ -308,9 +308,14 @@ class Menu implements Countable, Item
         $requestUrl = url_parts($url);
         $requestRoot = strip_trailing_slashes($root, '/');
 
-        $this->applyToAll(function (HasUrl $link) use ($requestUrl, $requestRoot) {
+        $this->applyToAll(function ($item) use ($requestUrl, $requestRoot) {
 
-            $url = url_parts($link->getUrl());
+            // Not using a magic typehint since we need to do two instance checks
+            if (! $item instanceof HasUrl || ! $item instanceof Activatable) {
+                return;
+            }
+
+            $url = url_parts($item->getUrl());
 
             // If the menu item is on a different host it can't be active.
             if ($url['host'] !== '' && $url['host'] !== $requestUrl['host']) {
@@ -323,7 +328,7 @@ class Menu implements Countable, Item
                 $url['path'] === $requestRoot
             ) {
                 if ($url['path'] === $requestUrl['path']) {
-                    $link->setActive();
+                    $item->setActive();
                 }
 
                 return;
@@ -337,7 +342,7 @@ class Menu implements Countable, Item
 
             // The menu item is active if it's path starts with the request path.
             if (strpos($url['path'], $requestUrl['path']) === 0) {
-                $link->setActive();
+                $item->setActive();
             };
         });
 
@@ -358,6 +363,7 @@ class Menu implements Countable, Item
         $type = first_parameter_type($callable);
 
         return $this->applyToAll(function (Activatable $item) use ($callable, $type) {
+            
             if (!item_matches_type($item, $type)) {
                 return;
             }
