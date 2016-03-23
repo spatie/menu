@@ -26,6 +26,30 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
+    function it_can_set_items_active_recursively_through_submenus_with_a_callable()
+    {
+        $this->menu = Menu::new()
+            ->add(Menu::new()
+                ->add(Link::to('/', 'Home'))
+                ->add(Link::to('/about', 'About'))
+            )
+            ->setActive(function (Link $link) {
+                return $link->getUrl() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul>
+                <li class="active">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li class="active"><a href="/about">About</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     function it_can_set_items_active_from_an_absolute_url()
     {
         $this->menu = Menu::new()
@@ -42,6 +66,34 @@ class MenuSetActiveTest extends MenuTestCase
                 </li>
                 <li class="active">
                     <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_set_items_active_recursively_through_submenus_from_an_absolute_url()
+    {
+        $this->menu = Menu::new()
+            ->add(Menu::new()
+                ->add(Link::to('/', 'Home'))
+                ->add(Link::to('/disclaimer', 'Disclaimer'))
+                ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+            )
+            ->setActive('http://example.com/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li class="active">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li class="active">
+                            <a href="/disclaimer">Disclaimer</a>
+                        </li>
+                        <li class="active">
+                            <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         ');

@@ -301,9 +301,9 @@ class Menu implements Countable, Item
      */
     public function setActiveFromUrl(string $url, string $root = '/')
     {
-        //$this->applyToAll(function (Menu $menu) use ($url, $root) {
-        //    $menu->setActiveFromUrl($url, $root);
-        //});
+        $this->applyToAll(function (Menu $menu) use ($url, $root) {
+            $menu->setActiveFromUrl($url, $root);
+        });
 
         $requestUrl = url_parts($url);
         $requestRoot = strip_trailing_slashes($root, '/');
