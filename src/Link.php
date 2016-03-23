@@ -27,8 +27,8 @@ class Link implements Item, Activatable, HasUrl
         $this->text = $text;
         $this->active = false;
 
-        $this->bootHtmlAttributes();
-        $this->bootParentAttributes();
+        $this->initializeHtmlAttributes();
+        $this->initializeParentAttributes();
     }
 
     /**

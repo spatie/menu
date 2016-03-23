@@ -9,7 +9,7 @@ trait HtmlAttributes
     /** @var \Spatie\HtmlElement\Attributes */
     protected $htmlAttributes;
 
-    protected function bootHtmlAttributes()
+    protected function initializeHtmlAttributes()
     {
         $this->htmlAttributes = new Attributes();
     }

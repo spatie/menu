@@ -20,7 +20,7 @@ class Html implements Item, Activatable
         $this->html = $html;
         $this->active = false;
 
-        $this->bootParentAttributes();
+        $this->initializeParentAttributes();
     }
 
     /**

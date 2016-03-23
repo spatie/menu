@@ -33,8 +33,8 @@ class Menu implements Countable, Item
     {
         $this->items = $items;
 
-        $this->bootHtmlAttributes();
-        $this->bootParentAttributes();
+        $this->initializeHtmlAttributes();
+        $this->initializeParentAttributes();
     }
 
     /**
