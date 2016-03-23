@@ -28,7 +28,7 @@ class Link implements Item
         $this->active = false;
 
         $this->bootHtmlAttributes();
-        $this->bootParentAttributes();
+        $this->initializeParentAttributes();
     }
 
     /**

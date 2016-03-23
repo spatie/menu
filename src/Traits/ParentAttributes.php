@@ -9,7 +9,7 @@ trait ParentAttributes
     /** @var \Spatie\HtmlElement\Attributes */
     protected $parentAttributes;
 
-    protected function bootParentAttributes()
+    protected function initializeParentAttributes()
     {
         $this->parentAttributes = new Attributes();
     }
