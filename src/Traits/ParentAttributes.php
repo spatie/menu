@@ -15,8 +15,8 @@ trait ParentAttributes
     }
 
     /**
-     * Return an array of attributes to apply on the parent. This generally means the attributes
-     * that should be applied on the <li> tag.
+     * Return an array of attributes to apply on the parent. This generally means 
+     * the attributes that should be applied on the <li> tag.
      *
      * @return array
      */

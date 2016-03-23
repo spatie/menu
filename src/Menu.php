@@ -7,7 +7,7 @@ use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Menu implements Countable, Item
+class Menu implements Item, Countable
 {
     use HtmlAttributes, ParentAttributes;
 

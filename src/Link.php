@@ -59,10 +59,12 @@ class Link implements Item, Activatable, HasUrl
     }
 
     /**
-     * Return a segment of the link's URL. This function works for both absolute and relative URL's.
-     * The index is a 1-index based number. Trailing and double slashes are ignored.
+     * Return a segment of the link's URL. This function works for both absolute
+     * and relative URL's. The index is a 1-index based number. Trailing and
+     * double slashes are ignored.
      *
-     * Example: (new Link('Open Source', 'https://spatie.be/opensource'))->segment(1) => 'opensource'
+     * Example: (new Link('Open Source', 'https://spatie.be/opensource'))->segment(1)
+     *      => 'opensource'
      *
      * @param int $index
      *
@@ -106,5 +108,13 @@ class Link implements Item, Activatable, HasUrl
             $this->htmlAttributes->toArray(),
             $this->text
         );
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString() : string
+    {
+        return $this->render();
     }
 }
