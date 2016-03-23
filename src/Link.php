@@ -3,13 +3,13 @@
 namespace Spatie\Menu;
 
 use Spatie\HtmlElement\HtmlElement;
-use Spatie\Menu\Traits\Activatable;
+use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Link implements Item
+class Link implements Item, Activatable
 {
-    use Activatable, HtmlAttributes, ParentAttributes;
+    use ActivatableTrait, HtmlAttributes, ParentAttributes;
 
     /** @var string */
     protected $text;

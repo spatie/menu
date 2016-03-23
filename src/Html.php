@@ -2,12 +2,12 @@
 
 namespace Spatie\Menu;
 
-use Spatie\Menu\Traits\Activatable;
+use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Html implements Item
+class Html implements Item, Activatable
 {
-    use Activatable, ParentAttributes;
+    use ActivatableTrait, ParentAttributes;
 
     /** @var string */
     protected $html;
