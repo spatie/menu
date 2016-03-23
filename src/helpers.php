@@ -29,7 +29,11 @@ function first_parameter_type(callable $callable) : string
  */
 function item_matches_type(Item $item, string $type)
 {
-    return $type !== '' && $item instanceof $type;
+    if ($type === '') {
+        return true;
+    }
+
+    return $item instanceof $type;
 }
 
 /**

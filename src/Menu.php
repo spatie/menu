@@ -301,9 +301,9 @@ class Menu implements Countable, Item
      */
     public function setActiveFromUrl(string $url, string $root = '/')
     {
-        $this->applyToAll(function (Menu $menu) use ($url, $root) {
-            $menu->setActiveFromUrl($url, $root);
-        });
+        //$this->applyToAll(function (Menu $menu) use ($url, $root) {
+        //    $menu->setActiveFromUrl($url, $root);
+        //});
 
         $requestUrl = url_parts($url);
         $requestRoot = strip_trailing_slashes($root, '/');
@@ -362,8 +362,8 @@ class Menu implements Countable, Item
 
         $type = first_parameter_type($callable);
 
-        return $this->applyToAll(function (Activatable $item) use ($callable, $type) {
-            
+        $this->applyToAll(function (Activatable $item) use ($callable, $type) {
+
             if (!item_matches_type($item, $type)) {
                 return;
             }
@@ -372,6 +372,8 @@ class Menu implements Countable, Item
                 $item->setActive();
             }
         });
+
+        return $this;
     }
 
     /**
