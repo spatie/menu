@@ -7,26 +7,95 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/menu.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/menu)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 
-> **WORK IN PROGRESS**
+The `spatie/menu` package provides a fluent interface to build menus of any size in your php application.
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
+Documentation is hosted at https://docs.spatie.be/menu
+
+### Human Readable, Fluent Interface
+
+All classes provide a human readable, fluent interface (no array configuration). Additionally, you can opt for a more verbose and flexible syntax, or for convenience methods that cover most use cases.
+
+```php
+Menu::new()
+    ->add(Link::to('/', 'Home'))
+    ->add(Link::to('/about', 'About'))
+    ->add(Link::to('/contact', 'Contact'))
+    ->render();
+
+// Or just...
+Menu::new()
+    ->link('/', 'Home')
+    ->link('/about', 'About');
+    ->link('/contact', 'Contact');
+```
+
+```html
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
+```
+
+### Strong Control Over the Html Output
+
+You can programatically add html classes and attributes to any item in the menu, or to the menu itself.
+
+```php
+Menu::new()
+    ->addClass('navigation');
+    ->add(Link::to('/', 'Home')->addClass('home-link'))
+    ->add(Link::to('/about', 'About'))
+    ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'))
+```
+
+```html
+<ul class="navigation">
+    <li><a href="/" class="home-link">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li class="float-right"><a href="/contact">Contact</a></li>
+</ul>
+```
+
+### Not Afraid of Depths
+
+The menu supports submenus, which in turn can be nested infinitely.
+
+```php
+Menu::new()
+    ->add(Link::to('/', 'Home'))
+    ->add(Menu::new()
+        ->addClass('submenu')
+        ->add(Link::to('/about', 'About'))
+        ->add(Link::to('/contact', 'Contact'))
+    );
+```
+
+```html
+<ul>
+    <li><a href="/">Home</a></li>
+    <li>
+        <ul class="submenu">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
+    </li>
+</ul>
+```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## Install
 
 You can install the package via composer:
+
 ``` bash
 $ composer require spatie/menu
 ```
 
 ## Usage
 
-``` php
-$skeleton = new Spatie\Skeleton();
-echo $skeleton->echoPhrase('Hello, Spatie!');
-```
+For full documentation, go to https://docs.spatie.be/menu.
 
 ## Changelog
 
@@ -35,7 +104,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 ## Testing
 
 ``` bash
-$ composer test
+$ phpunit
 ```
 
 ## Contributing
