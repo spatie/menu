@@ -9,7 +9,7 @@
 
 The `spatie/menu` package provides a fluent interface to build menus of any size in your php application.
 
-Documentation is hosted at https://docs.spatie.be/menu
+Documentation is available at https://docs.spatie.be/menu.
 
 ### Human Readable, Fluent Interface
 
