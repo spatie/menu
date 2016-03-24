@@ -95,7 +95,7 @@ $ composer require spatie/menu
 
 ## Usage
 
-For full documentation, go to https://docs.spatie.be/menu.
+Documentation is available at https://docs.spatie.be/menu.
 
 ## Changelog
 
