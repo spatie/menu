@@ -25,7 +25,7 @@ Menu::new()
 // Or just...
 Menu::new()
     ->link('/', 'Home')
-    ->link('/about', 'About');
+    ->link('/about', 'About')
     ->link('/contact', 'Contact');
 ```
 
@@ -43,10 +43,10 @@ You can programatically add html classes and attributes to any item in the menu,
 
 ```php
 Menu::new()
-    ->addClass('navigation');
+    ->addClass('navigation')
     ->add(Link::to('/', 'Home')->addClass('home-link'))
     ->add(Link::to('/about', 'About'))
-    ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'))
+    ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'));
 ```
 
 ```html
