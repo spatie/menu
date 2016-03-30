@@ -104,4 +104,46 @@ class MenuAddTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    function it_can_conditionally_add_an_item()
+    {
+        $this->menu = Menu::new()
+            ->addIf(true, Link::to('#', 'Foo'))
+            ->addIf(false, Link::to('#', 'Bar'));
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="#">Foo</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_conditionally_add_a_link()
+    {
+        $this->menu = Menu::new()
+            ->linkIf(true, '#', 'Foo')
+            ->linkIf(false, '#', 'Bar');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="#">Foo</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_conditionally_add_html()
+    {
+        $this->menu = Menu::new()
+            ->htmlIf(true, 'Foo')
+            ->htmlIf(false, 'Bar');
+
+        $this->assertRenders('
+            <ul>
+                <li>Foo</li>
+            </ul>
+        ');
+    }
 }

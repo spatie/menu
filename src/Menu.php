@@ -69,6 +69,23 @@ class Menu implements Item, Countable
     }
 
     /**
+     * Add an item to the menu if a (non-strict) condition is met.
+     *
+     * @param bool $condition
+     * @param \Spatie\Menu\Item $item
+     *
+     * @return $this
+     */
+    public function addIf($condition, Item $item)
+    {
+        if ($condition) {
+            $this->add($item);
+        }
+
+        return $this;
+    }
+
+    /**
      * Shortcut function to add a plain link to the menu.
      *
      * @param string $url
@@ -82,6 +99,24 @@ class Menu implements Item, Countable
     }
 
     /**
+     * Add a link to the menu if a (non-strict) condition is met.
+     *
+     * @param bool $condition
+     * @param string $url
+     * @param string $text
+     *
+     * @return $this
+     */
+    public function linkIf($condition, string $url, string $text)
+    {
+        if ($condition) {
+            $this->link($url, $text);
+        }
+
+        return $this;
+    }
+
+    /**
      * Shortcut function to add raw html to the menu.
      *
      * @param string $html
@@ -91,6 +126,23 @@ class Menu implements Item, Countable
     public function html(string $html)
     {
         return $this->add(Html::raw($html));
+    }
+
+    /**
+     * Add a chunk of html if a (non-strict) condition is met.
+     *
+     * @param bool $condition
+     * @param string $html
+     *
+     * @return $this
+     */
+    public function htmlIf($condition, string $html)
+    {
+        if ($condition) {
+            $this->html($html);
+        }
+
+        return $this;
     }
 
     /**
