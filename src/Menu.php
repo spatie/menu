@@ -392,8 +392,14 @@ class Menu implements Item, Countable
                 return;
             }
 
+            //echo PHP_EOL;
+            //echo '-----';
+            //var_dump($requestUrl['path'], $url['path']);
+            //var_dump(strpos($requestUrl['path'], $url['path']));
+            //echo '-----';
+
             // The menu item is active if it's path starts with the request path.
-            if (strpos($url['path'], $requestUrl['path']) === 0) {
+            if (strpos($requestUrl['path'], $url['path']) === 0) {
                 $item->setActive();
             };
         });

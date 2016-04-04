@@ -64,7 +64,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li class="active">
                     <a href="/disclaimer">Disclaimer</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/disclaimer/intellectual-property">Intellectual Property</a>
                 </li>
             </ul>
@@ -90,7 +90,7 @@ class MenuSetActiveTest extends MenuTestCase
                         <li class="active">
                             <a href="/disclaimer">Disclaimer</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="/disclaimer/intellectual-property">Intellectual Property</a>
                         </li>
                     </ul>
@@ -114,7 +114,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li class="active">
                     <a href="/disclaimer">Disclaimer</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="/disclaimer/intellectual-property">Intellectual Property</a>
                 </li>
             </ul>
