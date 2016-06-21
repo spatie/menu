@@ -13,7 +13,7 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         );
     }
 
-    protected function sanitizeHtmlWhitespace(string $subject) : string
+    protected function sanitizeHtmlWhitespace(string $subject): string
     {
         $find = ['/>\s+</', '/(^\s+)|(\s+$)/'];
         $replace = ['><', ''];
