@@ -38,7 +38,7 @@ class Html implements Item, Activatable
     /**
      * @return string
      */
-    public function getHtml() : string
+    public function getHtml(): string
     {
         return $this->html;
     }
@@ -46,7 +46,7 @@ class Html implements Item, Activatable
     /**
      * @return string
      */
-    public function render() : string
+    public function render(): string
     {
         return $this->html;
     }

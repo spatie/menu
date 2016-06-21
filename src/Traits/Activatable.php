@@ -10,7 +10,7 @@ trait Activatable
     /**
      * @return bool
      */
-    public function isActive() : bool
+    public function isActive(): bool
     {
         return $this->active;
     }

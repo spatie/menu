@@ -9,7 +9,7 @@ interface Item
      *
      * @return bool
      */
-    public function isActive() : bool;
+    public function isActive(): bool;
 
     /**
      * Return an array of attributes to apply on the parent. This generally means the attributes
@@ -17,12 +17,12 @@ interface Item
      *
      * @return array
      */
-    public function getParentAttributes() : array;
+    public function getParentAttributes(): array;
 
     /**
      * Render the item in html.
      *
      * @return string
      */
-    public function render() : string;
+    public function render(): string;
 }

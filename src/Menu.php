@@ -305,7 +305,7 @@ class Menu implements Item, Countable
      *
      * @return bool
      */
-    public function isActive() : bool
+    public function isActive(): bool
     {
         foreach ($this->items as $item) {
             if ($item->isActive()) {
@@ -450,7 +450,7 @@ class Menu implements Item, Countable
      *
      * @return string
      */
-    public function render() : string
+    public function render(): string
     {
         $contents = HtmlElement::render(
             'ul',
@@ -472,7 +472,7 @@ class Menu implements Item, Countable
      *
      * @return int
      */
-    public function count() : int
+    public function count(): int
     {
         return count($this->items);
     }
@@ -480,7 +480,7 @@ class Menu implements Item, Countable
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->render();
     }

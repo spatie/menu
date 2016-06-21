@@ -45,7 +45,7 @@ class Link implements Item, Activatable, HasUrl
     /**
      * @return string
      */
-    public function getText() : string
+    public function getText(): string
     {
         return $this->text;
     }
@@ -53,7 +53,7 @@ class Link implements Item, Activatable, HasUrl
     /**
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->url;
     }
@@ -101,7 +101,7 @@ class Link implements Item, Activatable, HasUrl
     /**
      * @return string
      */
-    public function render() : string
+    public function render(): string
     {
         return HtmlElement::render(
             "a[href={$this->url}]",
@@ -113,7 +113,7 @@ class Link implements Item, Activatable, HasUrl
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->render();
     }

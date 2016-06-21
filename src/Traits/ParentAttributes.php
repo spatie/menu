@@ -20,7 +20,7 @@ trait ParentAttributes
      *
      * @return array
      */
-    public function getParentAttributes() : array
+    public function getParentAttributes(): array
     {
         return $this->parentAttributes->toArray();
     }

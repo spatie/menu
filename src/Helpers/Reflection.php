@@ -8,7 +8,7 @@ use Spatie\Menu\Item;
 
 class Reflection
 {
-    public static function firstParameterType(callable $callable) : string
+    public static function firstParameterType(callable $callable): string
     {
         $reflection = new ReflectionFunction($callable);
 
