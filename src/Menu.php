@@ -4,6 +4,9 @@ namespace Spatie\Menu;
 
 use Countable;
 use Spatie\HtmlElement\HtmlElement;
+use Spatie\Menu\Helpers\Arr;
+use Spatie\Menu\Helpers\Reflection;
+use Spatie\Menu\Helpers\Url;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
@@ -156,10 +159,10 @@ class Menu implements Item, Countable
      */
     public function each(callable $callable)
     {
-        $type = first_parameter_type($callable);
+        $type = Reflection::firstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if (!item_matches_type($item, $type)) {
+            if (!Reflection::itemMatchesType($item, $type)) {
                 continue;
             }
 
@@ -193,9 +196,9 @@ class Menu implements Item, Countable
      */
     protected function applyFilter(callable $filter, Item $item)
     {
-        $type = first_parameter_type($filter);
+        $type = Reflection::firstParameterType($filter);
 
-        if (!item_matches_type($item, $type)) {
+        if (!Reflection::itemMatchesType($item, $type)) {
             return;
         }
 
@@ -357,8 +360,8 @@ class Menu implements Item, Countable
             $menu->setActiveFromUrl($url, $root);
         });
 
-        $requestUrl = url_parts($url);
-        $requestRoot = strip_trailing_slashes($root, '/');
+        $requestUrl = Url::parts($url);
+        $requestRoot = Url::stripTrailingSlashes($root, '/');
 
         $this->applyToAll(function ($item) use ($requestUrl, $requestRoot) {
 
@@ -367,7 +370,7 @@ class Menu implements Item, Countable
                 return;
             }
 
-            $url = url_parts($item->getUrl());
+            $url = Url::parts($item->getUrl());
 
             // If the menu item is on a different host it can't be active.
             if ($url['host'] !== '' && $url['host'] !== $requestUrl['host']) {
@@ -412,11 +415,11 @@ class Menu implements Item, Countable
             $menu->setActiveFromCallable($callable);
         });
 
-        $type = first_parameter_type($callable);
+        $type = Reflection::firstParameterType($callable);
 
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
 
-            if (!item_matches_type($item, $type)) {
+            if (!Reflection::itemMatchesType($item, $type)) {
                 return;
             }
 
@@ -452,13 +455,13 @@ class Menu implements Item, Countable
         $contents = HtmlElement::render(
             'ul',
             $this->htmlAttributes->toArray(),
-            array_map(function (Item $item) {
+            Arr::map($this->items, function (Item $item) {
                 return HtmlElement::render(
                     $item->isActive() ? "li.{$this->activeClass}" : 'li',
                     $item->getParentAttributes(),
                     $item->render()
                 );
-            }, $this->items)
+            })
         );
 
         return "{$this->prepend}{$contents}{$this->append}";
