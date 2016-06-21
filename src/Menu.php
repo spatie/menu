@@ -74,7 +74,7 @@ class Menu implements Item, Countable
     /**
      * Add an item to the menu if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool              $condition
      * @param \Spatie\Menu\Item $item
      *
      * @return $this
@@ -104,7 +104,7 @@ class Menu implements Item, Countable
     /**
      * Add a link to the menu if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $url
      * @param string $text
      *
@@ -134,7 +134,7 @@ class Menu implements Item, Countable
     /**
      * Add a chunk of html if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $html
      *
      * @return $this
@@ -191,7 +191,7 @@ class Menu implements Item, Countable
     /**
      * Apply a filter to an item. Returns the result of the filter.
      *
-     * @param callable $filter
+     * @param callable          $filter
      * @param \Spatie\Menu\Item $item
      */
     protected function applyFilter(callable $filter, Item $item)
@@ -254,7 +254,7 @@ class Menu implements Item, Countable
      * Prepend the menu with a string of html on render if a certain condition is
      * met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $prepend
      *
      * @return $this
@@ -286,7 +286,7 @@ class Menu implements Item, Countable
      * Append the menu with a string of html on render if a certain condition is
      * met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $append
      *
      * @return static
@@ -322,7 +322,7 @@ class Menu implements Item, Countable
      * only be applied to items of that type.
      *
      * @param callable|string $urlOrCallable
-     * @param string $root
+     * @param string          $root
      *
      * @return $this
      */
@@ -347,7 +347,7 @@ class Menu implements Item, Countable
      * /en, /en/about, /en/contact => request to /en won't set /en active if the
      *                                request root is set to /en.
      *
-     * @param string $url The current request url.
+     * @param string $url  The current request url.
      * @param string $root If the link's URL is an exact match with the request
      *                     root, the link won't be set active. This behavior is
      *                     to avoid having home links active on every request.
@@ -366,7 +366,7 @@ class Menu implements Item, Countable
         $this->applyToAll(function ($item) use ($requestUrl, $requestRoot) {
 
             // Not using a magic typehint since we need to do two instance checks
-            if (! $item instanceof HasUrl || ! $item instanceof Activatable) {
+            if (!$item instanceof HasUrl || !$item instanceof Activatable) {
                 return;
             }
 
