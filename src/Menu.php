@@ -10,7 +10,7 @@ use Spatie\Menu\Helpers\Url;
 use Spatie\Menu\Traits\HtmlAttributes;
 use Spatie\Menu\Traits\ParentAttributes;
 
-class Menu implements Item, Countable
+class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 {
     use HtmlAttributes, ParentAttributes;
 
@@ -146,6 +146,36 @@ class Menu implements Item, Countable
         }
 
         return $this;
+    }
+
+    /**
+     * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
+     * @param callable|\Spatie\Menu\Menu|null $menu
+     *
+     * @return $this
+     */
+    public function submenu($header, $menu = null)
+    {
+        list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
+
+        if (is_callable($menu)) {
+            $menu = $menu($this->copy());
+        }
+
+        if ($header instanceof Item) {
+            $header = $header->render();
+        }
+
+        return $this->add($menu->prependIf($header, $header));
+    }
+
+    protected function parseSubmenuArgs($args): array
+    {
+        if (count($args) === 1) {
+            return ['', $args[0]];
+        }
+
+        return [$args[0], $args[1]];
     }
 
     /**
@@ -525,6 +555,21 @@ class Menu implements Item, Countable
         });
 
         return $this;
+    }
+
+    /**
+     * Create a empty copy of the menu (copies `filters` and `activeClass`).
+     *
+     * @return static
+     */
+    public function copy()
+    {
+        $clone = new static();
+
+        $clone->filters = $this->filters;
+        $clone->activeClass = $this->activeClass;
+
+        return $clone;
     }
 
     /**
