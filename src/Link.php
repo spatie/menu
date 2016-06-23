@@ -17,6 +17,9 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     /** @var string */
     protected $url;
 
+    /** @var array */
+    protected $prefixes = [];
+
     /**
      * @param string $url
      * @param string $text
@@ -55,7 +58,11 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
      */
     public function getUrl(): string
     {
-        return $this->url;
+        if (empty($this->prefixes)) {
+            return $this->url;
+        }
+
+        return implode('', $this->prefixes) . '/' . ltrim($this->url, '/');
     }
 
     /**
@@ -93,7 +100,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
      */
     public function prefix(string $prefix)
     {
-        $this->url = $prefix.'/'.ltrim($this->url, '/');
+        $this->prefixes[] = $prefix;
 
         return $this;
     }
@@ -104,7 +111,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     public function render(): string
     {
         return HtmlElement::render(
-            "a[href={$this->url}]",
+            "a[href={$this->getUrl()}]",
             $this->htmlAttributes->toArray(),
             $this->text
         );

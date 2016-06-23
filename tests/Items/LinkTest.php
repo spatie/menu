@@ -86,4 +86,13 @@ class LinkTest extends \PHPUnit_Framework_TestCase
             Link::to('/bar', 'Bar')->prefix('/foo')->getUrl()
         );
     }
+
+    /** @test */
+    function it_can_prefix_an_url_multiple_times()
+    {
+        $this->assertEquals(
+            '/foo/bar/baz',
+            Link::to('/baz', 'Bar')->prefix('/foo')->prefix('/bar')->getUrl()
+        );
+    }
 }
