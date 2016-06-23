@@ -159,7 +159,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
 
         if (is_callable($menu)) {
-            $menu = $menu($this->copy());
+            $menu = $menu($this->blueprint());
         }
 
         if ($header instanceof Item) {
@@ -476,12 +476,12 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Add a class to all links in the menu.
-     *
-     * @param string $class
-     *
-     * @return $this
-     */
+ * Add a class to all links in the menu.
+ *
+ * @param string $class
+ *
+ * @return $this
+ */
     public function addLinkClass(string $class)
     {
         $this->applyToAll(function (Link $link) use ($class) {
@@ -558,11 +558,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Create a empty copy of the menu (copies `filters` and `activeClass`).
+     * Create a empty blueprint of the menu (copies `filters` and `activeClass`).
      *
      * @return static
      */
-    public function copy()
+    public function blueprint()
     {
         $clone = new static();
 
