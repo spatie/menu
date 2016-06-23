@@ -159,7 +159,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
 
         if (is_callable($menu)) {
-            $menu = $menu($this->blueprint());
+            $transformer = $menu;
+            $menu = $this->blueprint();
+            $transformer($menu);
         }
 
         if ($header instanceof Item) {
@@ -476,15 +478,15 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
- * Add a class to all links in the menu.
- *
- * @param string $class
- *
- * @return $this
- */
-    public function addLinkClass(string $class)
+     * Add a class to all items in the menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function addItemClass(string $class)
     {
-        $this->applyToAll(function (Link $link) use ($class) {
+        $this->applyToAll(function (HasHtmlAttributes $link) use ($class) {
             $link->addClass($class);
         });
 
@@ -492,33 +494,17 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Add a parent class to all links in the menu.
-     *
-     * @param string $class
-     *
-     * @return $this
-     */
-    public function addLinkParentClass(string $class)
-    {
-        $this->applyToAll(function (Link $link) use ($class) {
-            $link->addParentClass($class);
-        });
-
-        return $this;
-    }
-
-    /**
-     * Add a parent attribute to all links in the menu.
+     * Set an attribute on all items in the menu.
      *
      * @param string $attribute
      * @param string $value
      *
      * @return $this
      */
-    public function addLinkParentAttribute(string $attribute, string $value = '')
+    public function setItemAttribute(string $attribute, string $value = '')
     {
-        $this->applyToAll(function (Link $link) use ($attribute, $value) {
-            $link->setParentAttribute($attribute, $value);
+        $this->applyToAll(function (HasHtmlAttributes $link) use ($attribute, $value) {
+            $link->setAttribute($attribute, $value);
         });
 
         return $this;
