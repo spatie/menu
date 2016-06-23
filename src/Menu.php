@@ -446,6 +446,88 @@ class Menu implements Item, Countable
     }
 
     /**
+     * Add a class to all links in the menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function addLinkClass(string $class)
+    {
+        $this->applyToAll(function (Link $link) use ($class) {
+            $link->addClass($class);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Add a parent class to all links in the menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function addLinkParentClass(string $class)
+    {
+        $this->applyToAll(function (Link $link) use ($class) {
+            $link->addParentClass($class);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Add a parent attribute to all links in the menu.
+     *
+     * @param string $attribute
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function addLinkParentAttribute(string $attribute, string $value = '')
+    {
+        $this->applyToAll(function (Link $link) use ($attribute, $value) {
+            $link->setParentAttribute($attribute, $value);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Add a parent class to all items in the menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function addItemParentClass(string $class)
+    {
+        $this->applyToAll(function (HasParentAttributes $item) use ($class) {
+            $item->addParentClass($class);
+        });
+
+        return $this;
+    }
+
+    /**
+     * Add a parent attribute to all items in the menu.
+     *
+     * @param string $attribute
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function setItemParentAttribute(string $attribute, string $value = '')
+    {
+        $this->applyToAll(function (HasParentAttributes $item) use ($attribute, $value) {
+            $item->setParentAttribute($attribute, $value);
+        });
+
+        return $this;
+    }
+
+    /**
      * Render the menu.
      *
      * @return string
@@ -458,7 +540,7 @@ class Menu implements Item, Countable
             Arr::map($this->items, function (Item $item) {
                 return HtmlElement::render(
                     $item->isActive() ? "li.{$this->activeClass}" : 'li',
-                    $item->getParentAttributes(),
+                    $item instanceof HasParentAttributes ? $item->getParentAttributes() : [],
                     $item->render()
                 );
             })
