@@ -35,7 +35,7 @@ trait HtmlAttributes
      */
     public function setAttributes(array $attributes)
     {
-        $this->htmlAttributes->setAttributes($attribute);
+        $this->htmlAttributes->setAttributes($attributes);
 
         return $this;
     }
