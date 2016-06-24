@@ -15,7 +15,7 @@ trait ParentAttributes
     }
 
     /**
-     * Return an array of attributes to apply on the parent. This generally means 
+     * Return an array of attributes to apply on the parent. This generally means
      * the attributes that should be applied on the <li> tag.
      *
      * @return array
@@ -35,6 +35,18 @@ trait ParentAttributes
     {
         $this->parentAttributes->setAttribute($attribute, $value);
 
+        return $this;
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function setParentAttributes(array $attributes)
+    {
+        $this->parentAttributes->setAttributes($attributes);
+        
         return $this;
     }
 

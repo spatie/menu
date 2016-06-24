@@ -149,6 +149,35 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Add an empty item with parent attributes.
+     *
+     * @param array $parentAttributes
+     *
+     * @return $this
+     */
+    public function void(array $parentAttributes = [])
+    {
+        return $this->add(Html::raw('')->setParentAttributes($parentAttributes));
+    }
+
+    /**
+     * Add an empty item with parent attributes if a (non-strict) condition is met.
+     *
+     * @param $condition
+     * @param array $parentAttributes
+     *
+     * @return $this
+     */
+    public function voidIf($condition, array $parentAttributes = [])
+    {
+        if ($condition) {
+            $this->void($parentAttributes);
+        }
+
+        return $this;
+    }
+
+    /**
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
      * @param callable|\Spatie\Menu\Menu|null $menu
      *

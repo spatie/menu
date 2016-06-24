@@ -4,11 +4,13 @@ All Notable changes to `menu` will be documented in this file.
 
 ## 1.2.0
 - Broadened the api of `Menu`:
-    - A `submenu` method
+    - `submenu`
+    - `void` and `voidIf` for empty list items
     - A `blueprint` method to copy the menu without it's contents
     - Html item convenience methods: `addItemClass`, `setItemAttribute`
     - Html parent convenience methods: `addItemParentClass`, `setItemParentAttribute`
 - Added `HasHtmlAttributes` and `HasParentAttributes` interfaces
+- `HtmlAttributes` and `ParentAttributes` now also have a `setAttributes` method
 
 ## 1.1.1
 - Fixed `setActive` when setting active from a URL

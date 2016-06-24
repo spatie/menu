@@ -146,4 +146,30 @@ class MenuAddTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    function it_can_add_void_items_with_parent_attributes()
+    {
+        $this->menu = Menu::new()->void(['role' => 'divider', 'data-divider']);
+
+        $this->assertRenders('
+            <ul>
+                <li role="divider" data-divider></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    function it_can_conditionally_add_void_items_with_parent_attributes()
+    {
+        $this->menu = Menu::new()
+            ->voidIf(true, ['class' => 'divider--a'])
+            ->voidIf(false, ['class' => 'divider--b']);
+
+        $this->assertRenders('
+            <ul>
+                <li class="divider--a"></li>
+            </ul>
+        ');
+    }
 }

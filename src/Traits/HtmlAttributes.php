@@ -3,6 +3,7 @@
 namespace Spatie\Menu\Traits;
 
 use Spatie\HtmlElement\Attributes;
+use Spatie\Menu\Helpers\Arr;
 
 trait HtmlAttributes
 {
@@ -23,6 +24,18 @@ trait HtmlAttributes
     public function setAttribute(string $attribute, string $value = '')
     {
         $this->htmlAttributes->setAttribute($attribute, $value);
+
+        return $this;
+    }
+
+    /**
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function setAttributes(array $attributes)
+    {
+        $this->htmlAttributes->setAttributes($attribute);
 
         return $this;
     }

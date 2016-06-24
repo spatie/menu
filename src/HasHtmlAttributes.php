@@ -13,6 +13,13 @@ interface HasHtmlAttributes
     public function setAttribute(string $attribute, string $value = '');
 
     /**
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function setAttributes(array $attributes);
+
+    /**
      * @param string $class
      *
      * @return $this
