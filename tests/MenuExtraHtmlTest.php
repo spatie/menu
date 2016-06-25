@@ -77,4 +77,18 @@ class MenuExtraHtmlTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    function it_can_be_wrapped_in_an_element()
+    {
+        $this->menu = Menu::new()->link('#', 'Foo')->wrap('div');
+
+        $this->assertRenders('
+            <div>
+                <ul>
+                    <li><a href="#">Foo</a></li>
+                </ul>
+            </div>
+        ');
+    }
 }

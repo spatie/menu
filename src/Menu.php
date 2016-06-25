@@ -26,6 +26,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var array */
     protected $filters = [];
 
+    /** @var array */
+    protected $wrap = [];
+
     /** @var string */
     protected $activeClass = 'active';
 
@@ -362,6 +365,34 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Wrap the menu in an html element.
+     *
+     * @param string $element
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function wrap(string $element, $attributes = [])
+    {
+        $this->wrap = [$element, $attributes];
+
+        return $this;
+    }
+
+    /**
+     * Alias for `wrap`.
+     *
+     * @param string $element
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function wrapIn(string $element, $attributes = [])
+    {
+        return $this->wrap($element, $attributes);
+    }
+
+    /**
      * Determine whether the menu is active.
      *
      * @return bool
@@ -606,7 +637,13 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             })
         );
 
-        return "{$this->prepend}{$contents}{$this->append}";
+        $menu = "{$this->prepend}{$contents}{$this->append}";
+
+        if (!empty($this->wrap)) {
+            return HtmlElement::render($this->wrap[0], $this->wrap[1], $menu);
+        }
+
+        return $menu;
     }
 
     /**
