@@ -380,19 +380,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Alias for `wrap`.
-     *
-     * @param string $element
-     * @param array $attributes
-     *
-     * @return $this
-     */
-    public function wrapIn(string $element, $attributes = [])
-    {
-        return $this->wrap($element, $attributes);
-    }
-
-    /**
      * Determine whether the menu is active.
      *
      * @return bool
