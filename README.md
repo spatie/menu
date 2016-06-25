@@ -7,11 +7,11 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/spatie/menu.svg?style=flat-square)](https://scrutinizer-ci.com/g/spatie/menu)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 
-The `spatie/menu` package provides a fluent interface to build menus of any size in your php application.
+The `spatie/menu` package provides a fluent interface to build menus of any size in your php application. If you're building your app with Laravel, the [`spatie/laravel-menu`](https://github.com/spatie/laravel-menu) provides some extra treats.
 
 Documentation is available at https://docs.spatie.be/menu.
 
-### Human Readable, Fluent Interface
+## Human Readable, Fluent Interface
 
 All classes provide a human readable, fluent interface (no array configuration). Additionally, you can opt for a more verbose and flexible syntax, or for convenience methods that cover most use cases.
 
@@ -25,7 +25,7 @@ Menu::new()
 // Or just...
 Menu::new()
     ->link('/', 'Home')
-    ->link('/about', 'About')
+    ->link('/about', 'About');
     ->link('/contact', 'Contact');
 ```
 
@@ -37,37 +37,40 @@ Menu::new()
 </ul>
 ```
 
-### Strong Control Over the Html Output
+## Strong Control Over the Html Output
 
 You can programatically add html classes and attributes to any item in the menu, or to the menu itself.
 
 ```php
 Menu::new()
-    ->addClass('navigation')
+    ->addClass('navigation');
     ->add(Link::to('/', 'Home')->addClass('home-link'))
     ->add(Link::to('/about', 'About'))
-    ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'));
+    ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'))
+    ->wrap('div.wrapper')
 ```
 
 ```html
-<ul class="navigation">
-    <li><a href="/" class="home-link">Home</a></li>
-    <li><a href="/about">About</a></li>
-    <li class="float-right"><a href="/contact">Contact</a></li>
-</ul>
+<div class="wrapper">
+    <ul class="navigation">
+        <li><a href="/" class="home-link">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li class="float-right"><a href="/contact">Contact</a></li>
+    </ul>
+</div
 ```
 
-### Not Afraid of Depths
+## Not Afraid of Depths
 
 The menu supports submenus, which in turn can be nested infinitely.
 
 ```php
 Menu::new()
     ->add(Link::to('/', 'Home'))
-    ->add(Menu::new()
+    ->submenu('More', Menu::new()
         ->addClass('submenu')
-        ->add(Link::to('/about', 'About'))
-        ->add(Link::to('/contact', 'Contact'))
+        ->link('/about', 'About'))
+        ->link('/contact', 'Contact'))
     );
 ```
 
@@ -75,12 +78,33 @@ Menu::new()
 <ul>
     <li><a href="/">Home</a></li>
     <li>
+        More
         <ul class="submenu">
             <li><a href="/about">About</a></li>
             <li><a href="/contact">Contact</a></li>
         </ul>
     </li>
 </ul>
+```
+
+## Some Extra Treats for Laravel Apps
+
+The Laravel version of the menu package adds some extras like convenience methods for generating URLs and macros.
+
+```php
+Menu::macro('main', function () {
+    return Menu::new()
+        ->action('HomeController@index', 'Home')
+        ->action('AboutController@index', 'About')
+        ->action('ContactController@index', 'Contact')
+        ->setActiveFromRequest();
+});
+```
+
+```html
+<nav class="navigation">
+    {!! Menu::main() !!}
+</nav>
 ```
 
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
