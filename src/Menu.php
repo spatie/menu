@@ -190,15 +190,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
 
-        if (is_callable($menu)) {
-            $transformer = $menu;
-            $menu = $this->blueprint();
-            $transformer($menu);
-        }
-
-        if ($header instanceof Item) {
-            $header = $header->render();
-        }
+        $menu = $this->createSubmenuMenu($menu);
+        $header = $this->createSubmenuHeader($header);
 
         return $this->add($menu->prependIf($header, $header));
     }
@@ -210,6 +203,36 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         }
 
         return [$args[0], $args[1]];
+    }
+
+    /**
+     * @param \Spatie\Menu\Menu|callable $menu
+     *
+     * @return \Spatie\Menu\Menu
+     */
+    protected function createSubmenuMenu($menu): Menu
+    {
+        if (is_callable($menu)) {
+            $transformer = $menu;
+            $menu = $this->blueprint();
+            $transformer($menu);
+        }
+
+        return $menu;
+    }
+
+    /**
+     * @param \Spatie\Menu\Item|string $header
+     *
+     * @return string
+     */
+    protected function createSubmenuHeader($header): string
+    {
+        if ($header instanceof Item) {
+            $header = $header->render();
+        }
+
+        return $header;
     }
 
     /**
