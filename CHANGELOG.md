@@ -2,6 +2,9 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 1.2.1
+- Internal refactors
+
 ## 1.2.0
 - New methods on `Menu`:
     - `submenu` for submenus with optional headers
