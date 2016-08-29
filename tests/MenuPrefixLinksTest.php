@@ -8,7 +8,7 @@ use Spatie\Menu\Menu;
 class MenuPrefixLinksTest extends MenuTestCase
 {
     /** @test */
-    function it_can_prefix_link_urls_after_adding_them()
+    public function it_can_prefix_link_urls_after_adding_them()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/bar', 'Bar'))
@@ -22,7 +22,7 @@ class MenuPrefixLinksTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_prefix_link_urls_before_adding_them()
+    public function it_can_prefix_link_urls_before_adding_them()
     {
         $this->menu = Menu::new()
             ->prefixLinks('/foo')

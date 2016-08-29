@@ -8,7 +8,7 @@ use Spatie\Menu\Menu;
 class MenuSubmenuTest extends MenuTestCase
 {
     /** @test */
-    function it_can_add_a_submenu_with_a_menu()
+    public function it_can_add_a_submenu_with_a_menu()
     {
         $this->menu = Menu::new()->submenu(Menu::new());
 
@@ -16,7 +16,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_add_a_submenu_with_a_callable_menu()
+    public function it_can_add_a_submenu_with_a_callable_menu()
     {
         $this->menu = Menu::new()->submenu(function (Menu $menu): Menu {
             return $menu;
@@ -32,7 +32,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    function it_preserves_filters_with_callable_menus()
+    public function it_preserves_filters_with_callable_menus()
     {
         $this->menu = Menu::new()
             ->prefixLinks('/bar')
@@ -53,7 +53,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_add_a_submenu_with_a_string_header()
+    public function it_can_add_a_submenu_with_a_string_header()
     {
         $this->menu = Menu::new()->submenu('Hi', Menu::new());
 
@@ -65,7 +65,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_add_a_submenu_with_an_item_header()
+    public function it_can_add_a_submenu_with_an_item_header()
     {
         $this->menu = Menu::new()->submenu(Link::to('#', 'Hi'), Menu::new());
 
@@ -80,7 +80,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_conditionally_add_a_submenu()
+    public function it_can_conditionally_add_a_submenu()
     {
         $this->menu = Menu::new()->submenuIf(false, Menu::new());
 

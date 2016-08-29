@@ -3,7 +3,6 @@
 namespace Spatie\Menu\Traits;
 
 use Spatie\HtmlElement\Attributes;
-use Spatie\Menu\Helpers\Arr;
 
 trait HtmlAttributes
 {
