@@ -182,7 +182,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
     /**
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
-     * @param callable|\Spatie\Menu\Menu|null $menu
+     * @param callable|\Spatie\Menu\Menu|null              $menu
      *
      * @return $this
      */
@@ -195,11 +195,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         return $this->add($menu->prependIf($header, $header));
     }
-    
+
     /**
-     * @param bool $condition
+     * @param bool                                         $condition
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
-     * @param callable|\Spatie\Menu\Menu|null $menu
+     * @param callable|\Spatie\Menu\Menu|null              $menu
      *
      * @return $this
      */
@@ -407,7 +407,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * Wrap the menu in an html element.
      *
      * @param string $element
-     * @param array $attributes
+     * @param array  $attributes
      *
      * @return $this
      */
@@ -516,7 +516,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             // The menu item is active if it's path starts with the request path.
             if (strpos($requestUrl['path'], $url['path']) === 0) {
                 $item->setActive();
-            };
+            }
         });
 
         return $this;
@@ -536,7 +536,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $type = Reflection::firstParameterType($callable);
 
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
-
             if (!Reflection::itemMatchesType($item, $type)) {
                 return;
             }
