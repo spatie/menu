@@ -195,6 +195,22 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         return $this->add($menu->prependIf($header, $header));
     }
+    
+    /**
+     * @param bool $condition
+     * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
+     * @param callable|\Spatie\Menu\Menu|null $menu
+     *
+     * @return $this
+     */
+    public function submenuIf($condition, $header, $menu = null)
+    {
+        if ($condition) {
+            $this->submenu($header, $menu);
+        }
+
+        return $this;
+    }
 
     protected function parseSubmenuArgs($args): array
     {
