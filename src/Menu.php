@@ -195,7 +195,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         return $this->add($menu->prependIf($header, $header));
     }
-    
+
     /**
      * @param bool $condition
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
@@ -265,7 +265,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $type = Reflection::firstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if (!Reflection::itemMatchesType($item, $type)) {
+            if (! Reflection::itemMatchesType($item, $type)) {
                 continue;
             }
 
@@ -301,7 +301,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         $type = Reflection::firstParameterType($filter);
 
-        if (!Reflection::itemMatchesType($item, $type)) {
+        if (! Reflection::itemMatchesType($item, $type)) {
             return;
         }
 
@@ -484,7 +484,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $this->applyToAll(function ($item) use ($requestUrl, $requestRoot) {
 
             // Not using a magic typehint since we need to do two instance checks
-            if (!$item instanceof HasUrl || !$item instanceof Activatable) {
+            if (! $item instanceof HasUrl || ! $item instanceof Activatable) {
                 return;
             }
 
@@ -516,7 +516,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             // The menu item is active if it's path starts with the request path.
             if (strpos($requestUrl['path'], $url['path']) === 0) {
                 $item->setActive();
-            };
+            }
         });
 
         return $this;
@@ -536,8 +536,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $type = Reflection::firstParameterType($callable);
 
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
-
-            if (!Reflection::itemMatchesType($item, $type)) {
+            if (! Reflection::itemMatchesType($item, $type)) {
                 return;
             }
 
@@ -665,7 +664,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         $menu = "{$this->prepend}{$contents}{$this->append}";
 
-        if (!empty($this->wrap)) {
+        if (! empty($this->wrap)) {
             return HtmlElement::render($this->wrap[0], $this->wrap[1], $menu);
         }
 

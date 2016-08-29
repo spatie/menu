@@ -8,7 +8,7 @@ use Spatie\Menu\Menu;
 class MenuSetActiveTest extends MenuTestCase
 {
     /** @test */
-    function it_can_set_items_active_with_a_callable()
+    public function it_can_set_items_active_with_a_callable()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/', 'Home'))
@@ -26,7 +26,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_set_items_active_recursively_through_submenus_with_a_callable()
+    public function it_can_set_items_active_recursively_through_submenus_with_a_callable()
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
@@ -50,7 +50,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_set_items_active_from_an_absolute_url()
+    public function it_can_set_items_active_from_an_absolute_url()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/', 'Home'))
@@ -72,7 +72,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_set_items_active_recursively_through_submenus_from_an_absolute_url()
+    public function it_can_set_items_active_recursively_through_submenus_from_an_absolute_url()
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
@@ -100,7 +100,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_set_items_active_from_a_relative_url()
+    public function it_can_set_items_active_from_a_relative_url()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/', 'Home'))
@@ -122,7 +122,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_domain()
+    public function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_domain()
     {
         $this->menu = Menu::new()
             ->add(Link::to('https://example.com/foo', 'Example Foo'))
@@ -138,7 +138,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_subdomain()
+    public function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_subdomain()
     {
         $this->menu = Menu::new()
             ->add(Link::to('https://example.com/foo', 'Example Foo'))
@@ -154,7 +154,7 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    function it_uses_a_request_root_to_ensure_top_level_links_arent_always_active()
+    public function it_uses_a_request_root_to_ensure_top_level_links_arent_always_active()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/nl', 'Home'))
@@ -171,7 +171,7 @@ class MenuSetActiveTest extends MenuTestCase
         ');
     }
 
-    function it_can_render_a_custom_active_class()
+    public function it_can_render_a_custom_active_class()
     {
         $this->menu = Menu::new()
             ->setActiveClass('-active')
