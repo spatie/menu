@@ -8,7 +8,7 @@ use Spatie\Menu\Menu;
 class MenuAddTest extends MenuTestCase
 {
     /** @test */
-    function it_starts_as_an_empty_list()
+    public function it_starts_as_an_empty_list()
     {
         $this->menu = Menu::new();
 
@@ -16,7 +16,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function an_item_can_be_added()
+    public function an_item_can_be_added()
     {
         $this->menu = Menu::new()->add(Link::to('#', 'Hello'));
 
@@ -28,7 +28,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function a_link_can_be_added()
+    public function a_link_can_be_added()
     {
         $this->menu = Menu::new()->link('#', 'Hello');
 
@@ -40,7 +40,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function multiple_items_can_be_added()
+    public function multiple_items_can_be_added()
     {
         $this->menu = Menu::new()
             ->add(Link::to('#', 'Hello'))
@@ -55,7 +55,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_adds_an_active_class_to_active_items()
+    public function it_adds_an_active_class_to_active_items()
     {
         $this->menu = Menu::new()
             ->add(Link::to('#', 'Hello')->setActive());
@@ -68,7 +68,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function submenus_can_be_added()
+    public function submenus_can_be_added()
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
@@ -87,7 +87,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_adds_active_classes_to_active_submenus()
+    public function it_adds_active_classes_to_active_submenus()
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
@@ -106,7 +106,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_conditionally_add_an_item()
+    public function it_can_conditionally_add_an_item()
     {
         $this->menu = Menu::new()
             ->addIf(true, Link::to('#', 'Foo'))
@@ -120,7 +120,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_conditionally_add_a_link()
+    public function it_can_conditionally_add_a_link()
     {
         $this->menu = Menu::new()
             ->linkIf(true, '#', 'Foo')
@@ -134,7 +134,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_conditionally_add_html()
+    public function it_can_conditionally_add_html()
     {
         $this->menu = Menu::new()
             ->htmlIf(true, 'Foo')
@@ -148,7 +148,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_add_void_items_with_parent_attributes()
+    public function it_can_add_void_items_with_parent_attributes()
     {
         $this->menu = Menu::new()->void(['role' => 'divider', 'data-divider']);
 
@@ -160,7 +160,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_conditionally_add_void_items_with_parent_attributes()
+    public function it_can_conditionally_add_void_items_with_parent_attributes()
     {
         $this->menu = Menu::new()
             ->voidIf(true, ['class' => 'divider--a'])
