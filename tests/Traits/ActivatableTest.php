@@ -10,7 +10,7 @@ class ActivatableTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->activatable = new class {
+        $this->activatable = new class() {
             use Activatable;
         };
     }
