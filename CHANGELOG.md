@@ -2,6 +2,9 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 1.3.0
+- Added `submenuIf`
+
 ## 1.2.1
 - Internal refactors
 
