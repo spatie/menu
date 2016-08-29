@@ -46,7 +46,7 @@ trait ParentAttributes
     public function setParentAttributes(array $attributes)
     {
         $this->parentAttributes->setAttributes($attributes);
-        
+
         return $this;
     }
 

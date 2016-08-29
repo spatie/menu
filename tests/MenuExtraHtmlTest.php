@@ -8,7 +8,7 @@ use Spatie\Menu\Menu;
 class MenuExtraHtmlTest extends MenuTestCase
 {
     /** @test */
-    function it_can_prepend_content()
+    public function it_can_prepend_content()
     {
         $this->menu = Menu::new()->prepend('<h1>Hi!</h1>');
 
@@ -16,7 +16,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_append_content()
+    public function it_can_append_content()
     {
         $this->menu = Menu::new()->append('<aside>Bye!</aside>');
 
@@ -24,7 +24,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_classes()
+    public function it_renders_classes()
     {
         $this->menu = Menu::new()->addClass('menu');
 
@@ -32,7 +32,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_attributes()
+    public function it_renders_attributes()
     {
         $this->menu = Menu::new()->setAttribute('data-role', 'navigation');
 
@@ -40,7 +40,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_attributes_on_the_list_items()
+    public function it_renders_attributes_on_the_list_items()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/foo', 'Foo')->setParentAttribute('data-foo'));
@@ -53,7 +53,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_classes_on_the_list_items()
+    public function it_renders_classes_on_the_list_items()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/foo', 'Foo')->addParentClass('red'));
@@ -66,7 +66,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_renders_classes_on_the_list_items_when_they_are_active()
+    public function it_renders_classes_on_the_list_items_when_they_are_active()
     {
         $this->menu = Menu::new()
             ->add(Link::to('/foo', 'Foo')->setActive()->addParentClass('red'));
@@ -79,7 +79,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    function it_can_be_wrapped_in_an_element()
+    public function it_can_be_wrapped_in_an_element()
     {
         $this->menu = Menu::new()->link('#', 'Foo')->wrap('div');
 
