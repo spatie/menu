@@ -78,4 +78,12 @@ class MenuSubmenuTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    function it_can_conditionally_add_a_submenu()
+    {
+        $this->menu = Menu::new()->submenuIf(false, Menu::new());
+
+        $this->assertRenders('<ul></ul>');
+    }
 }
