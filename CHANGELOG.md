@@ -2,6 +2,10 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 1.4.0
+- Added a `HasUrl` trait
+- Deprecated `prefixLinks` in favor of `prefixUrls`
+
 ## 1.3.0
 - Added `submenuIf`
 
