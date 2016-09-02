@@ -19,7 +19,7 @@ trait HasUrl
             return $this->url;
         }
 
-        return implode('', $this->prefixes) . '/' . ltrim($this->url, '/');
+        return implode('', $this->prefixes).'/'.ltrim($this->url, '/');
     }
 
     /**
