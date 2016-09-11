@@ -3,16 +3,16 @@
 namespace Spatie\Menu;
 
 use Countable;
+use Spatie\HtmlElement\Attributes;
 use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Helpers\Arr;
 use Spatie\Menu\Helpers\Reflection;
-use Spatie\Menu\Helpers\Url;
-use Spatie\Menu\Traits\HtmlAttributes;
-use Spatie\Menu\Traits\ParentAttributes;
+use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
+use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 {
-    use HtmlAttributes, ParentAttributes;
+    use HasHtmlAttributesTrait, HasParentAttributesTrait;
 
     /** @var array */
     protected $items = [];
@@ -32,6 +32,12 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var string */
     protected $activeClass = 'active';
 
+    /** @var \Spatie\HtmlElement\Attributes */
+    protected $htmlAttributes;
+
+    /** @var \Spatie\HtmlElement\Attributes */
+    protected $parentAttributes;
+
     /**
      * @param \Spatie\Menu\Item[] ...$items
      */
@@ -39,8 +45,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         $this->items = $items;
 
-        $this->initializeHtmlAttributes();
-        $this->initializeParentAttributes();
+        $this->htmlAttributes = new Attributes();
+        $this->parentAttributes = new Attributes();
     }
 
     /**
@@ -50,9 +56,14 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @return static
      */
-    public static function new(array $items = [])
+    public static function new($items = [])
     {
         return new static(...array_values($items));
+    }
+
+    public static function build($items, $mapper)
+    {
+        return array_reduce($items, $mapper, static::new());
     }
 
     /**
@@ -490,52 +501,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function setActiveFromUrl(string $url, string $root = '/')
     {
-        $this->applyToAll(function (Menu $menu) use ($url, $root) {
-            $menu->setActiveFromUrl($url, $root);
+        return $this->applyToAll(function (Activatable $item) use ($url, $root) {
+            $item->determineActiveForUrl($url);
         });
-
-        $requestUrl = Url::parts($url);
-        $requestRoot = Url::stripTrailingSlashes($root, '/');
-
-        $this->applyToAll(function ($item) use ($requestUrl, $requestRoot) {
-
-            // Not using a magic typehint since we need to do two instance checks
-            if (! $item instanceof HasUrl || ! $item instanceof Activatable) {
-                return;
-            }
-
-            $url = Url::parts($item->getUrl());
-
-            // If the menu item is on a different host it can't be active.
-            if ($url['host'] !== '' && $url['host'] !== $requestUrl['host']) {
-                return;
-            }
-
-            // If the request url or the link url is on the root, only set exact matches active.
-            if (
-                $requestUrl['path'] === $requestRoot ||
-                $url['path'] === $requestRoot
-            ) {
-                if ($url['path'] === $requestUrl['path']) {
-                    $item->setActive();
-                }
-
-                return;
-            }
-
-            // If the request path is empty and it isn't the root, there's most likely a
-            // configuration error, and the item isn't active.
-            if (empty($url['path'])) {
-                return;
-            }
-
-            // The menu item is active if it's path starts with the request path.
-            if (strpos($requestUrl['path'], $url['path']) === 0) {
-                $item->setActive();
-            }
-        });
-
-        return $this;
     }
 
     /**

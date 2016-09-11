@@ -2,15 +2,19 @@
 
 namespace Spatie\Menu;
 
+use Spatie\HtmlElement\Attributes;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
-use Spatie\Menu\Traits\ParentAttributes;
+use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
 class Html implements Item, Activatable, HasParentAttributes
 {
-    use ActivatableTrait, ParentAttributes;
+    use ActivatableTrait, HasParentAttributesTrait;
 
     /** @var string */
     protected $html;
+
+    /** @var \Spatie\HtmlElement\Attributes */
+    protected $parentAttributes;
 
     /**
      * @param string $html
@@ -19,8 +23,7 @@ class Html implements Item, Activatable, HasParentAttributes
     {
         $this->html = $html;
         $this->active = false;
-
-        $this->initializeParentAttributes();
+        $this->parentAttributes = new Attributes();
     }
 
     /**
@@ -41,6 +44,14 @@ class Html implements Item, Activatable, HasParentAttributes
     public function getHtml(): string
     {
         return $this->html;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function determineActiveForUrl(string $url)
+    {
+        return;
     }
 
     /**

@@ -2,15 +2,16 @@
 
 namespace Spatie\Menu;
 
+use Spatie\HtmlElement\Attributes;
 use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasUrl as HasUrlTrait;
-use Spatie\Menu\Traits\HtmlAttributes;
-use Spatie\Menu\Traits\ParentAttributes;
+use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
+use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
 class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes, HasUrl
 {
-    use ActivatableTrait, HasUrlTrait, HtmlAttributes, ParentAttributes;
+    use ActivatableTrait, HasUrlTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
 
     /** @var string */
     protected $text;
@@ -21,6 +22,12 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     /** @var array */
     protected $prefixes = [];
 
+    /** @var \Spatie\HtmlElement\Attributes */
+    protected $htmlAttributes;
+
+    /** @var \Spatie\HtmlElement\Attributes */
+    protected $parentAttributes;
+
     /**
      * @param string $url
      * @param string $text
@@ -30,9 +37,8 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
         $this->url = $url;
         $this->text = $text;
         $this->active = false;
-
-        $this->initializeHtmlAttributes();
-        $this->initializeParentAttributes();
+        $this->htmlAttributes = new Attributes();
+        $this->parentAttributes = new Attributes();
     }
 
     /**

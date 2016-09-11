@@ -2,18 +2,11 @@
 
 namespace Spatie\Menu\Traits;
 
-use Spatie\HtmlElement\Attributes;
-
-trait HtmlAttributes
+/**
+ * @property $htmlAttributes \Spatie\HtmlElement\Attributes
+ */
+trait HasHtmlAttributes
 {
-    /** @var \Spatie\HtmlElement\Attributes */
-    protected $htmlAttributes;
-
-    protected function initializeHtmlAttributes()
-    {
-        $this->htmlAttributes = new Attributes();
-    }
-
     /**
      * @param string $attribute
      * @param string $value

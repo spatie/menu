@@ -2,18 +2,11 @@
 
 namespace Spatie\Menu\Traits;
 
-use Spatie\HtmlElement\Attributes;
-
-trait ParentAttributes
+/**
+ * @property $parentAttributes \Spatie\HtmlElement\Attributes
+ */
+trait HasParentAttributes
 {
-    /** @var \Spatie\HtmlElement\Attributes */
-    protected $parentAttributes;
-
-    protected function initializeParentAttributes()
-    {
-        $this->parentAttributes = new Attributes();
-    }
-
     /**
      * Return an array of attributes to apply on the parent. This generally means
      * the attributes that should be applied on the <li> tag.

@@ -12,5 +12,12 @@ interface Activatable
     /**
      * @return $this
      */
-    public function setInActive();
+    public function setInactive();
+
+    /**
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function determineActiveForUrl(string $url);
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace Spatie\Menu\Traits;
+use Spatie\Menu\Url;
 
 /**
  * Expects a `$url` and a `$prefixes` property on the class.
@@ -11,43 +12,15 @@ namespace Spatie\Menu\Traits;
 trait HasUrl
 {
     /**
-     * @return string
+     * @return \Spatie\Menu\Url
      */
-    public function getUrl(): string
+    public function getUrl(): Url
     {
         if (empty($this->prefixes)) {
-            return $this->url;
+            return Url::create($this->url);
         }
 
-        return implode('', $this->prefixes).'/'.ltrim($this->url, '/');
-    }
-
-    /**
-     * Return a segment of the link's URL. This function works for both absolute
-     * and relative URL's. The index is a 1-index based number. Trailing and
-     * double slashes are ignored.
-     *
-     * Example: (new Link('Open Source', 'https://spatie.be/opensource'))->segment(1)
-     *      => 'opensource'
-     *
-     * @param int $index
-     *
-     * @return string|null
-     */
-    public function segment(int $index)
-    {
-        $path = parse_url($this->url)['path'] ?? '';
-
-        $segments = array_values(
-            array_filter(
-                explode('/', $path),
-                function ($value) {
-                    return $value !== '';
-                }
-            )
-        );
-
-        return $segments[$index - 1] ?? null;
+        return Url::create(implode('', $this->prefixes).'/'.ltrim($this->url, '/'));
     }
 
     /**
@@ -60,5 +33,13 @@ trait HasUrl
         $this->prefixes[] = $prefix;
 
         return $this;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function determineActiveForUrl(string $url)
+    {
+        // TODO: Implement determineActiveForUrl() method.
     }
 }
