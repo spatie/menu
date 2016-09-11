@@ -1,6 +1,7 @@
 <?php
 
 namespace Spatie\Menu\Traits;
+
 use Spatie\Menu\Url;
 
 /**
