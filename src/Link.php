@@ -16,11 +16,8 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     /** @var string */
     protected $text;
 
-    /** @var string */
+    /** @var \Spatie\Menu\Url */
     protected $url;
-
-    /** @var array */
-    protected $prefixes = [];
 
     /** @var \Spatie\HtmlElement\Attributes */
     protected $htmlAttributes;
@@ -34,7 +31,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
      */
     protected function __construct(string $url, string $text)
     {
-        $this->url = $url;
+        $this->url = new Url($url);
         $this->text = $text;
         $this->active = false;
         $this->htmlAttributes = new Attributes();
@@ -66,7 +63,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     public function render(): string
     {
         return HtmlElement::render(
-            "a[href={$this->getUrl()}]",
+            "a[href={$this->getUrl()->url()}]",
             $this->htmlAttributes->toArray(),
             $this->text
         );

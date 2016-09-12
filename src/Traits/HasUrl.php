@@ -1,13 +1,12 @@
 <?php
 
 namespace Spatie\Menu\Traits;
-
 use Spatie\Menu\Url;
 
 /**
  * Expects a `$url` and a `$prefixes` property on the class.
  *
- * @property string $url
+ * @property \Spatie\Menu\Url $url
  * @property array $prefixes
  */
 trait HasUrl
@@ -17,11 +16,7 @@ trait HasUrl
      */
     public function getUrl(): Url
     {
-        if (empty($this->prefixes)) {
-            return Url::create($this->url);
-        }
-
-        return Url::create(implode('', $this->prefixes).'/'.ltrim($this->url, '/'));
+        return $this->url;
     }
 
     /**
@@ -31,7 +26,7 @@ trait HasUrl
      */
     public function prefix(string $prefix)
     {
-        $this->prefixes[] = $prefix;
+        $this->url->prefix($prefix);
 
         return $this;
     }

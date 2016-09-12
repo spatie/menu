@@ -7,27 +7,41 @@ use InvalidArgumentException;
 class Url
 {
     /** @var string */
-    protected $host;
+    protected $url;
 
-    /** @var string */
-    protected $path;
-
-    protected function __construct(string $host, string $path)
+    public function __construct(string $url)
     {
-        $this->host = $host;
-        $this->path = $path;
+        $this->url = rtrim($url, '/');
     }
 
-    /**
-     * @param string $url
-     *
-     * @return \Spatie\Menu\Url
-     */
-    public static function create(string $url)
+    public function url(): string
     {
-        $url = parse_url(rtrim($url, '/'));
+        return $this->url;
+    }
 
-        return new static($url['host'] ?? '', $url['path'] ?? '');
+    public function host(): string
+    {
+        return $this->parse()['host'] ?? '';
+    }
+
+    public function hasHost(): bool
+    {
+        return ! empty($this->host());
+    }
+
+    public function isRelative(): bool
+    {
+        return ! $this->hasHost() && strpos($this->path(), '/') !== 0;
+    }
+
+    public function path(): string
+    {
+        return $this->parse()['path'] ?? '';
+    }
+
+    protected function parse(): array
+    {
+        return parse_url($this->url);
     }
 
     /**
@@ -40,14 +54,14 @@ class Url
     public function matches($url): bool
     {
         if (is_string($url)) {
-            $url = static::create($url);
+            $url = new static($url);
         }
 
         if (! $url instanceof static) {
             throw new InvalidArgumentException("`$url` must be a string or an instance of Spatie\\Menu\\HelpersUrl");
         }
 
-        return $this->host === $url->host && $this->path === $url->path;
+        return $this->host() === $url->host() && $this->path() === $url->path();
     }
 
     /**
@@ -63,7 +77,7 @@ class Url
     {
         $segments = array_values(
             array_filter(
-                explode('/', $this->path),
+                explode('/', $this->path()),
                 function ($value) {
                     return $value !== '';
                 }
@@ -71,5 +85,12 @@ class Url
         );
 
         return $segments[$index - 1] ?? null;
+    }
+
+    public function prefix(string $prefix)
+    {
+        if (! $this->hasHost() && $this->isRelative()) {
+            $this->url = rtrim($prefix, '/') . '/' . $this->url;
+        }
     }
 }
