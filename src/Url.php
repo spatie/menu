@@ -90,7 +90,7 @@ class Url
     public function prefix(string $prefix)
     {
         if (! $this->hasHost() && $this->isRelative()) {
-            $this->url = rtrim($prefix, '/') . '/' . $this->url;
+            $this->url = rtrim($prefix, '/').'/'.$this->url;
         }
     }
 }
