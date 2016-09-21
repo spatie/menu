@@ -12,8 +12,6 @@ use Spatie\Url\Url;
  */
 trait HasUrl
 {
-    use Activatable;
-
     /**
      * @return string
      */

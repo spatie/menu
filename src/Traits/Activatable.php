@@ -3,7 +3,7 @@
 namespace Spatie\Menu\Traits;
 
 /**
- * Expects an `$active` property on the class.
+ * Expects a `$active` property on the class.
  *
  * @property string $url
  */
