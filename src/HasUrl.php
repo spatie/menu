@@ -15,11 +15,4 @@ interface HasUrl extends Activatable
      * @return $this
      */
     public function setUrl(string $url);
-
-    /**
-     * @param string $prefix
-     *
-     * @return $this
-     */
-    public function prefix(string $prefix);
 }

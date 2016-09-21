@@ -36,8 +36,8 @@ class MenuSubmenuTest extends MenuTestCase
     public function it_preserves_filters_with_callable_menus()
     {
         $this->menu = Menu::new()
-            ->registerFilter(function (HasUrl $url) {
-                $url->prefix('bar');
+            ->registerFilter(function (HasUrl $item) {
+                $item->setUrl('/bar'.$item->url());
             })
             ->submenu(function (Menu $menu): Menu {
                 return $menu->link('/baz', 'Baz');
@@ -51,7 +51,6 @@ class MenuSubmenuTest extends MenuTestCase
                     </ul>
                 </li>
             </ul>
-     
         ');
     }
 

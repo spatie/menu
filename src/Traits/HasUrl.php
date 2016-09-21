@@ -35,18 +35,6 @@ trait HasUrl
     }
 
     /**
-     * @param string $prefix
-     *
-     * @return $this
-     */
-    public function prefix(string $prefix)
-    {
-        $url = Url::fromString($this->url);
-
-        return $this->setUrl($url->withBasename($prefix.'/'.$url->getBasename()));
-    }
-
-    /**
      * @param string $url
      * @param string $root
      *
