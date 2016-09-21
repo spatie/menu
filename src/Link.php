@@ -4,26 +4,25 @@ namespace Spatie\Menu;
 
 use Spatie\HtmlElement\Attributes;
 use Spatie\HtmlElement\HtmlElement;
-use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasUrl as HasUrlTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
-class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes, HasUrl
+class Link implements Item, HasHtmlAttributes, HasParentAttributes, HasUrl
 {
-    use ActivatableTrait, HasUrlTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
+    use HasUrlTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
 
     /** @var string */
     protected $text;
 
-    /** @var \Spatie\Menu\Url */
+    /** @var string */
     protected $url;
 
-    /** @var \Spatie\HtmlElement\Attributes */
-    protected $htmlAttributes;
+    /** @var bool */
+    protected $active = false;
 
     /** @var \Spatie\HtmlElement\Attributes */
-    protected $parentAttributes;
+    protected $htmlAttributes, $parentAttributes;
 
     /**
      * @param string $url
@@ -31,9 +30,8 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
      */
     protected function __construct(string $url, string $text)
     {
-        $this->url = new Url($url);
+        $this->url = $url;
         $this->text = $text;
-        $this->active = false;
         $this->htmlAttributes = new Attributes();
         $this->parentAttributes = new Attributes();
     }
@@ -52,7 +50,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     /**
      * @return string
      */
-    public function getText(): string
+    public function text(): string
     {
         return $this->text;
     }
@@ -63,7 +61,7 @@ class Link implements Item, Activatable, HasHtmlAttributes, HasParentAttributes,
     public function render(): string
     {
         return HtmlElement::render(
-            "a[href={$this->getUrl()->url()}]",
+            "a[href={$this->url()}]",
             $this->htmlAttributes->toArray(),
             $this->text
         );

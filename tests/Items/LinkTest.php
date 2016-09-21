@@ -11,7 +11,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'Home',
-            Link::to('https://spatie.be', 'Home')->getText()
+            Link::to('https://spatie.be', 'Home')->text()
         );
     }
 
@@ -20,34 +20,7 @@ class LinkTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'https://spatie.be',
-            Link::to('https://spatie.be', 'Home')->getUrl()->url()
-        );
-    }
-
-    /** @test */
-    public function it_can_retrieve_a_segment_from_an_absolute_root_url()
-    {
-        $this->assertEquals(
-            null,
-            Link::to('https://spatie.be', 'Home')->getUrl()->segment(1)
-        );
-    }
-
-    /** @test */
-    public function it_can_retrieve_a_segment_from_an_absolute_url()
-    {
-        $this->assertEquals(
-            'opensource',
-            Link::to('https://spatie.be/opensource', 'Open Source')->getUrl()->segment(1)
-        );
-    }
-
-    /** @test */
-    public function it_can_retrieve_a_segment_from_a_relative_url()
-    {
-        $this->assertEquals(
-            'opensource',
-            Link::to('/opensource', 'Open Source')->getUrl()->segment(1)
+            Link::to('https://spatie.be', 'Home')->url()
         );
     }
 
@@ -75,29 +48,6 @@ class LinkTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             '<a href="https://spatie.be" data-home-link>Home</a>',
             Link::to('https://spatie.be', 'Home')->setAttribute('data-home-link')->render()
-        );
-    }
-
-    /** @test */
-    public function it_can_prefix_an_url()
-    {
-        $this->assertEquals(
-            '/foo/bar',
-            Link::to('bar', 'Bar')->prefix('/foo')->getUrl()->url()
-        );
-    }
-
-    /** @test */
-    public function it_can_prefix_an_url_multiple_times()
-    {
-        $this->assertEquals(
-            '/foo/bar/baz',
-            Link::to('baz', 'Bar')
-                ->prefix('foo')
-                ->prefix('bar')
-                ->prefix('/')
-                ->getUrl()
-                ->url()
         );
     }
 }

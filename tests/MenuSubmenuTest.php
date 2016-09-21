@@ -2,6 +2,7 @@
 
 namespace Spatie\Menu\Test;
 
+use Spatie\Menu\HasUrl;
 use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
 
@@ -35,7 +36,9 @@ class MenuSubmenuTest extends MenuTestCase
     public function it_preserves_filters_with_callable_menus()
     {
         $this->menu = Menu::new()
-            ->prefixUrls('/bar')
+            ->registerFilter(function (HasUrl $url) {
+                $url->prefix('bar');
+            })
             ->submenu(function (Menu $menu): Menu {
                 return $menu->link('/baz', 'Baz');
             });

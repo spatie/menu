@@ -12,13 +12,8 @@ class ActivatableTest extends \PHPUnit_Framework_TestCase
     {
         $this->activatable = new class {
             use Activatable;
+            protected $active = false;
         };
-    }
-
-    /** @test */
-    public function it_starts_inactive()
-    {
-        $this->assertFalse($this->activatable->isActive());
     }
 
     /** @test */

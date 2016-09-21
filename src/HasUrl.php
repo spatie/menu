@@ -2,12 +2,19 @@
 
 namespace Spatie\Menu;
 
-interface HasUrl
+interface HasUrl extends Activatable
 {
     /**
-     * @return \Spatie\Menu\Url
+     * @return string
      */
-    public function getUrl(): Url;
+    public function url(): string;
+
+    /**
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function setUrl(string $url);
 
     /**
      * @param string $prefix
@@ -15,4 +22,10 @@ interface HasUrl
      * @return $this
      */
     public function prefix(string $prefix);
+
+    /**
+     * @param string $url
+     * @param string $root
+     */
+    public function determineActiveForUrl(string $url, string $root = '/');
 }

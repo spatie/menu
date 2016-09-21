@@ -13,6 +13,9 @@ class Html implements Item, Activatable, HasParentAttributes
     /** @var string */
     protected $html;
 
+    /** @var bool */
+    protected $active = false;
+
     /** @var \Spatie\HtmlElement\Attributes */
     protected $parentAttributes;
 
@@ -22,7 +25,6 @@ class Html implements Item, Activatable, HasParentAttributes
     protected function __construct(string $html)
     {
         $this->html = $html;
-        $this->active = false;
         $this->parentAttributes = new Attributes();
     }
 

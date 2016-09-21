@@ -2,11 +2,13 @@
 
 namespace Spatie\Menu\Traits;
 
+/**
+ * Expects an `$active` property on the class.
+ *
+ * @property string $url
+ */
 trait Activatable
 {
-    /** @var bool */
-    protected $active = false;
-
     /**
      * @return bool
      */

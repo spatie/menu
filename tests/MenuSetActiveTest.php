@@ -11,10 +11,10 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_set_items_active_with_a_callable()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('/', 'Home'))
-            ->add(Link::to('/about', 'About'))
+            ->link('/', 'Home')
+            ->link('/about', 'About')
             ->setActive(function (Link $link) {
-                return $link->getUrl() === '/about';
+                return $link->url() === '/about';
             });
 
         $this->assertRenders('
@@ -30,11 +30,11 @@ class MenuSetActiveTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
-                ->add(Link::to('/', 'Home'))
-                ->add(Link::to('/about', 'About'))
+                ->link('/', 'Home')
+                ->link('/about', 'About')
             )
             ->setActive(function (Link $link) {
-                return $link->getUrl() === '/about';
+                return $link->url() === '/about';
             });
 
         $this->assertRenders('
@@ -50,22 +50,22 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_set_items_active_from_an_absolute_url()
+    public function it_can_set_items_active_with_an_absolute_url()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('/', 'Home'))
-            ->add(Link::to('/disclaimer', 'Disclaimer'))
-            ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+            ->link('http://example.com', 'Home')
+            ->link('http://example.com/disclaimer', 'Disclaimer')
+            ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')
             ->setActive('http://example.com/disclaimer');
 
         $this->assertRenders('
             <ul>
-                <li><a href="/">Home</a></li>
+                <li><a href="http://example.com">Home</a></li>
                 <li class="active">
-                    <a href="/disclaimer">Disclaimer</a>
+                    <a href="http://example.com/disclaimer">Disclaimer</a>
                 </li>
                 <li>
-                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                    <a href="http://example.com/disclaimer/intellectual-property">Intellectual Property</a>
                 </li>
             </ul>
         ');
@@ -76,9 +76,9 @@ class MenuSetActiveTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->add(Menu::new()
-                ->add(Link::to('/', 'Home'))
-                ->add(Link::to('/disclaimer', 'Disclaimer'))
-                ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+                ->link('http://example.com', 'Home')
+                ->link('http://example.com/disclaimer', 'Disclaimer')
+                ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')
             )
             ->setActive('http://example.com/disclaimer');
 
@@ -86,12 +86,12 @@ class MenuSetActiveTest extends MenuTestCase
             <ul>
                 <li class="active">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="http://example.com">Home</a></li>
                         <li class="active">
-                            <a href="/disclaimer">Disclaimer</a>
+                            <a href="http://example.com/disclaimer">Disclaimer</a>
                         </li>
                         <li>
-                            <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                            <a href="http://example.com/disclaimer/intellectual-property">Intellectual Property</a>
                         </li>
                     </ul>
                 </li>
@@ -103,9 +103,9 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_set_items_active_from_a_relative_url()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('/', 'Home'))
-            ->add(Link::to('/disclaimer', 'Disclaimer'))
-            ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
             ->setActive('/disclaimer');
 
         $this->assertRenders('
@@ -125,8 +125,8 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_domain()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('https://example.com/foo', 'Example Foo'))
-            ->add(Link::to('https://another-example.com/foo', 'Another Example Foo'))
+            ->link('https://example.com/foo', 'Example Foo')
+            ->link('https://another-example.com/foo', 'Another Example Foo')
             ->setActive('https://example.com/foo');
 
         $this->assertRenders('
@@ -141,8 +141,8 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_subdomain()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('https://example.com/foo', 'Example Foo'))
-            ->add(Link::to('https://sub.example.com/foo', 'Sub Example Foo'))
+            ->link('https://example.com/foo', 'Example Foo')
+            ->link('https://sub.example.com/foo', 'Sub Example Foo')
             ->setActive('https://example.com/foo');
 
         $this->assertRenders('
@@ -157,15 +157,15 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_uses_a_request_root_to_ensure_top_level_links_arent_always_active()
     {
         $this->menu = Menu::new()
-            ->add(Link::to('/nl', 'Home'))
-            ->add(Link::to('/nl/disclaimer', 'Disclaimer'))
-            ->add(Link::to('/nl/disclaimer/intellectuele-eigendom', 'Intellectuële Eigendom'))
-            ->setActive('https://example.com/nl', '/nl');
+            ->link('/nl', 'Home')
+            ->link('/nl/disclaimer', 'Disclaimer')
+            ->link('/nl/disclaimer/intellectuele-eigendom', 'Intellectuële Eigendom')
+            ->setActive('/nl/disclaimer', '/nl');
 
         $this->assertRenders('
             <ul>
-                <li class="active"><a href="/nl">Home</a></li>
-                <li><a href="/nl/disclaimer">Disclaimer</a></li>
+                <li><a href="/nl">Home</a></li>
+                <li class="active"><a href="/nl/disclaimer">Disclaimer</a></li>
                 <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
             </ul>
         ');
@@ -175,9 +175,9 @@ class MenuSetActiveTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->setActiveClass('-active')
-            ->add(Link::to('/', 'Home'))
-            ->add(Link::to('/disclaimer', 'Disclaimer'))
-            ->add(Link::to('/disclaimer/intellectual-property', 'Intellectual Property'))
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
             ->setActive('http://example.com/disclaimer');
 
         $this->assertRenders('
