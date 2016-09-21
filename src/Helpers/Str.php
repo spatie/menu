@@ -15,11 +15,11 @@ class Str
 
     public static function removeFromStart(string $remove, string $subject): string
     {
-        if (! Str::startsWith($subject, $remove)) {
+        if (! self::startsWith($subject, $remove)) {
             return $subject;
         }
 
-        return Str::replaceFirst($remove, '', $subject);
+        return self::replaceFirst($remove, '', $subject);
     }
 
     public static function replaceFirst(string $search, string $replace, string $subject): string
@@ -32,5 +32,4 @@ class Str
 
         return $subject;
     }
-
 }
