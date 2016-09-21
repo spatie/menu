@@ -339,6 +339,26 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Prefix all the urls in the menu.
+     *
+     * @param string $prefix
+     *
+     * @return \Spatie\Menu\Menu
+     */
+    public function prefixUrls(string $prefix)
+    {
+        //$this->applyToAll(function (Menu $menu) use ($prefix) {
+        //    $menu->prefix($prefix);
+        //});
+
+        $this->applyToAll(function (HasUrl $link) use ($prefix) {
+            $link->prefix($prefix);
+        });
+
+        return $this;
+    }
+
+    /**
      * Prepend the menu with a string of html on render.
      *
      * @param string $prepend
