@@ -3,6 +3,8 @@
 namespace Spatie\Menu\Traits;
 
 /**
+ * Expects a `$parentAttributes` propert on the class.
+ *
  * @property $parentAttributes \Spatie\HtmlElement\Attributes
  */
 trait HasParentAttributes
