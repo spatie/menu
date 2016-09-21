@@ -629,7 +629,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             Arr::map($this->items, function (Item $item) {
                 return HtmlElement::render(
                     $item->isActive() ? "li.{$this->activeClass}" : 'li',
-                    $item instanceof HasParentAttributes ? $item->getParentAttributes() : [],
+                    $item instanceof HasParentAttributes ? $item->parentAttributes() : [],
                     $item->render()
                 );
             })

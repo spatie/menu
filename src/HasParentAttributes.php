@@ -10,7 +10,7 @@ interface HasParentAttributes
      *
      * @return array
      */
-    public function getParentAttributes(): array;
+    public function parentAttributes(): array;
 
     /**
      * @param string $attribute
