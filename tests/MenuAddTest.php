@@ -148,9 +148,21 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_add_void_items_with_parent_attributes()
+    public function it_can_add_text_items()
     {
-        $this->menu = Menu::new()->void(['role' => 'divider', 'data-divider']);
+        $this->menu = Menu::new()->text('Hello world');
+
+        $this->assertRenders('
+            <ul>
+                <li>Hello world</li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_add_text_items_with_parent_attributes()
+    {
+        $this->menu = Menu::new()->text('', ['role' => 'divider', 'data-divider']);
 
         $this->assertRenders('
             <ul>
@@ -160,15 +172,15 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_conditionally_add_void_items_with_parent_attributes()
+    public function it_can_conditionally_add_text_items()
     {
         $this->menu = Menu::new()
-            ->voidIf(true, ['class' => 'divider--a'])
-            ->voidIf(false, ['class' => 'divider--b']);
+            ->textIf(true, 'Hello world')
+            ->textIf(false, 'Goodbye world');
 
         $this->assertRenders('
             <ul>
-                <li class="divider--a"></li>
+                <li>Hello world</li>
             </ul>
         ');
     }

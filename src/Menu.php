@@ -17,14 +17,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var array */
     protected $items = [];
 
-    /** @var string */
-    protected $prepend = '';
-
-    /** @var string */
-    protected $append = '';
-
     /** @var array */
     protected $filters = [];
+
+    /** @var string */
+    protected $prepend, $append = '';
 
     /** @var array */
     protected $wrap = [];
@@ -33,14 +30,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $activeClass = 'active';
 
     /** @var \Spatie\HtmlElement\Attributes */
-    protected $htmlAttributes;
+    protected $htmlAttributes, $parentAttributes;
 
-    /** @var \Spatie\HtmlElement\Attributes */
-    protected $parentAttributes;
-
-    /**
-     * @param \Spatie\Menu\Item[] ...$items
-     */
     protected function __construct(Item ...$items)
     {
         $this->items = $items;
@@ -61,9 +52,18 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         return new static(...array_values($items));
     }
 
-    public static function build($items, $mapper)
+    /**
+     * Build a new menu from an array. The reducer receives a menu instance as
+     * the accumulator, and the array item as a second parameter.
+     *
+     * @param array $items
+     * @param callable $reducer
+     *
+     * @return static
+     */
+    public static function build($items, callable $reducer)
     {
-        return array_reduce($items, $mapper, static::new());
+        return array_reduce($items, $reducer, static::new());
     }
 
     /**
@@ -163,29 +163,31 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Add an empty item with parent attributes.
+     * Add a list item with text and parent attributes.
      *
+     * @param string $text
      * @param array $parentAttributes
      *
      * @return $this
      */
-    public function void(array $parentAttributes = [])
+    public function text(string $text, array $parentAttributes = [])
     {
-        return $this->add(Html::raw('')->setParentAttributes($parentAttributes));
+        return $this->add(Html::raw($text)->setParentAttributes($parentAttributes));
     }
 
     /**
-     * Add an empty item with parent attributes if a (non-strict) condition is met.
+     * Add a list item with text and parent attributes if a (non-strict) condition is met.
      *
      * @param $condition
+     * @param string $text
      * @param array $parentAttributes
      *
      * @return $this
      */
-    public function voidIf($condition, array $parentAttributes = [])
+    public function textIf($condition, string $text = '', array $parentAttributes = [])
     {
         if ($condition) {
-            $this->void($parentAttributes);
+            $this->text($text, $parentAttributes);
         }
 
         return $this;
