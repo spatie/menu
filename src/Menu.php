@@ -347,15 +347,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function prefixUrls(string $prefix)
     {
-        //$this->applyToAll(function (Menu $menu) use ($prefix) {
-        //    $menu->prefix($prefix);
-        //});
-
-        $this->applyToAll(function (HasUrl $link) use ($prefix) {
+        return $this->applyToAll(function (HasUrl $link) use ($prefix) {
             $link->prefix($prefix);
         });
-
-        return $this;
     }
 
     /**
