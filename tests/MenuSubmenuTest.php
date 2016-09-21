@@ -35,7 +35,7 @@ class MenuSubmenuTest extends MenuTestCase
     public function it_preserves_filters_with_callable_menus()
     {
         $this->menu = Menu::new()
-            ->prefixLinks('/bar')
+            ->prefixUrls('/bar')
             ->submenu(function (Menu $menu): Menu {
                 return $menu->link('/baz', 'Baz');
             });
