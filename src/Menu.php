@@ -21,7 +21,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $filters = [];
 
     /** @var string */
-    protected $prepend, $append = '';
+    protected $prepend;
+    protected $append = '';
 
     /** @var array */
     protected $wrap = [];
@@ -30,7 +31,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $activeClass = 'active';
 
     /** @var \Spatie\HtmlElement\Attributes */
-    protected $htmlAttributes, $parentAttributes;
+    protected $htmlAttributes;
+    protected $parentAttributes;
 
     protected function __construct(Item ...$items)
     {
