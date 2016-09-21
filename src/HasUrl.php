@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu;
 
-interface HasUrl
+interface HasUrl extends Activatable
 {
     /**
      * @return string

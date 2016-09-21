@@ -36,4 +36,12 @@ trait Activatable
 
         return $this;
     }
+
+    /**
+     * @param string $url
+     * @param string $root
+     */
+    public function determineActiveForUrl(string $url, string $root = '')
+    {
+    }
 }

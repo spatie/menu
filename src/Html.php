@@ -49,13 +49,6 @@ class Html implements Item, Activatable, HasParentAttributes
     }
 
     /**
-     * @param string $url
-     */
-    public function determineActiveForUrl(string $url)
-    {
-    }
-
-    /**
      * @return string
      */
     public function render(): string
