@@ -16,7 +16,7 @@ class MenuBuildTest extends MenuTestCase
         ];
 
         $this->menu = Menu::build($items, function (Menu $menu, $item) {
-           return $menu->link($item['url'], $item['text']);
+            return $menu->link($item['url'], $item['text']);
         });
 
         $this->assertRenders('
