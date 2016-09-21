@@ -43,7 +43,7 @@ class Html implements Item, Activatable, HasParentAttributes
     /**
      * @return string
      */
-    public function getHtml(): string
+    public function html(): string
     {
         return $this->html;
     }

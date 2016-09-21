@@ -11,7 +11,7 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals(
             'Hello world',
-            Html::raw('Hello world')->getHtml()
+            Html::raw('Hello world')->html()
         );
     }
 

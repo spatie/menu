@@ -159,12 +159,13 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * Shortcut function to add raw html to the menu.
      *
      * @param string $html
+     * @param array  $parentAttributes
      *
      * @return $this
      */
-    public function html(string $html)
+    public function html(string $html, array $parentAttributes = [])
     {
-        return $this->add(Html::raw($html));
+        return $this->add(Html::raw($html)->setParentAttributes($parentAttributes));
     }
 
     /**
@@ -172,29 +173,17 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @param bool   $condition
      * @param string $html
+     * @param array  $parentAttributes
      *
      * @return $this
      */
-    public function htmlIf($condition, string $html)
+    public function htmlIf($condition, string $html, array $parentAttributes = [])
     {
         if ($condition) {
-            $this->html($html);
+            $this->html($html, $parentAttributes);
         }
 
         return $this;
-    }
-
-    /**
-     * Add a list item with text and parent attributes.
-     *
-     * @param string $text
-     * @param array $parentAttributes
-     *
-     * @return $this
-     */
-    public function text(string $text, array $parentAttributes = [])
-    {
-        return $this->add(Html::raw($text)->setParentAttributes($parentAttributes));
     }
 
     /**

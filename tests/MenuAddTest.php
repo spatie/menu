@@ -146,42 +146,4 @@ class MenuAddTest extends MenuTestCase
             </ul>
         ');
     }
-
-    /** @test */
-    public function it_can_add_text_items()
-    {
-        $this->menu = Menu::new()->text('Hello world');
-
-        $this->assertRenders('
-            <ul>
-                <li>Hello world</li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_add_text_items_with_parent_attributes()
-    {
-        $this->menu = Menu::new()->text('', ['role' => 'divider', 'data-divider']);
-
-        $this->assertRenders('
-            <ul>
-                <li role="divider" data-divider></li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_conditionally_add_text_items()
-    {
-        $this->menu = Menu::new()
-            ->textIf(true, 'Hello world')
-            ->textIf(false, 'Goodbye world');
-
-        $this->assertRenders('
-            <ul>
-                <li>Hello world</li>
-            </ul>
-        ');
-    }
 }
