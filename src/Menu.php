@@ -187,24 +187,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Add a list item with text and parent attributes if a (non-strict) condition is met.
-     *
-     * @param $condition
-     * @param string $text
-     * @param array $parentAttributes
-     *
-     * @return $this
-     */
-    public function textIf($condition, string $text = '', array $parentAttributes = [])
-    {
-        if ($condition) {
-            $this->text($text, $parentAttributes);
-        }
-
-        return $this;
-    }
-
-    /**
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
      * @param callable|\Spatie\Menu\Menu|null $menu
      *
