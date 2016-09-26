@@ -7,6 +7,7 @@ All Notable changes to `menu` will be documented in this file.
 - Added static `Menu::build` and non-static `Menu::fill` methods to create menu's from arrays
 - `setActive` now also accepts a non-strict boolean or callable parameter to set `$active` to true or false 
 - `Menu::html` and `Menu::htmlIf` now accept a `$parentAttributes` array as their second arguments
+- Renamed `Htmlattributes` and `ParentAttributes` traits to `HasHtmlattributes` and `HasParentAttributes` to match their interfaces
 - Removed `get` prefix from getter methods (e.g. `getUrl` -> `url`, `getText` -> `text`)
 - Removed `void` and `voidIf` (just use `html` with an empty string instead)
 - Removed `prefixLinks` and `prefixUrls` since it's too complex and unpredictable in nested menu's
