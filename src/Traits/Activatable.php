@@ -26,6 +26,7 @@ trait Activatable
     {
         if (is_callable($active)) {
             $this->active = $active($this);
+
             return $this;
         }
 
