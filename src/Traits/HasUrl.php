@@ -47,12 +47,12 @@ trait HasUrl
 
         // If the hosts don't match, this url isn't active.
         if ($itemUrl->getHost() !== $matchUrl->getHost()) {
-            return $this->setActive(false);
+            return $this->setInactive();
         }
 
         // If this url doesn't start with the root, it's inactive.
         if (! Str::startsWith($itemUrl->getPath(), $root)) {
-            return $this->setActive(false);
+            return $this->setInactive();
         }
 
         // For the next comparisons we just need the paths, and we'll remove
@@ -65,6 +65,6 @@ trait HasUrl
             return $this->setActive();
         }
 
-        return $this->setActive(false);
+        return $this->setInactive();
     }
 }
