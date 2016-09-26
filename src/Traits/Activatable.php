@@ -18,11 +18,18 @@ trait Activatable
     }
 
     /**
+     * @param bool|callable $active
+     *
      * @return $this
      */
-    public function setActive()
+    public function setActive($active = true)
     {
-        $this->active = true;
+        if (is_callable($active)) {
+            $this->active = $active($this);
+            return $this;
+        }
+
+        $this->active = (bool) $active;
 
         return $this;
     }

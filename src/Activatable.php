@@ -5,9 +5,11 @@ namespace Spatie\Menu;
 interface Activatable
 {
     /**
+     * @param bool|callable $active
+     *
      * @return $this
      */
-    public function setActive();
+    public function setActive($active = true);
 
     /**
      * @return $this

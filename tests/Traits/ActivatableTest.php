@@ -23,8 +23,22 @@ class ActivatableTest extends \PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_be_set_inactive()
+    public function it_can_be_set_inactive_via_set_active()
+    {
+        $this->assertFalse($this->activatable->setActive()->setActive(false)->isActive());
+    }
+
+    /** @test */
+    public function it_can_be_set_inactive_via_set_inactive()
     {
         $this->assertFalse($this->activatable->setActive()->setInactive()->isActive());
+    }
+
+    /** @test */
+    public function it_can_be_set_active_via_a_callable()
+    {
+        $this->assertFalse($this->activatable->setActive(function () {
+            return false;
+        })->isActive());
     }
 }
