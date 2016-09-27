@@ -41,6 +41,8 @@ Menu::new()
 
 ## Or a More Programmatic Approach
 
+Menus can also be created through a reduce-like callable.
+
 ```php
 $pages = [
     '/' => 'Home',
