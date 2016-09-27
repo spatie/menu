@@ -15,7 +15,7 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     /** @var string */
     protected $text;
 
-    /** @var string */
+    /** @var string|null */
     protected $url = null;
 
     /** @var bool */
