@@ -11,6 +11,8 @@ The `spatie/menu` package provides a fluent interface to build menus of any size
 
 Documentation is available at https://docs.spatie.be/menu.
 
+Upgrading from version 1? There's a [guide](https://github.com/spatie/menu#upgrading-to-20) for that!
+
 ## Human Readable, Fluent Interface
 
 All classes provide a human readable, fluent interface (no array configuration). Additionally, you can opt for a more verbose and flexible syntax, or for convenience methods that cover most use cases.
