@@ -129,6 +129,26 @@ $ composer require spatie/menu
 
 Documentation is available at https://docs.spatie.be/menu.
 
+## Upgrading to 2.0
+
+Upgrading to 2.0 should be pretty painless for most use cases.
+
+### If you're just building menus...
+
+- The `void` and `voidIf` have been removed. These can be replaced by `html` and `htmlIf`, with empty strings as their first arguments
+- The `prefixLinks` and `prefixUrls` methods have been removed because they were too unpredictable in some case. There currently isn't an alternative for these, besides writing your own logic and applying it with `applyToAll`.
+
+### If you're using custom `Item` implementations...
+
+- The `HtmlAttributes` and `ParentAttributes` traits have been renamed to `HasHtmlAttributes` and `HasParentAttributes`.
+- The `HasUrl` interface and trait has been removed. Url-related methods now also are part of the `Activatable` interface and trait.
+
+### New features...
+
+- Added the static `Menu::build` and non-static `Menu::fill` methods to create menu's from arrays.
+- The `setActive` method on `Activatable` now also accepts a non-strict boolean or callable parameter to set `$active` to true or false.
+- `Menu::html` and `Menu::htmlIf` now accept a `$parentAttributes` array as their second arguments.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.

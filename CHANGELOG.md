@@ -3,14 +3,13 @@
 All Notable changes to `menu` will be documented in this file.
 
 ## 2.0.0
-- Item active states for URL's are now determined by a `determineActiveForUrl` on the item itself
-- Added static `Menu::build` and non-static `Menu::fill` methods to create menu's from arrays
-- `setActive` now also accepts a non-strict boolean or callable parameter to set `$active` to true or false 
-- `Menu::html` and `Menu::htmlIf` now accept a `$parentAttributes` array as their second arguments
-- Renamed `Htmlattributes` and `ParentAttributes` traits to `HasHtmlattributes` and `HasParentAttributes` to match their interfaces
-- Removed `get` prefix from getter methods (e.g. `getUrl` -> `url`, `getText` -> `text`)
-- Removed `void` and `voidIf` (just use `html` with an empty string instead)
-- Removed `prefixLinks` and `prefixUrls` since it's too complex and unpredictable in nested menu's
+- Added: Added the static `Menu::build` and non-static `Menu::fill` methods to create menu's from arrays.
+- Added: The `setActive` method on `Activatable` now also accepts a non-strict boolean or callable parameter to set `$active` to true or false.
+- Added: `Menu::html` and `Menu::htmlIf` now accept a `$parentAttributes` array as their second arguments.
+- Changed: The `HtmlAttributes` and `ParentAttributes` traits have been renamed to `HasHtmlAttributes` and `HasParentAttributes`.
+- Changed: The `HasUrl` interface and trait has been removed. Url-related methods now also are part of the `Activatable` interface and trait.
+- Removed: The `void` and `voidIf` have been removed. These can be replaced by `html` and `htmlIf`, with empty strings as their first arguments
+- Removed: The `prefixLinks` and `prefixUrls` methods have been removed because they were too unpredictable in some case. There currently isn't an alternative for these, besides writing your own logic and applying it with `applyToAll`.
 
 ## 1.4.0
 - Added a `HasUrl` trait
