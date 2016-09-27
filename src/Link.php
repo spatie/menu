@@ -4,19 +4,19 @@ namespace Spatie\Menu;
 
 use Spatie\HtmlElement\Attributes;
 use Spatie\HtmlElement\HtmlElement;
-use Spatie\Menu\Traits\HasUrl as HasUrlTrait;
+use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
-class Link implements Item, HasHtmlAttributes, HasParentAttributes, HasUrl
+class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
 {
-    use HasUrlTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
+    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
 
     /** @var string */
     protected $text;
 
     /** @var string */
-    protected $url;
+    protected $url = null;
 
     /** @var bool */
     protected $active = false;

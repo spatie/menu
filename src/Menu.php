@@ -470,7 +470,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             $menu->setActiveFromUrl($url, $root);
         });
 
-        $this->applyToAll(function (HasUrl $item) use ($url, $root) {
+        $this->applyToAll(function (Activatable $item) use ($url, $root) {
             $item->determineActiveForUrl($url, $root);
         });
 
