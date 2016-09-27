@@ -39,6 +39,28 @@ Menu::new()
 </ul>
 ```
 
+## Or a More Programmatic Approach
+
+```php
+$pages = [
+    '/' => 'Home',
+    '/about' => 'About',
+    '/contact' => 'Contact',
+];
+
+Menu::build($pages, function ($menu, $label, $url) {
+    $menu->add($url, $label);
+})->render();
+```
+
+```html
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
+```
+
 ## Strong Control Over the Html Output
 
 You can programatically add html classes and attributes to any item in the menu, or to the menu itself.
