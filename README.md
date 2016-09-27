@@ -92,7 +92,7 @@ The menu supports submenus, which in turn can be nested infinitely.
 
 ```php
 Menu::new()
-    ->add(Link::to('/', 'Home'))
+    ->link('/', 'Home')
     ->submenu('More', Menu::new()
         ->addClass('submenu')
         ->link('/about', 'About'))
@@ -129,7 +129,7 @@ Menu::macro('main', function () {
 
 ```html
 <nav class="navigation">
-    {!! Menu::main() !!}
+    {{ Menu::main() }}
 </nav>
 ```
 
@@ -199,6 +199,7 @@ If you discover any security related issues, please email freek@spatie.be instea
 - [All Contributors](../../contributors)
 
 ## About Spatie
+
 Spatie is a webdesign agency based in Antwerp, Belgium. You'll find an overview of all our open source projects [on our website](https://spatie.be/opensource).
 
 ## License
