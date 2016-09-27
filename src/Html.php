@@ -13,6 +13,9 @@ class Html implements Item, Activatable, HasParentAttributes
     /** @var string */
     protected $html;
 
+    /** @var string|null */
+    protected $url = null;
+
     /** @var bool */
     protected $active = false;
 
