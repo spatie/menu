@@ -2,6 +2,9 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 2.0.1
+- Fixed: Require `^1.0.0` of spatie/url
+
 ## 2.0.0
 - Added: Added the static `Menu::build` and non-static `Menu::fill` methods to create menu's from arrays.
 - Added: The `setActive` method on `Activatable` now also accepts a non-strict boolean or callable parameter to set `$active` to true or false.
