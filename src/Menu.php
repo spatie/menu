@@ -53,36 +53,36 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Build a new menu from an array. The reducer receives a menu instance as
+     * Build a new menu from an array. The callback receives a menu instance as
      * the accumulator, the array item as the second parameter, and the item's
      * key as the third.
      *
      * @param array|\Iterator $items
-     * @param callable $reducer
+     * @param callable $callback
      *
      * @return static
      */
-    public static function build($items, callable $reducer)
+    public static function build($items, callable $callback)
     {
-        return static::new()->fill($items, $reducer);
+        return static::new()->fill($items, $callback);
     }
 
     /**
-     * Fill a menu from an array. The reducer receives a menu instance as
+     * Fill a menu from an array. The callback receives a menu instance as
      * the accumulator, the array item as the second parameter, and the item's
      * key as the third.
      *
      * @param array|\Iterator $items
-     * @param callable $reducer
+     * @param callable $callback
      *
      * @return static
      */
-    public function fill($items, callable $reducer)
+    public function fill($items, callable $callback)
     {
         $menu = $this;
 
         foreach ($items as $key => $item) {
-            $menu = $reducer($menu, $item, $key);
+            $menu = $callback($menu, $item, $key);
         }
 
         return $menu;
