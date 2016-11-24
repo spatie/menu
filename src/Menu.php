@@ -59,12 +59,13 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @param array|\Iterator $items
      * @param callable $callback
+     * @param \Spatie\Menu\Menu|null $initial
      *
      * @return static
      */
-    public static function build($items, callable $callback)
+    public static function build($items, callable $callback, Menu $initial = null)
     {
-        return static::new()->fill($items, $callback);
+        return ($initial ?: static::new())->fill($items, $callback);
     }
 
     /**
