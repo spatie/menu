@@ -2,6 +2,9 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 2.1.0
+- Added: Optional third `$initial` parameter in `Menu::build`
+
 ## 2.0.1
 - Fixed: Require `^1.0.0` of spatie/url
 
