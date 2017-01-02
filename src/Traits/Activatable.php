@@ -2,8 +2,8 @@
 
 namespace Spatie\Menu\Traits;
 
-use Spatie\Menu\Helpers\Str;
 use Spatie\Url\Url;
+use Spatie\Menu\Helpers\Str;
 
 /**
  * Expects an `$active` property on the class.
