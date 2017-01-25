@@ -171,6 +171,24 @@ class MenuSetActiveTest extends MenuTestCase
         ');
     }
 
+    /** @test */
+    public function the_request_root_also_works_when_not_prepended_by_a_slash()
+    {
+        $this->menu = Menu::new()
+            ->link('/nl', 'Home')
+            ->link('/nl/disclaimer', 'Disclaimer')
+            ->link('/nl/disclaimer/intellectuele-eigendom', 'Intellectuële Eigendom')
+            ->setActive('/nl/disclaimer', 'nl');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/nl">Home</a></li>
+                <li class="active"><a href="/nl/disclaimer">Disclaimer</a></li>
+                <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
+            </ul>
+        ');
+    }
+
     public function it_can_render_a_custom_active_class()
     {
         $this->menu = Menu::new()

@@ -32,4 +32,13 @@ class Str
 
         return $subject;
     }
+
+    public static function ensureLeft(string $pattern, string $subject): string
+    {
+        if (strpos($subject, $pattern) === 0) {
+            return $subject;
+        }
+
+        return $pattern.$subject;
+    }
 }

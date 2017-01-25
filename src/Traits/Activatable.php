@@ -96,6 +96,8 @@ trait Activatable
             return $this->setInactive();
         }
 
+        $root = Str::ensureLeft('/', $root);
+
         // If this url doesn't start with the root, it's inactive.
         if (! Str::startsWith($itemUrl->getPath(), $root)) {
             return $this->setInactive();
