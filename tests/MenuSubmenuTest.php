@@ -2,9 +2,9 @@
 
 namespace Spatie\Menu\Test;
 
-use Spatie\Menu\Activatable;
 use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
+use Spatie\Menu\Activatable;
 
 class MenuSubmenuTest extends MenuTestCase
 {
