@@ -2,6 +2,9 @@
 
 All Notable changes to `menu` will be documented in this file.
 
+## 2.1.1
+- Added: The request root path when setting the active path
+ 
 ## 2.1.0
 - Added: Optional third `$initial` parameter in `Menu::build`
 
