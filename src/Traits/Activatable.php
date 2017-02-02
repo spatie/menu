@@ -109,7 +109,7 @@ trait Activatable
         $matchPath = Str::removeFromStart($root, $matchUrl->getPath());
 
         // If this url starts with the url we're matching with, it's active.
-        if (Str::startsWith($matchPath, $itemPath)) {
+        if ($mathPath === $itemPath || Str::startsWith($matchPath, $itemPath)) {
             return $this->setActive();
         }
 
