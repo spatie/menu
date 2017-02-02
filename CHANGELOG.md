@@ -2,7 +2,7 @@
 
 All Notable changes to `menu` will be documented in this file.
 
-## 2.1.2
+## 2.1.3
 - Fixed setting an active url when the url is exactly the same
 
 ## 2.1.1
