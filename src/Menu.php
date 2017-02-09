@@ -585,6 +585,17 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * @param bool $condition
+     * @param callable $callable
+     *
+     * @return $this
+     */
+    public function if(bool $condition, callable $callable)
+    {
+        return $condition ? $callable($this) : $this;
+    }
+
+    /**
      * Create a empty blueprint of the menu (copies `filters` and `activeClass`).
      *
      * @return static

@@ -1,9 +1,12 @@
 # Changelog
 
-All Notable changes to `menu` will be documented in this file.
+All notable changes to `menu` will be documented in this file.
+
+## 2.2.0 - 2017-02-09
+- Added: `if` function
 
 ## 2.1.3
-- Fixed setting an active url when the url is exactly the same
+- Fixed: setting an active url when the url is exactly the same
 
 ## 2.1.1
 - Added: The request root path when setting the active path
