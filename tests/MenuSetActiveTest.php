@@ -50,6 +50,28 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
+    public function it_can_set_items_active_while_items_exists_with_startswith_true()
+    {
+        $this->menu = Menu::new()
+            ->link('http://example.com', 'Home')
+            ->link('http://example.com/disclaimer', 'Disclaimer')
+            ->link('http://example.com/disclaimer-full', 'Full Disclaimer')
+            ->setActive('http://example.com/disclaimer-full');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="http://example.com">Home</a></li>
+                <li>
+                    <a href="http://example.com/disclaimer">Disclaimer</a>
+                </li>
+                <li class="active">
+                    <a href="http://example.com/disclaimer-full">Full Disclaimer</a>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     public function it_can_set_items_active_with_an_absolute_url()
     {
         $this->menu = Menu::new()
@@ -184,6 +206,24 @@ class MenuSetActiveTest extends MenuTestCase
             <ul>
                 <li><a href="/nl">Home</a></li>
                 <li class="active"><a href="/nl/disclaimer">Disclaimer</a></li>
+                <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function and_we_can_still_set_the_root_as_active()
+    {
+        $this->menu = Menu::new()
+            ->link('/nl', 'Home')
+            ->link('/nl/disclaimer', 'Disclaimer')
+            ->link('/nl/disclaimer/intellectuele-eigendom', 'Intellectuële Eigendom')
+            ->setActive('/nl/', '/nl');
+
+        $this->assertRenders('
+            <ul>
+                <li class="active"><a href="/nl">Home</a></li>
+                <li><a href="/nl/disclaimer">Disclaimer</a></li>
                 <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
             </ul>
         ');

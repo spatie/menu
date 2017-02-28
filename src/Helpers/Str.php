@@ -41,4 +41,13 @@ class Str
 
         return $pattern.$subject;
     }
+
+    public static function ensureRight(string $pattern, string $subject): string
+    {
+        if (strrpos($subject, $pattern) === strlen($subject) - 1) {
+            return $subject;
+        }
+
+        return $subject.$pattern;
+    }
 }
