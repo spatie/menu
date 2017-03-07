@@ -97,7 +97,7 @@ trait Activatable
         }
 
         $root = Str::ensureLeft('/', $root);
-        
+
         // All paths used in this method should be terminated by a /
         // otherwise startsWith at the end will be too greedy and
         // also matches items which are on the same level
