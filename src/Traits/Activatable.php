@@ -97,16 +97,25 @@ trait Activatable
         }
 
         $root = Str::ensureLeft('/', $root);
+        
+        // All paths used in this method should be terminated by a /
+        // otherwise startsWith at the end will be too greedy and
+        // also matches items which are on the same level
+        $root = Str::ensureRight('/', $root);
+
+        $itemPath = Str::ensureRight('/', $itemUrl->getPath());
 
         // If this url doesn't start with the root, it's inactive.
-        if (! Str::startsWith($itemUrl->getPath(), $root)) {
+        if (! Str::startsWith($itemPath, $root)) {
             return $this->setInactive();
         }
 
+        $matchPath = Str::ensureRight('/', $matchUrl->getPath());
+
         // For the next comparisons we just need the paths, and we'll remove
         // the root first.
-        $itemPath = Str::removeFromStart($root, $itemUrl->getPath());
-        $matchPath = Str::removeFromStart($root, $matchUrl->getPath());
+        $itemPath = Str::removeFromStart($root, $itemPath);
+        $matchPath = Str::removeFromStart($root, $matchPath);
 
         // If this url starts with the url we're matching with, it's active.
         if ($matchPath === $itemPath || Str::startsWith($matchPath, $itemPath)) {
