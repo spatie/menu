@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.2.1 - 2017-03-07
+- Fixed: Setting items active with urls that start with the same string
+
 ## 2.2.0 - 2017-02-09
 - Added: `if` function
 
