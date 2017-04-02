@@ -365,9 +365,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @return $this
      */
-    public function prependIf(bool $condition, string $prepend)
+    public function prependIf($condition, string $prepend)
     {
-        if ($condition) {
+        if ($this->resolveCondition($condition)) {
             return $this->prepend($prepend);
         }
 
@@ -397,9 +397,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @return static
      */
-    public function appendIf(bool $condition, string $append)
+    public function appendIf($condition, string $append)
     {
-        if ($condition) {
+        if ($this->resolveCondition($condition)) {
             return $this->append($append);
         }
 
