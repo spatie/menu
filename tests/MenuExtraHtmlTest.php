@@ -26,6 +26,8 @@ class MenuExtraHtmlTest extends MenuTestCase
             [function () {
                 return false;
             }, '<h1>Hi!</h1>', '<ul></ul>'],
+            ['is_true', '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
+            ['is_false', '<h1>Hi!</h1>', '<ul></ul>'],
         ];
     }
 
@@ -62,6 +64,8 @@ class MenuExtraHtmlTest extends MenuTestCase
             [function () {
                 return false;
             }, '<aside>Bye!</aside>', '<ul></ul>'],
+            ['is_true', '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
+            ['is_false', '<aside>Bye!</aside>', '<ul></ul>'],
         ];
     }
 

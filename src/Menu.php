@@ -194,7 +194,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     protected function resolveCondition($conditional)
     {
-        return $conditional instanceof Closure ? $conditional() : $conditional;
+        return is_callable($conditional) ? $conditional() : $conditional;
     }
 
     /**
