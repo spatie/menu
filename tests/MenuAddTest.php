@@ -111,8 +111,12 @@ class MenuAddTest extends MenuTestCase
         $this->menu = Menu::new()
             ->addIf(true, Link::to('#', 'Foo'))
             ->addIf(false, Link::to('#', 'Bar'))
-            ->addIf(function () { return true; }, Link::to('#', 'Baz'))
-            ->addIf(function () { return false; }, Link::to('#', 'Qux'));
+            ->addIf(function () {
+                return true;
+            }, Link::to('#', 'Baz'))
+            ->addIf(function () {
+                return false;
+            }, Link::to('#', 'Qux'));
 
         $this->assertRenders('
             <ul>
@@ -128,8 +132,12 @@ class MenuAddTest extends MenuTestCase
         $this->menu = Menu::new()
             ->linkIf(true, '#', 'Foo')
             ->linkIf(false, '#', 'Bar')
-            ->linkIf(function () { return true; }, '#', 'Baz')
-            ->linkIf(function () { return false; }, '#', 'Qux');
+            ->linkIf(function () {
+                return true;
+            }, '#', 'Baz')
+            ->linkIf(function () {
+                return false;
+            }, '#', 'Qux');
 
         $this->assertRenders('
             <ul>
@@ -145,8 +153,12 @@ class MenuAddTest extends MenuTestCase
         $this->menu = Menu::new()
             ->htmlIf(true, 'Foo')
             ->htmlIf(false, 'Bar')
-            ->htmlIf(function () { return true; }, 'Baz')
-            ->htmlIf(function () { return false; }, 'Qux');
+            ->htmlIf(function () {
+                return true;
+            }, 'Baz')
+            ->htmlIf(function () {
+                return false;
+            }, 'Qux');
 
         $this->assertRenders('
             <ul>

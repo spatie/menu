@@ -20,8 +20,12 @@ class MenuExtraHtmlTest extends MenuTestCase
         return [
             [true, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
             [false, '<h1>Hi!</h1>', '<ul></ul>'],
-            [function () { return true; }, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
-            [function () { return false; }, '<h1>Hi!</h1>', '<ul></ul>'],
+            [function () {
+                return true;
+            }, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
+            [function () {
+                return false;
+            }, '<h1>Hi!</h1>', '<ul></ul>'],
         ];
     }
 
@@ -52,8 +56,12 @@ class MenuExtraHtmlTest extends MenuTestCase
         return [
             [true, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
             [false, '<aside>Bye!</aside>', '<ul></ul>'],
-            [function () { return true; }, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
-            [function () { return false; }, '<aside>Bye!</aside>', '<ul></ul>'],
+            [function () {
+                return true;
+            }, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
+            [function () {
+                return false;
+            }, '<aside>Bye!</aside>', '<ul></ul>'],
         ];
     }
 
