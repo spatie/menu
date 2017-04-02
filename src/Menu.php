@@ -2,7 +2,6 @@
 
 namespace Spatie\Menu;
 
-use Closure;
 use Countable;
 use Spatie\Menu\Helpers\Arr;
 use Spatie\HtmlElement\Attributes;
