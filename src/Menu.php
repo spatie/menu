@@ -2,6 +2,7 @@
 
 namespace Spatie\Menu;
 
+use Closure;
 use Countable;
 use Spatie\Menu\Helpers\Arr;
 use Spatie\HtmlElement\Attributes;
@@ -118,7 +119,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function addIf($condition, Item $item)
     {
-        if ($condition) {
+        if ($this->resolveCondition($condition)) {
             $this->add($item);
         }
 
@@ -149,7 +150,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function linkIf($condition, string $url, string $text)
     {
-        if ($condition) {
+        if ($this->resolveCondition($condition)) {
             $this->link($url, $text);
         }
 
@@ -180,11 +181,20 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function htmlIf($condition, string $html, array $parentAttributes = [])
     {
-        if ($condition) {
+        if ($this->resolveCondition($condition)) {
             $this->html($html, $parentAttributes);
         }
 
         return $this;
+    }
+
+    /**
+     * @param $conditional
+     * @return bool
+     */
+    protected function resolveCondition($conditional)
+    {
+        return $conditional instanceof Closure ? $conditional() : $conditional;
     }
 
     /**
