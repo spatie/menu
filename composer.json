@@ -30,6 +30,9 @@
         }
     },
     "autoload-dev": {
+        "files": [
+            "tests/callables.php"
+        ],
         "psr-4": {
             "Spatie\\Menu\\Test\\": "tests"
         }

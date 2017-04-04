@@ -110,11 +110,21 @@ class MenuAddTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->addIf(true, Link::to('#', 'Foo'))
-            ->addIf(false, Link::to('#', 'Bar'));
+            ->addIf(false, Link::to('#', 'Bar'))
+            ->addIf(function () {
+                return true;
+            }, Link::to('#', 'Baz'))
+            ->addIf(function () {
+                return false;
+            }, Link::to('#', 'Qux'))
+            ->addIf('is_true', Link::to('#', 'Quux'))
+            ->addIf('is_false', Link::to('#', 'Quuz'));
 
         $this->assertRenders('
             <ul>
                 <li><a href="#">Foo</a></li>
+                <li><a href="#">Baz</a></li>
+                <li><a href="#">Quux</a></li>
             </ul>
         ');
     }
@@ -124,11 +134,21 @@ class MenuAddTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->linkIf(true, '#', 'Foo')
-            ->linkIf(false, '#', 'Bar');
+            ->linkIf(false, '#', 'Bar')
+            ->linkIf(function () {
+                return true;
+            }, '#', 'Baz')
+            ->linkIf(function () {
+                return false;
+            }, '#', 'Qux')
+            ->linkIf('is_true', '#', 'Quux')
+            ->linkIf('is_false', '#', 'Quuz');
 
         $this->assertRenders('
             <ul>
                 <li><a href="#">Foo</a></li>
+                <li><a href="#">Baz</a></li>
+                <li><a href="#">Quux</a></li>
             </ul>
         ');
     }
@@ -138,11 +158,21 @@ class MenuAddTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->htmlIf(true, 'Foo')
-            ->htmlIf(false, 'Bar');
+            ->htmlIf(false, 'Bar')
+            ->htmlIf(function () {
+                return true;
+            }, 'Baz')
+            ->htmlIf(function () {
+                return false;
+            }, 'Qux')
+            ->htmlIf('is_true', 'Quux')
+            ->htmlIf('is_false', 'Quuz');
 
         $this->assertRenders('
             <ul>
                 <li>Foo</li>
+                <li>Baz</li>
+                <li>Quux</li>
             </ul>
         ');
     }

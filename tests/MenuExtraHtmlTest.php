@@ -15,12 +15,72 @@ class MenuExtraHtmlTest extends MenuTestCase
         $this->assertRenders('<h1>Hi!</h1><ul></ul>');
     }
 
+    public function prependIfDataProvider()
+    {
+        return [
+            [true, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
+            [false, '<h1>Hi!</h1>', '<ul></ul>'],
+            [function () {
+                return true;
+            }, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
+            [function () {
+                return false;
+            }, '<h1>Hi!</h1>', '<ul></ul>'],
+            ['is_true', '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
+            ['is_false', '<h1>Hi!</h1>', '<ul></ul>'],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider prependIfDataProvider
+     * @param \Closure|bool $condition
+     * @param string $prepend
+     * @param string $expected
+     */
+    public function it_can_conditionally_prepend_content($condition, string $prepend, string $expected)
+    {
+        $this->menu = Menu::new()->prependIf($condition, $prepend);
+
+        $this->assertRenders($expected);
+    }
+
     /** @test */
     public function it_can_append_content()
     {
         $this->menu = Menu::new()->append('<aside>Bye!</aside>');
 
         $this->assertRenders('<ul></ul><aside>Bye!</aside>');
+    }
+
+    public function appendIfDataProvider()
+    {
+        return [
+            [true, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
+            [false, '<aside>Bye!</aside>', '<ul></ul>'],
+            [function () {
+                return true;
+            }, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
+            [function () {
+                return false;
+            }, '<aside>Bye!</aside>', '<ul></ul>'],
+            ['is_true', '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
+            ['is_false', '<aside>Bye!</aside>', '<ul></ul>'],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider appendIfDataProvider
+     * @param \Closure|bool $condition
+     * @param string $prepend
+     * @param string $expected
+     */
+    public function it_can_conditionally_append_content($condition, string $prepend, string $expected)
+    {
+        $this->menu = Menu::new()->appendIf($condition, $prepend);
+
+        $this->assertRenders($expected);
     }
 
     /** @test */
