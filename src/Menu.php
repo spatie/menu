@@ -3,10 +3,9 @@
 namespace Spatie\Menu;
 
 use Countable;
-use Spatie\Menu\Helpers\Arr;
-use Spatie\Menu\Helpers\Reflection;
-use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Html\Tag;
+use Spatie\Menu\Html\Attributes;
+use Spatie\Menu\Helpers\Reflection;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
