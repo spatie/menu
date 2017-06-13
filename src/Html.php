@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu;
 
-use Spatie\HtmlElement\Attributes;
+use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
@@ -19,7 +19,7 @@ class Html implements Item, Activatable, HasParentAttributes
     /** @var bool */
     protected $active = false;
 
-    /** @var \Spatie\HtmlElement\Attributes */
+    /** @var \Spatie\Menu\Html\Attributes */
     protected $parentAttributes;
 
     /**

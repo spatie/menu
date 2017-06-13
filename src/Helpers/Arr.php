@@ -4,7 +4,7 @@ namespace Spatie\Menu\Helpers;
 
 class Arr
 {
-    public static function map(array $array, callable $callback): array
+    public static function map(array $array, $callback): array
     {
         $keys = array_keys($array);
 

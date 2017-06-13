@@ -2,8 +2,7 @@
 
 namespace Spatie\Menu;
 
-use Spatie\HtmlElement\Attributes;
-use Spatie\HtmlElement\HtmlElement;
+use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
@@ -21,7 +20,7 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     /** @var bool */
     protected $active = false;
 
-    /** @var \Spatie\HtmlElement\Attributes */
+    /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
 
     /**
@@ -60,11 +59,10 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
      */
     public function render(): string
     {
-        return HtmlElement::render(
-            "a[href={$this->url()}]",
-            $this->htmlAttributes->toArray(),
-            $this->text
-        );
+        $attributes = new Attributes(['href' => $this->url]);
+        $attributes->mergeWith($this->htmlAttributes);
+
+        return "<a {$attributes}>{$this->text}</a>";
     }
 
     /**

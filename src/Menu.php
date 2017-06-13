@@ -4,9 +4,9 @@ namespace Spatie\Menu;
 
 use Countable;
 use Spatie\Menu\Helpers\Arr;
-use Spatie\HtmlElement\Attributes;
-use Spatie\HtmlElement\HtmlElement;
 use Spatie\Menu\Helpers\Reflection;
+use Spatie\Menu\Html\Attributes;
+use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
@@ -29,7 +29,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var string */
     protected $activeClass = 'active';
 
-    /** @var \Spatie\HtmlElement\Attributes */
+    /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
 
     protected function __construct(Item ...$items)
@@ -626,25 +626,32 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function render(): string
     {
-        $contents = HtmlElement::render(
-            'ul',
-            $this->htmlAttributes->toArray(),
-            Arr::map($this->items, function (Item $item) {
-                return HtmlElement::render(
-                    $item->isActive() ? "li.{$this->activeClass}" : 'li',
-                    $item instanceof HasParentAttributes ? $item->parentAttributes() : [],
-                    $item->render()
-                );
-            })
-        );
+        $tag = new Tag('ul', $this->htmlAttributes);
 
-        $menu = "{$this->prepend}{$contents}{$this->append}";
+        $contents = array_map([$this, 'renderItem'], $this->items);
+
+        $menu = $this->prepend.$tag->withContents($contents).$this->append;
 
         if (! empty($this->wrap)) {
-            return HtmlElement::render($this->wrap[0], $this->wrap[1], $menu);
+            return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
         }
 
         return $menu;
+    }
+
+    protected function renderItem(Item $item): string
+    {
+        $attributes = new Attributes();
+
+        if ($item->isActive()) {
+            $attributes->addClass($this->activeClass);
+        }
+
+        if ($item instanceof HasParentAttributes) {
+            $attributes->setAttributes($item->parentAttributes());
+        }
+
+        return Tag::make('li', $attributes)->withContents($item->render());
     }
 
     /**
