@@ -82,7 +82,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $menu = $this;
 
         foreach ($items as $key => $item) {
-            $menu = $callback($menu, $item, $key);
+            $menu = $callback($menu, $item, $key) ?: $menu;
         }
 
         return $menu;
