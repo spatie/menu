@@ -4,18 +4,23 @@ namespace Spatie\Menu;
 
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
+use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 
 class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
 {
-    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait;
+    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
 
     /** @var string */
     protected $text;
 
     /** @var string|null */
     protected $url = null;
+
+    /** @var string */
+    protected $prepend, $append = '';
 
     /** @var bool */
     protected $active = false;
@@ -62,7 +67,7 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
         $attributes = new Attributes(['href' => $this->url]);
         $attributes->mergeWith($this->htmlAttributes);
 
-        return "<a {$attributes}>{$this->text}</a>";
+        return $this->prepend."<a {$attributes}>{$this->text}</a>".$this->append;
     }
 
     /**

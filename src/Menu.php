@@ -6,12 +6,15 @@ use Countable;
 use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Helpers\Reflection;
+use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
+
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 {
-    use HasHtmlAttributesTrait, HasParentAttributesTrait;
+    use HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
 
     /** @var array */
     protected $items = [];
@@ -187,15 +190,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * @param $conditional
-     * @return bool
-     */
-    protected function resolveCondition($conditional)
-    {
-        return is_callable($conditional) ? $conditional() : $conditional;
-    }
-
-    /**
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
      * @param callable|\Spatie\Menu\Menu|null $menu
      *
@@ -336,70 +330,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         $this->each($callable);
         $this->registerFilter($callable);
-
-        return $this;
-    }
-
-    /**
-     * Prepend the menu with a string of html on render.
-     *
-     * @param string $prepend
-     *
-     * @return $this
-     */
-    public function prepend(string $prepend)
-    {
-        $this->prepend = $prepend;
-
-        return $this;
-    }
-
-    /**
-     * Prepend the menu with a string of html on render if a certain condition is
-     * met.
-     *
-     * @param bool   $condition
-     * @param string $prepend
-     *
-     * @return $this
-     */
-    public function prependIf($condition, string $prepend)
-    {
-        if ($this->resolveCondition($condition)) {
-            return $this->prepend($prepend);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Append a string of html to the menu on render.
-     *
-     * @param string $append
-     *
-     * @return $this
-     */
-    public function append(string $append)
-    {
-        $this->append = $append;
-
-        return $this;
-    }
-
-    /**
-     * Append the menu with a string of html on render if a certain condition is
-     * met.
-     *
-     * @param bool   $condition
-     * @param string $append
-     *
-     * @return static
-     */
-    public function appendIf($condition, string $append)
-    {
-        if ($this->resolveCondition($condition)) {
-            return $this->append($append);
-        }
 
         return $this;
     }
