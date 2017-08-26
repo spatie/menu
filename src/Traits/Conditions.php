@@ -2,7 +2,6 @@
 
 namespace Spatie\Menu\Traits;
 
-
 trait Conditions
 {
     /**
