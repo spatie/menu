@@ -2,7 +2,9 @@
 
 namespace Spatie\Menu\Traits;
 
-trait Conditions {
+
+trait Conditions
+{
     /**
      * @param $conditional
      * @return bool
