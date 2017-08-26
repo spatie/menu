@@ -7,9 +7,9 @@ use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Helpers\Reflection;
 use Spatie\Menu\Traits\Conditions as ConditionsTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
-use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes

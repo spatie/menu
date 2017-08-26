@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Spatie\Menu\Traits;
-
 
 trait Conditions {
     /**
@@ -13,4 +11,5 @@ trait Conditions {
     {
         return is_callable($conditional) ? $conditional() : $conditional;
     }
+
 }

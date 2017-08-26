@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Spatie\Menu\Traits;
 
 trait HasTextAttributes
@@ -68,4 +67,5 @@ trait HasTextAttributes
 
         return $this;
     }
+
 }
