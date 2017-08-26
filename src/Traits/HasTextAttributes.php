@@ -67,5 +67,4 @@ trait HasTextAttributes
 
         return $this;
     }
-
 }
