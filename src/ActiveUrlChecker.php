@@ -2,8 +2,8 @@
 
 namespace Spatie\Menu;
 
-use Spatie\Menu\Helpers\Str;
 use Spatie\Url\Url;
+use Spatie\Menu\Helpers\Str;
 
 class ActiveUrlChecker
 {
