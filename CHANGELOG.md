@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.3.1 - 2017-08-29
+- Extracted a `ActiveUrlChecker` class for public use
+
 ## 2.3.0 - 2017-08-28
 - Added `append` and `prepend` methods to `Link`
 
