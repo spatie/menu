@@ -2,8 +2,9 @@
 
 namespace Spatie\Menu\Traits;
 
-use Spatie\Url\Url;
+use Spatie\Menu\ActiveUrlChecker;
 use Spatie\Menu\Helpers\Str;
+use Spatie\Url\Url;
 
 /**
  * Expects an `$active` property on the class.
@@ -88,40 +89,8 @@ trait Activatable
             return;
         }
 
-        $itemUrl = Url::fromString($this->url);
-        $matchUrl = Url::fromString($url);
-
-        // If the hosts don't match, this url isn't active.
-        if ($itemUrl->getHost() !== $matchUrl->getHost()) {
-            return $this->setInactive();
-        }
-
-        $root = Str::ensureLeft('/', $root);
-
-        // All paths used in this method should be terminated by a /
-        // otherwise startsWith at the end will be too greedy and
-        // also matches items which are on the same level
-        $root = Str::ensureRight('/', $root);
-
-        $itemPath = Str::ensureRight('/', $itemUrl->getPath());
-
-        // If this url doesn't start with the root, it's inactive.
-        if (! Str::startsWith($itemPath, $root)) {
-            return $this->setInactive();
-        }
-
-        $matchPath = Str::ensureRight('/', $matchUrl->getPath());
-
-        // For the next comparisons we just need the paths, and we'll remove
-        // the root first.
-        $itemPath = Str::removeFromStart($root, $itemPath);
-        $matchPath = Str::removeFromStart($root, $matchPath);
-
-        // If this url starts with the url we're matching with, it's active.
-        if ($matchPath === $itemPath || Str::startsWith($matchPath, $itemPath)) {
-            return $this->setActive();
-        }
-
-        return $this->setInactive();
+        ActiveUrlChecker::check($this->url, $url, $root)
+            ? $this->setActive()
+            : $this->setInactive();
     }
 }
