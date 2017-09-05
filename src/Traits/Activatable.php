@@ -2,9 +2,8 @@
 
 namespace Spatie\Menu\Traits;
 
-use Spatie\Menu\ActiveUrlChecker;
-use Spatie\Menu\Helpers\Str;
 use Spatie\Url\Url;
+use Spatie\Menu\ActiveUrlChecker;
 
 /**
  * Expects an `$active` property on the class.
