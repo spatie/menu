@@ -14,10 +14,4 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
             Html::raw('Hello world')->html()
         );
     }
-
-    /** @test */
-    public function it_can_be_set_active()
-    {
-        $this->assertTrue(Html::raw('')->setActive()->isActive());
-    }
 }
