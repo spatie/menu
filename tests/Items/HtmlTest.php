@@ -14,4 +14,13 @@ class HtmlTest extends \PHPUnit_Framework_TestCase
             Html::raw('Hello world')->html()
         );
     }
+
+    /** @test */
+    public function it_can_make_an_empty_item()
+    {
+        $this->assertEquals(
+            '',
+            Html::empty()->html()
+        );
+    }
 }

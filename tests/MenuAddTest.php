@@ -40,6 +40,18 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
+    public function an_empty_item_can_be_added()
+    {
+        $this->menu = Menu::new()->empty();
+
+        $this->assertRenders('
+            <ul>
+                <li></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     public function multiple_items_can_be_added()
     {
         $this->menu = Menu::new()

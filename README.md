@@ -23,6 +23,7 @@ Menu::new()
     ->add(Link::to('/', 'Home'))
     ->add(Link::to('/about', 'About'))
     ->add(Link::to('/contact', 'Contact'))
+    ->add(Html::empty())
     ->render();
 
 // Or just...
@@ -30,6 +31,7 @@ Menu::new()
     ->link('/', 'Home')
     ->link('/about', 'About')
     ->link('/contact', 'Contact')
+    ->empty()
 ```
 
 ```html
