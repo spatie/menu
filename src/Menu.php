@@ -140,6 +140,16 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Shortcut function to add an empty item to the menu.
+     *
+     * @return $this
+     */
+    public function empty()
+    {
+        return $this->add(Html::empty());
+    }
+
+    /**
      * Add a link to the menu if a (non-strict) condition is met.
      *
      * @param bool   $condition

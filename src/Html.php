@@ -44,6 +44,16 @@ class Html implements Item, Activatable, HasParentAttributes
     }
 
     /**
+     * Create an empty item.
+     *
+     * @return static
+     */
+    public static function empty()
+    {
+        return new static('');
+    }
+
+    /**
      * @return string
      */
     public function html(): string
