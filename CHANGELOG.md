@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.4.0 - 2017-10-17
+- Added `Menu::empty` and `Html::empty` method for adding empty list items
+
 ## 2.3.1 - 2017-08-29
 - Extracted a `ActiveUrlChecker` class for public use
 
