@@ -3,8 +3,9 @@
 namespace Spatie\Menu\Test\Items;
 
 use Spatie\Menu\Link;
+use PHPUnit\Framework\TestCase;
 
-class LinkTest extends \PHPUnit_Framework_TestCase
+class LinkTest extends TestCase
 {
     /** @test */
     public function it_contains_text()
