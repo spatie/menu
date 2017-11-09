@@ -21,7 +21,7 @@
         "spatie/url": "^1.0.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^5.2.10"
+        "phpunit/phpunit": "^6.4"
     },
     "autoload": {
         "psr-4": {

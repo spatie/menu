@@ -2,7 +2,9 @@
 
 namespace Spatie\Menu\Test;
 
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
     public function assertHtmlEquals(string $expected, string $actual, string $message = '')
     {

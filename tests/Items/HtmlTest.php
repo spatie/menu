@@ -3,8 +3,9 @@
 namespace Spatie\Menu\Test\Items;
 
 use Spatie\Menu\Html;
+use PHPUnit\Framework\TestCase;
 
-class HtmlTest extends \PHPUnit_Framework_TestCase
+class HtmlTest extends TestCase
 {
     /** @test */
     public function it_contains_html()

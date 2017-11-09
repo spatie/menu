@@ -2,9 +2,10 @@
 
 namespace Spatie\Menu\Test\Traits;
 
+use PHPUnit\Framework\TestCase;
 use Spatie\Menu\Traits\Activatable;
 
-class ActivatableTest extends \PHPUnit_Framework_TestCase
+class ActivatableTest extends TestCase
 {
     protected $activatable;
 
