@@ -1,4 +1,5 @@
 <?php
+
 namespace Spatie\Menu\Test\Items;
 
 use Spatie\Menu\Link;
