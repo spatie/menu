@@ -6,8 +6,7 @@ use Spatie\Menu\Menu;
 use Spatie\Menu\Test\MenuTestCase;
 
 /**
- * Class FiltersTest
- * @package Spatie\Menu\Test\Items
+ * Class FiltersTest.
  */
 class FiltersTest extends MenuTestCase
 {
@@ -21,8 +20,7 @@ class FiltersTest extends MenuTestCase
                 $link->addClass('filtered');
             })
             ->link('#', 'Up')
-            ->link('#', 'Scotty')
-        ;
+            ->link('#', 'Scotty');
 
         $this->assertRenders('
             <ul>
@@ -44,8 +42,7 @@ class FiltersTest extends MenuTestCase
                 $link->addClass('filtered');
             })
             ->link('#', 'Up')
-            ->link('#', 'Scotty')
-        ;
+            ->link('#', 'Scotty');
 
         $this->assertRenders('
             <ul>
@@ -67,8 +64,7 @@ class FiltersTest extends MenuTestCase
                 $link->addClass('filtered');
             })
             ->link('#', 'Up')
-            ->link('#', 'Scotty')
-        ;
+            ->link('#', 'Scotty');
 
         $this->assertRenders('
             <ul>
@@ -83,7 +79,7 @@ class FiltersTest extends MenuTestCase
     /** @test */
     public function it_can_register_a_closure_as_a_filter()
     {
-        $this->menu = Menu::new()->link('#', 'Foo')->applyToAll(function(Link $link) {
+        $this->menu = Menu::new()->link('#', 'Foo')->applyToAll(function (Link $link) {
             $link->addClass('filtered');
         });
 
