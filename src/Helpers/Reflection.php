@@ -10,11 +10,18 @@ class Reflection
 {
     public static function firstParameterType(callable $callable): string
     {
-        $reflection = new ReflectionFunction($callable);
+        // # 58 - Allow invokable classes to be used as filters
+        if (is_object($callable)) {
+            $reflection = new \ReflectionObject($callable);
+            $parameters = $reflection->getMethod('__invoke')->getParameters();
+        } else {
+            $reflection = new ReflectionFunction($callable);
+            $parameters = $reflection->getParameters();
+        }
 
         $parameterTypes = array_map(function (ReflectionParameter $parameter) {
             return $parameter->getClass() ? $parameter->getClass()->name : null;
-        }, $reflection->getParameters());
+        }, $parameters);
 
         return $parameterTypes[0] ?? '';
     }
