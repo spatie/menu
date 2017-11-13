@@ -2,6 +2,7 @@
 
 namespace Spatie\Menu\Helpers;
 
+use ReflectionObject;
 use Spatie\Menu\Item;
 use ReflectionFunction;
 use ReflectionParameter;
@@ -10,14 +11,11 @@ class Reflection
 {
     public static function firstParameterType(callable $callable): string
     {
-        // # 58 - Allow invokable classes to be used as filters
-        if (is_object($callable)) {
-            $reflection = new \ReflectionObject($callable);
-            $parameters = $reflection->getMethod('__invoke')->getParameters();
-        } else {
-            $reflection = new ReflectionFunction($callable);
-            $parameters = $reflection->getParameters();
-        }
+        $reflection = is_object($callable)
+            ? (new ReflectionObject($callable))->getMethod('__invoke')
+            : new ReflectionFunction($callable);
+
+        $parameters = $reflection->getParameters();
 
         $parameterTypes = array_map(function (ReflectionParameter $parameter) {
             return $parameter->getClass() ? $parameter->getClass()->name : null;
