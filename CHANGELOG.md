@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.4.1 - 2017-11-13
+- Allow invokable classes as callbacks
+
 ## 2.4.0 - 2017-10-17
 - Added `Menu::empty` and `Html::empty` method for adding empty list items
 
