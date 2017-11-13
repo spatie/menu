@@ -64,7 +64,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @return static
      */
-    public static function build($items, callable $callback, Menu $initial = null)
+    public static function build($items, callable $callback, self $initial = null)
     {
         return ($initial ?: static::new())->fill($items, $callback);
     }
@@ -244,7 +244,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      *
      * @return \Spatie\Menu\Menu
      */
-    protected function createSubmenuMenu($menu): Menu
+    protected function createSubmenuMenu($menu): self
     {
         if (is_callable($menu)) {
             $transformer = $menu;
