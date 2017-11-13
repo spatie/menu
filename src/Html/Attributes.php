@@ -81,7 +81,7 @@ class Attributes
      *
      * @return $this
      */
-    public function mergeWith(Attributes $attributes)
+    public function mergeWith(self $attributes)
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
         $this->classes = array_merge($this->classes, $attributes->classes);
