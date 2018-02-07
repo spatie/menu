@@ -557,6 +557,23 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         return $clone;
     }
 
+    protected $tagName = 'ul';
+    protected $wrapLinksInList = true;
+
+    public function setTagName($tagName)
+    {
+        $this->tagName = $tagName;
+
+        return $this;
+    }
+
+    public function setWrapLinksInList($wrapLinksInList)
+    {
+        $this->wrapLinksInList = $wrapLinksInList;
+
+        return $this;
+    }
+
     /**
      * Render the menu.
      *
@@ -564,7 +581,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function render(): string
     {
-        $tag = new Tag('ul', $this->htmlAttributes);
+        $tag = new Tag($this->tagName, $this->htmlAttributes);
 
         $contents = array_map([$this, 'renderItem'], $this->items);
 
@@ -587,6 +604,10 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         if ($item instanceof HasParentAttributes) {
             $attributes->setAttributes($item->parentAttributes());
+        }
+
+        if(! $this->wrapLinksInList) {
+            return $item->render();
         }
 
         return Tag::make('li', $attributes)->withContents($item->render());
