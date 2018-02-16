@@ -310,4 +310,70 @@ class MenuSetActiveTest extends MenuTestCase
             </div>
         ');
     }
+
+    /** @test */
+    public function it_can_render_active_on_a_bootstrap_4_menu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->setWrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="active nav-item">
+                    <a href="/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="/" class="dropdown-item">Home</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_on_a_bootstrap_4_submenu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->setWrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="active nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="/about" class="dropdown-item active">About</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
 }

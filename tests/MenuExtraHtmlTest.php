@@ -190,4 +190,33 @@ class MenuExtraHtmlTest extends MenuTestCase
             </div>
         ');
     }
+
+    /** @test */
+    public function it_can_render_as_a_bootstrap_4_menu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->setWrapLinksInList(false)
+            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'));
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Foo</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Foo</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
 }
