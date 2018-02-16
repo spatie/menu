@@ -250,4 +250,64 @@ class MenuSetActiveTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    public function it_can_render_active_on_custom_tag()
+    {
+        $this->menu = Menu::new()
+            ->setTagName('div')
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <div>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/about">About</a></li>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_without_list_items()
+    {
+        $this->menu = Menu::new()
+            ->setWrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul>
+                <a href="/">Home</a>
+                <a href="/about" class="active">About</a>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_on_custom_tag_without_list_items()
+    {
+        $this->menu = Menu::new()
+            ->setTagName('div')
+            ->setWrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <div>
+                <a href="/">Home</a>
+                <a href="/about" class="active">About</a>
+            </div>
+        ');
+    }
 }

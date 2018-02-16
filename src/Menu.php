@@ -30,6 +30,15 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var string */
     protected $activeClass = 'active';
 
+    /** @var string */
+    protected $tagName = 'ul';
+
+    /** @var bool */
+    protected $wrapLinksInList = true;
+
+    /** @var bool */
+    protected $activeClassOnLink = false;
+
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
 
@@ -532,6 +541,45 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Set tag for items wrapper
+     *
+     * @param string $tagName
+     * @return $this
+     */
+    public function setTagName(string $tagName)
+    {
+        $this->tagName = $tagName;
+
+        return $this;
+    }
+
+    /**
+     * Set whether links should be wrapped in a list item
+     *
+     * @param $wrapLinksInList
+     * @return $this
+     */
+    public function setWrapLinksInList(bool $wrapLinksInList)
+    {
+        $this->wrapLinksInList = $wrapLinksInList;
+
+        return $this;
+    }
+
+    /**
+     * Set whether active class should (also) be on link
+     *
+     * @param $activeClassOnLink
+     * @return $this
+     */
+    public function setActiveClassOnLink(bool $activeClassOnLink)
+    {
+        $this->activeClassOnLink = $activeClassOnLink;
+
+        return $this;
+    }
+
+    /**
      * @param bool $condition
      * @param callable $callable
      *
@@ -555,23 +603,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $clone->activeClass = $this->activeClass;
 
         return $clone;
-    }
-
-    protected $tagName = 'ul';
-    protected $wrapLinksInList = true;
-
-    public function setTagName($tagName)
-    {
-        $this->tagName = $tagName;
-
-        return $this;
-    }
-
-    public function setWrapLinksInList($wrapLinksInList)
-    {
-        $this->wrapLinksInList = $wrapLinksInList;
-
-        return $this;
     }
 
     /**
@@ -600,6 +631,10 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
         if ($item->isActive()) {
             $attributes->addClass($this->activeClass);
+
+            if($this->activeClassOnLink) {
+                $item->addClass($this->activeClass);
+            }
         }
 
         if ($item instanceof HasParentAttributes) {

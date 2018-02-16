@@ -151,4 +151,43 @@ class MenuExtraHtmlTest extends MenuTestCase
             </div>
         ');
     }
+
+    /** @test */
+    public function it_can_render_as_another_tag()
+    {
+        $this->menu = Menu::new()->setTagName('div')->link('#', 'Foo');
+
+        $this->assertRenders('
+            <div>
+                <li><a href="#">Foo</a></li>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_without_wrapping_links_in_list()
+    {
+        $this->menu = Menu::new()->setWrapLinksInList(false)->link('#', 'Foo');
+
+        $this->assertRenders('
+            <ul>
+                <a href="#">Foo</a>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_as_another_tag_without_wrapping_links_in_list()
+    {
+        $this->menu = Menu::new()
+            ->setWrapLinksInList(false)
+            ->setTagName('div')
+            ->link('#', 'Foo');
+
+        $this->assertRenders('
+            <div>
+                <a href="#">Foo</a>
+            </div>
+        ');
+    }
 }
