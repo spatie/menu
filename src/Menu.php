@@ -632,7 +632,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         if ($item->isActive()) {
             $attributes->addClass($this->activeClass);
 
-            if($this->activeClassOnLink) {
+            if($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
             }
         }
