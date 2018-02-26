@@ -544,7 +544,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Set tag for items wrapper
+     * Set tag for items wrapper.
      *
      * @param string $tagName
      * @return $this
@@ -557,7 +557,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Set whether links should be wrapped in a list item
+     * Set whether links should be wrapped in a list item.
      *
      * @param $wrapLinksInList
      * @return $this
@@ -570,7 +570,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Set whether active class should (also) be on link
+     * Set whether active class should (also) be on link.
      *
      * @param $activeClassOnLink
      * @return $this
@@ -583,7 +583,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Set whether active class should (also) be on parent
+     * Set whether active class should (also) be on parent.
      *
      * @param $activeClassOnParent
      * @return $this
@@ -646,11 +646,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $attributes = new Attributes();
 
         if ($item->isActive()) {
-            if($this->activeClassOnParent) {
+            if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);
             }
 
-            if($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
+            if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
             }
         }
@@ -659,7 +659,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             $attributes->setAttributes($item->parentAttributes());
         }
 
-        if(! $this->wrapLinksInList) {
+        if (! $this->wrapLinksInList) {
             return $item->render();
         }
 
