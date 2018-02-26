@@ -37,6 +37,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $wrapLinksInList = true;
 
     /** @var bool */
+    protected $activeClassOnParent = true;
+
+    /** @var bool */
     protected $activeClassOnLink = false;
 
     /** @var \Spatie\Menu\Html\Attributes */
@@ -580,6 +583,19 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Set whether active class should (also) be on parent
+     *
+     * @param $activeClassOnParent
+     * @return $this
+     */
+    public function setActiveClassOnParent(bool $activeClassOnParent)
+    {
+        $this->activeClassOnParent = $activeClassOnParent;
+
+        return $this;
+    }
+
+    /**
      * @param bool $condition
      * @param callable $callable
      *
@@ -630,7 +646,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $attributes = new Attributes();
 
         if ($item->isActive()) {
-            $attributes->addClass($this->activeClass);
+            if($this->activeClassOnParent) {
+                $attributes->addClass($this->activeClass);
+            }
 
             if($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);

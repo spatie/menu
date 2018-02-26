@@ -376,4 +376,27 @@ class MenuSetActiveTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    public function it_can_have_no_active_class()
+    {
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
+            ->setActiveClassOnParent(false)
+            ->setActive('/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/disclaimer">Disclaimer</a>
+                </li>
+                <li>
+                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
 }
