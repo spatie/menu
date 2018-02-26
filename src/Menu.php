@@ -559,7 +559,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * @param $wrapLinksInList
      * @return $this
      */
-    public function setWrapLinksInList(bool $wrapLinksInList)
+    public function wrapLinksInList(bool $wrapLinksInList)
     {
         $this->wrapLinksInList = $wrapLinksInList;
 

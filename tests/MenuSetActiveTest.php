@@ -274,7 +274,7 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_without_list_items()
     {
         $this->menu = Menu::new()
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->setActiveClassOnLink(true)
             ->link('/', 'Home')
             ->link('/about', 'About')
@@ -295,7 +295,7 @@ class MenuSetActiveTest extends MenuTestCase
     {
         $this->menu = Menu::new()
             ->setTagName('div')
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->setActiveClassOnLink(true)
             ->link('/', 'Home')
             ->link('/about', 'About')
@@ -317,7 +317,7 @@ class MenuSetActiveTest extends MenuTestCase
         $submenu = Menu::new()
             ->setTagName('div')
             ->addClass('dropdown-menu')
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->setActiveClassOnLink(true)
             ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('dropdown-item'));
 
@@ -350,7 +350,7 @@ class MenuSetActiveTest extends MenuTestCase
         $submenu = Menu::new()
             ->setTagName('div')
             ->addClass('dropdown-menu')
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->setActiveClassOnLink(true)
             ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('dropdown-item'));
 

@@ -167,7 +167,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     /** @test */
     public function it_can_render_without_wrapping_links_in_list()
     {
-        $this->menu = Menu::new()->setWrapLinksInList(false)->link('#', 'Foo');
+        $this->menu = Menu::new()->wrapLinksInList(false)->link('#', 'Foo');
 
         $this->assertRenders('
             <ul>
@@ -180,7 +180,7 @@ class MenuExtraHtmlTest extends MenuTestCase
     public function it_can_render_as_another_tag_without_wrapping_links_in_list()
     {
         $this->menu = Menu::new()
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->setTagName('div')
             ->link('#', 'Foo');
 
@@ -197,7 +197,7 @@ class MenuExtraHtmlTest extends MenuTestCase
         $submenu = Menu::new()
             ->setTagName('div')
             ->addClass('dropdown-menu')
-            ->setWrapLinksInList(false)
+            ->wrapLinksInList(false)
             ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
 
         $this->menu = Menu::new()
