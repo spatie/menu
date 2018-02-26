@@ -575,7 +575,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * @param $activeClassOnLink
      * @return $this
      */
-    public function setActiveClassOnLink(bool $activeClassOnLink)
+    public function setActiveClassOnLink(bool $activeClassOnLink = true)
     {
         $this->activeClassOnLink = $activeClassOnLink;
 
@@ -588,7 +588,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * @param $activeClassOnParent
      * @return $this
      */
-    public function setActiveClassOnParent(bool $activeClassOnParent)
+    public function setActiveClassOnParent(bool $activeClassOnParent = true)
     {
         $this->activeClassOnParent = $activeClassOnParent;
 
