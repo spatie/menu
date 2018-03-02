@@ -30,6 +30,18 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var string */
     protected $activeClass = 'active';
 
+    /** @var string */
+    protected $tagName = 'ul';
+
+    /** @var bool */
+    protected $wrapLinksInList = true;
+
+    /** @var bool */
+    protected $activeClassOnParent = true;
+
+    /** @var bool */
+    protected $activeClassOnLink = false;
+
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
 
@@ -532,6 +544,58 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Set tag for items wrapper.
+     *
+     * @param string $tagName
+     * @return $this
+     */
+    public function setTagName(string $tagName)
+    {
+        $this->tagName = $tagName;
+
+        return $this;
+    }
+
+    /**
+     * Set whether links should be wrapped in a list item.
+     *
+     * @param $wrapLinksInList
+     * @return $this
+     */
+    public function wrapLinksInList(bool $wrapLinksInList = true)
+    {
+        $this->wrapLinksInList = $wrapLinksInList;
+
+        return $this;
+    }
+
+    /**
+     * Set whether active class should (also) be on link.
+     *
+     * @param $activeClassOnLink
+     * @return $this
+     */
+    public function setActiveClassOnLink(bool $activeClassOnLink = true)
+    {
+        $this->activeClassOnLink = $activeClassOnLink;
+
+        return $this;
+    }
+
+    /**
+     * Set whether active class should (also) be on parent.
+     *
+     * @param $activeClassOnParent
+     * @return $this
+     */
+    public function setActiveClassOnParent(bool $activeClassOnParent = true)
+    {
+        $this->activeClassOnParent = $activeClassOnParent;
+
+        return $this;
+    }
+
+    /**
      * @param bool $condition
      * @param callable $callable
      *
@@ -564,7 +628,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function render(): string
     {
-        $tag = new Tag('ul', $this->htmlAttributes);
+        $tag = new Tag($this->tagName, $this->htmlAttributes);
 
         $contents = array_map([$this, 'renderItem'], $this->items);
 
@@ -582,11 +646,21 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         $attributes = new Attributes();
 
         if ($item->isActive()) {
-            $attributes->addClass($this->activeClass);
+            if ($this->activeClassOnParent) {
+                $attributes->addClass($this->activeClass);
+            }
+
+            if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
+                $item->addClass($this->activeClass);
+            }
         }
 
         if ($item instanceof HasParentAttributes) {
             $attributes->setAttributes($item->parentAttributes());
+        }
+
+        if (! $this->wrapLinksInList) {
+            return $item->render();
         }
 
         return Tag::make('li', $attributes)->withContents($item->render());

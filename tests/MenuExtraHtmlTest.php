@@ -151,4 +151,72 @@ class MenuExtraHtmlTest extends MenuTestCase
             </div>
         ');
     }
+
+    /** @test */
+    public function it_can_render_as_another_tag()
+    {
+        $this->menu = Menu::new()->setTagName('div')->link('#', 'Foo');
+
+        $this->assertRenders('
+            <div>
+                <li><a href="#">Foo</a></li>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_without_wrapping_links_in_list()
+    {
+        $this->menu = Menu::new()->wrapLinksInList(false)->link('#', 'Foo');
+
+        $this->assertRenders('
+            <ul>
+                <a href="#">Foo</a>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_as_another_tag_without_wrapping_links_in_list()
+    {
+        $this->menu = Menu::new()
+            ->wrapLinksInList(false)
+            ->setTagName('div')
+            ->link('#', 'Foo');
+
+        $this->assertRenders('
+            <div>
+                <a href="#">Foo</a>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_as_a_bootstrap_4_menu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->wrapLinksInList(false)
+            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'));
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Foo</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Foo</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
 }

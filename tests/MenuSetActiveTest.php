@@ -250,4 +250,153 @@ class MenuSetActiveTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    public function it_can_render_active_on_custom_tag()
+    {
+        $this->menu = Menu::new()
+            ->setTagName('div')
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <div>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/about">About</a></li>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_without_list_items()
+    {
+        $this->menu = Menu::new()
+            ->wrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul>
+                <a href="/">Home</a>
+                <a href="/about" class="active">About</a>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_on_custom_tag_without_list_items()
+    {
+        $this->menu = Menu::new()
+            ->setTagName('div')
+            ->wrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->link('/', 'Home')
+            ->link('/about', 'About')
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <div>
+                <a href="/">Home</a>
+                <a href="/about" class="active">About</a>
+            </div>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_on_a_bootstrap_4_menu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->wrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="active nav-item">
+                    <a href="/about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="/" class="dropdown-item">Home</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_active_on_a_bootstrap_4_submenu()
+    {
+        $submenu = Menu::new()
+            ->setTagName('div')
+            ->addClass('dropdown-menu')
+            ->wrapLinksInList(false)
+            ->setActiveClassOnLink(true)
+            ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+        $this->menu = Menu::new()
+            ->addClass('navbar-nav')
+            ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('nav-link'))
+            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
+            ->setActive(function (Link $link) {
+                return $link->url() === '/about';
+            });
+
+        $this->assertRenders('
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li class="active nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+                    <div class="dropdown-menu">
+                        <a href="/about" class="dropdown-item active">About</a>
+                    </div>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_have_no_active_class()
+    {
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
+            ->setActiveClassOnParent(false)
+            ->setActive('/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/disclaimer">Disclaimer</a>
+                </li>
+                <li>
+                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
 }
