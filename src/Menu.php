@@ -124,7 +124,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /**
      * Add an item to the menu if a (non-strict) condition is met.
      *
-     * @param bool              $condition
+     * @param bool $condition
      * @param \Spatie\Menu\Item $item
      *
      * @return $this
@@ -164,7 +164,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /**
      * Add a link to the menu if a (non-strict) condition is met.
      *
-     * @param bool   $condition
+     * @param bool $condition
      * @param string $url
      * @param string $text
      *
@@ -183,7 +183,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * Shortcut function to add raw html to the menu.
      *
      * @param string $html
-     * @param array  $parentAttributes
+     * @param array $parentAttributes
      *
      * @return $this
      */
@@ -195,9 +195,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /**
      * Add a chunk of html if a (non-strict) condition is met.
      *
-     * @param bool   $condition
+     * @param bool $condition
      * @param string $html
-     * @param array  $parentAttributes
+     * @param array $parentAttributes
      *
      * @return $this
      */
@@ -324,7 +324,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /**
      * Apply a filter to an item. Returns the result of the filter.
      *
-     * @param callable          $filter
+     * @param callable $filter
      * @param \Spatie\Menu\Item $item
      */
     protected function applyFilter(callable $filter, Item $item)
@@ -393,7 +393,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * only be applied to items of that type.
      *
      * @param callable|string $urlOrCallable
-     * @param string          $root
+     * @param string $root
      *
      * @return $this
      */
