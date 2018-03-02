@@ -255,7 +255,7 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_on_custom_tag()
     {
         $this->menu = Menu::new()
-            ->setTagName('div')
+            ->setWrapperTag('div')
             ->link('/', 'Home')
             ->link('/about', 'About')
             ->setActive(function (Link $link) {
@@ -274,8 +274,8 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_without_list_items()
     {
         $this->menu = Menu::new()
-            ->wrapLinksInList(false)
-            ->setActiveClassOnLink(true)
+            ->withoutParentTag()
+            ->setActiveClassOnLink()
             ->link('/', 'Home')
             ->link('/about', 'About')
             ->setActive(function (Link $link) {
@@ -294,9 +294,9 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_on_custom_tag_without_list_items()
     {
         $this->menu = Menu::new()
-            ->setTagName('div')
-            ->wrapLinksInList(false)
-            ->setActiveClassOnLink(true)
+            ->setWrapperTag('div')
+            ->withoutParentTag()
+            ->setActiveClassOnLink()
             ->link('/', 'Home')
             ->link('/about', 'About')
             ->setActive(function (Link $link) {
@@ -315,10 +315,10 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_on_a_bootstrap_4_menu()
     {
         $submenu = Menu::new()
-            ->setTagName('div')
+            ->setWrapperTag('div')
             ->addClass('dropdown-menu')
-            ->wrapLinksInList(false)
-            ->setActiveClassOnLink(true)
+            ->withoutParentTag()
+            ->setActiveClassOnLink()
             ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('dropdown-item'));
 
         $this->menu = Menu::new()
@@ -348,10 +348,10 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_active_on_a_bootstrap_4_submenu()
     {
         $submenu = Menu::new()
-            ->setTagName('div')
+            ->setWrapperTag('div')
+            ->withoutParentTag()
+            ->setActiveClassOnLink()
             ->addClass('dropdown-menu')
-            ->wrapLinksInList(false)
-            ->setActiveClassOnLink(true)
             ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('dropdown-item'));
 
         $this->menu = Menu::new()

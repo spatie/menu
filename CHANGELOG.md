@@ -2,6 +2,12 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.5.0 - 2018-03-02
+- This release adds a few methods to create non-`ul` menus, which allows for Bootstrap 4 compatibility
+- Added `Menu::setWrapperTag` and `Menu::withoutWrapperTag` to set a custom wrapper tag name for the menu list. Default: `ul`
+- Added `Menu::setParentTag` & `Menu::withoutParentTag` to determine which tag should be used for the item's parent element. Default: `li`
+- Added `Menu::setActiveClassOnLink` and `Menu::setActiveClassOnParent` to determine where the active class should be applied
+
 ## 2.4.1 - 2017-11-13
 - Allow invokable classes as callbacks
 
@@ -28,7 +34,7 @@ All notable changes to `menu` will be documented in this file.
 
 ## 2.1.1
 - Added the request root path when setting the active path
- 
+
 ## 2.1.0
 - Added optional third `$initial` parameter in `Menu::build`
 

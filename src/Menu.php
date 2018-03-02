@@ -31,10 +31,10 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $activeClass = 'active';
 
     /** @var string */
-    protected $tagName = 'ul';
+    protected $wrapperTagName = 'ul';
 
     /** @var bool */
-    protected $wrapLinksInList = true;
+    protected $parentTagName = 'li';
 
     /** @var bool */
     protected $activeClassOnParent = true;
@@ -356,7 +356,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Wrap the menu in an html element.
+     * Wrap the entire menu in an html element. This is another level of
+     * wrapping above the `wrapperTag`.
      *
      * @param string $element
      * @param array $attributes
@@ -546,25 +547,50 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /**
      * Set tag for items wrapper.
      *
-     * @param string $tagName
+     * @param string|null $wrapperTagName
      * @return $this
      */
-    public function setTagName(string $tagName)
+    public function setWrapperTag($wrapperTagName = null)
     {
-        $this->tagName = $tagName;
+        $this->wrapperTagName = $wrapperTagName;
 
         return $this;
     }
 
     /**
-     * Set whether links should be wrapped in a list item.
+     * Set tag for items wrapper.
      *
-     * @param $wrapLinksInList
+     * @param string|null $wrapperTagName
      * @return $this
      */
-    public function wrapLinksInList(bool $wrapLinksInList = true)
+    public function withoutWrapperTag()
     {
-        $this->wrapLinksInList = $wrapLinksInList;
+        $this->wrapperTagName = null;
+
+        return $this;
+    }
+
+    /**
+     * Set the parent tag name.
+     *
+     * @param string|null $parentTagName
+     * @return $this
+     */
+    public function setParentTag($parentTagName = null)
+    {
+        $this->parentTagName = $parentTagName;
+
+        return $this;
+    }
+
+    /**
+     * Render items without a parent tag.
+     *
+     * @return $this
+     */
+    public function withoutParentTag()
+    {
+        $this->parentTagName = null;
 
         return $this;
     }
@@ -628,11 +654,15 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      */
     public function render(): string
     {
-        $tag = new Tag($this->tagName, $this->htmlAttributes);
+        $tag = $this->wrapperTagName
+            ? new Tag($this->wrapperTagName, $this->htmlAttributes)
+            : null;
 
         $contents = array_map([$this, 'renderItem'], $this->items);
 
-        $menu = $this->prepend.$tag->withContents($contents).$this->append;
+        $wrappedContents = $tag ? $tag->withContents($contents) : implode('', $contents);
+
+        $menu = $this->prepend.$wrappedContents.$this->append;
 
         if (! empty($this->wrap)) {
             return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
@@ -659,11 +689,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             $attributes->setAttributes($item->parentAttributes());
         }
 
-        if (! $this->wrapLinksInList) {
+        if (! $this->parentTagName) {
             return $item->render();
         }
 
-        return Tag::make('li', $attributes)->withContents($item->render());
+        return Tag::make($this->parentTagName, $attributes)->withContents($item->render());
     }
 
     /**

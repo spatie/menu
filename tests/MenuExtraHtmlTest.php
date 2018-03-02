@@ -153,35 +153,24 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_render_as_another_tag()
-    {
-        $this->menu = Menu::new()->setTagName('div')->link('#', 'Foo');
-
-        $this->assertRenders('
-            <div>
-                <li><a href="#">Foo</a></li>
-            </div>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_without_wrapping_links_in_list()
-    {
-        $this->menu = Menu::new()->wrapLinksInList(false)->link('#', 'Foo');
-
-        $this->assertRenders('
-            <ul>
-                <a href="#">Foo</a>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_as_another_tag_without_wrapping_links_in_list()
+    public function it_can_render_without_wrapping_anything()
     {
         $this->menu = Menu::new()
-            ->wrapLinksInList(false)
-            ->setTagName('div')
+            ->withoutWrapperTag()
+            ->withoutParentTag()
+            ->link('#', 'Foo');
+
+        $this->assertRenders('
+            <a href="#">Foo</a>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_as_another_tag_with_a_custom_wrapper_tag()
+    {
+        $this->menu = Menu::new()
+            ->setWrapperTag('div')
+            ->withoutParentTag()
             ->link('#', 'Foo');
 
         $this->assertRenders('
@@ -192,12 +181,25 @@ class MenuExtraHtmlTest extends MenuTestCase
     }
 
     /** @test */
+    public function it_can_render_as_another_tag_with_custom_parent_tags()
+    {
+        $this->menu = Menu::new()
+            ->withoutWrapperTag()
+            ->setParentTag('span')
+            ->link('#', 'Foo');
+
+        $this->assertRenders('
+            <span><a href="#">Foo</a></span>
+        ');
+    }
+
+    /** @test */
     public function it_can_render_as_a_bootstrap_4_menu()
     {
         $submenu = Menu::new()
-            ->setTagName('div')
+            ->setWrapperTag('div')
+            ->withoutParentTag()
             ->addClass('dropdown-menu')
-            ->wrapLinksInList(false)
             ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
 
         $this->menu = Menu::new()
