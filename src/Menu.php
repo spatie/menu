@@ -675,6 +675,14 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         $attributes = new Attributes();
 
+        if(method_exists($item, 'beforeRender')) {
+            $item->beforeRender();
+        }
+
+        if (method_exists($item, 'willRender') && $item->willRender() === false) {
+            return '';
+        }
+
         if ($item->isActive()) {
             if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);

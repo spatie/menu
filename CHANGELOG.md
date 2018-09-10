@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.6.0 - 2018-09-10
+- Add `beforeRender` and `willRender` hooks that are called when an item is rendered
+
 ## 2.5.0 - 2018-03-02
 - This release adds a few methods to create non-`ul` menus, which allows for Bootstrap 4 compatibility
 - Added `Menu::setWrapperTag` and `Menu::withoutWrapperTag` to set a custom wrapper tag name for the menu list. Default: `ul`
