@@ -2,7 +2,9 @@
 
 namespace Spatie\Menu;
 
+use ArrayIterator;
 use Countable;
+use IteratorAggregate;
 use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Helpers\Reflection;
@@ -10,8 +12,9 @@ use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Traversable;
 
-class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
+class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
 {
     use HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
 
@@ -720,5 +723,13 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     public function __toString(): string
     {
         return $this->render();
+    }
+
+    /**
+     * @return Traversable
+     */
+    public function getIterator()
+    {
+        return new ArrayIterator($this->items);
     }
 }
