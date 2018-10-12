@@ -38,7 +38,7 @@ class ExactUrlChecker
         $itemPath = Str::removeFromStart($rootUrl, $itemPath);
         $matchPath = Str::removeFromStart($rootUrl, $matchPath);
 
-        // If this url starts with the url we're matching with, it's active.
+        // If this url is an exact match for the url we're matching with, it's exact-active.
         if ($matchPath === $itemPath) {
             return true;
         }
