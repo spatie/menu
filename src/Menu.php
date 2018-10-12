@@ -31,6 +31,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     protected $activeClass = 'active';
 
     /** @var string */
+    protected $exactActiveClass = 'exact-active';
+
+    /** @var string */
     protected $wrapperTagName = 'ul';
 
     /** @var bool */
@@ -41,6 +44,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
     /** @var bool */
     protected $activeClassOnLink = false;
+
+    /** @var bool */
+    protected $exactActive = false;
 
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
@@ -411,6 +417,34 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * Set if the menu should add an extra class for exact url matches.
+     *
+     * @param bool @exactActive
+     *
+     * @return $this
+     */
+    public function setExactActive(bool $exactActive = true)
+    {
+        $this->exactActive = $exactActive;
+
+        return $this;
+    }
+
+    /**
+     * Set the class name that will be used on exact-active items for this menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function setExactActiveClass(string $class)
+    {
+        $this->exactActiveClass = $class;
+
+        return $this;
+    }
+
+    /**
      * Set all relevant children active based on the current request's URL.
      *
      * /, /about, /contact => request to /about will set the about link active.
@@ -686,10 +720,18 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         if ($item->isActive()) {
             if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);
+
+                if ($this->exactActive && $item->isExactActive()) {
+                    $attributes->addClass($this->exactActiveClass);
+                }
             }
 
             if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
+
+                if ($this->exactActive && $item->isExactActive()) {
+                    $item->addClass($this->exactActiveClass);
+                }
             }
         }
 

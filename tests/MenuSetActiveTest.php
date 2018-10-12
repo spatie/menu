@@ -26,6 +26,46 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
+    public function it_can_set_items_exact_active()
+    {
+        $this->menu = Menu::new()
+            ->setExactActive(true)
+            ->link('/', 'Home')
+            ->link('/people', 'People')
+            ->link('/people/sebastian', 'Sebastian')
+            ->setActive('/people/sebastian');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/people">People</a></li>
+                <li class="active exact-active"><a href="/people/sebastian">Sebastian</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_only_sets_exact_active_on_exact_url_match()
+    {
+        $this->menu = Menu::new()
+            ->setExactActive(true)
+            ->link('/', 'Home')
+            ->link('/people', 'People')
+            ->link('/people/sebastian', 'Sebastian')
+            ->link('/people/sebastian/bio', 'Bio')
+            ->setActive('/people/sebastian');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/people">People</a></li>
+                <li class="active exact-active"><a href="/people/sebastian">Sebastian</a></li>
+                <li><a href="/people/sebastian/bio">Bio</a></li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     public function it_can_set_items_active_recursively_through_submenus_with_a_callable()
     {
         $this->menu = Menu::new()
@@ -245,6 +285,30 @@ class MenuSetActiveTest extends MenuTestCase
                     <a href="/disclaimer">Disclaimer</a>
                 </li>
                 <li class="-active">
+                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_render_a_custom_exact_active_class()
+    {
+        $this->menu = Menu::new()
+            ->setExactActive()
+            ->setExactActiveClass('e-active')
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
+            ->setActive('/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active e-active">
+                    <a href="/disclaimer">Disclaimer</a>
+                </li>
+                <li>
                     <a href="/disclaimer/intellectual-property">Intellectual Property</a>
                 </li>
             </ul>
