@@ -675,7 +675,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     {
         $attributes = new Attributes();
 
-        if(method_exists($item, 'beforeRender')) {
+        if (method_exists($item, 'beforeRender')) {
             $item->beforeRender();
         }
 
