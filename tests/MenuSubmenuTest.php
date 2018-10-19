@@ -90,7 +90,8 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_render_a_submenu_without_the_menu_item_class() {
+    public function it_can_render_a_submenu_without_the_menu_item_class()
+    {
         $this->menu = Menu::new()
             ->addClass('nav')
             ->addItemParentClass('nav-item')
@@ -100,8 +101,7 @@ class MenuSubmenuTest extends MenuTestCase
             ->link('#', 'Main Menu Link 2')
             ->submenu(
                 Link::to('#', 'Sub Menu')
-                    ->addClass('nav-link nav-dropdown-toggle')
-                ,
+                    ->addClass('nav-link nav-dropdown-toggle'),
                 Menu::new()
                     ->addClass('nav-dropdown-items') // this has nav-link class from parent menu but it shouldn't
                     ->addParentClass('nav-dropdown')
@@ -126,7 +126,8 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_render_a_submenu_with_the_menu_item_class_when_it_has_the_override_Set() {
+    public function it_can_render_a_submenu_with_the_menu_item_class_when_it_has_the_override_Set()
+    {
         $this->menu = Menu::new()
             ->addClass('nav')
             ->addItemParentClass('nav-item')
@@ -136,8 +137,7 @@ class MenuSubmenuTest extends MenuTestCase
             ->link('#', 'Main Menu Link 2')
             ->submenu(
                 Link::to('#', 'Sub Menu')
-                    ->addClass('nav-link nav-dropdown-toggle')
-                ,
+                    ->addClass('nav-link nav-dropdown-toggle'),
                 Menu::new()
                     ->addClass('nav-dropdown-items') // this has nav-link class from parent menu but it shouldn't
                     ->addParentClass('nav-dropdown')

@@ -491,7 +491,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     public function addItemClass(string $class, bool $treatSubmenuAsLink = false)
     {
         $this->applyToAll(function (HasHtmlAttributes $link) use ($class, $treatSubmenuAsLink) {
-            if($treatSubmenuAsLink || ! $link instanceof self){
+            if ($treatSubmenuAsLink || ! $link instanceof self) {
                 $link->addClass($class);
             }
         });
