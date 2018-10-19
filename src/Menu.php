@@ -479,16 +479,21 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
-     * Add a class to all items in the menu.
+     * Add a class to all items in the menu, unless it's a submenu.
+     * If it is a submenu it will not have the item class unless it is
+     * overridden by setting $treatSubmenuAsLink to true.
      *
      * @param string $class
+     * @param boolean $treatSubmenuAsLink
      *
      * @return $this
      */
-    public function addItemClass(string $class)
+    public function addItemClass(string $class, bool $treatSubmenuAsLink = false)
     {
-        $this->applyToAll(function (HasHtmlAttributes $link) use ($class) {
-            $link->addClass($class);
+        $this->applyToAll(function (HasHtmlAttributes $link) use ($class, $treatSubmenuAsLink) {
+            if($treatSubmenuAsLink || ! $link instanceof self){
+                $link->addClass($class);
+            }
         });
 
         return $this;
