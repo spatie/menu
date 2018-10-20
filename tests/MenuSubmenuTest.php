@@ -126,7 +126,7 @@ class MenuSubmenuTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_render_a_submenu_with_the_menu_item_class_when_it_has_the_override_Set()
+    public function it_can_render_a_submenu_with_the_menu_item_class_when_it_has_the_override_set()
     {
         $this->menu = Menu::new()
             ->addClass('nav')
