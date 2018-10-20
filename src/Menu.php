@@ -484,7 +484,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
      * overridden by setting $treatSubmenuAsLink to true.
      *
      * @param string $class
-     * @param boolean $treatSubmenuAsLink
+     * @param bool $treatSubmenuAsLink
      *
      * @return $this
      */
