@@ -725,10 +725,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return $this->render();
     }
 
-    /**
-     * @return Traversable
-     */
-    public function getIterator()
+    public function getIterator() : Traversable
     {
         return new ArrayIterator($this->items);
     }
