@@ -2,8 +2,9 @@
 
 namespace Spatie\Menu;
 
-use ArrayIterator;
 use Countable;
+use Traversable;
+use ArrayIterator;
 use IteratorAggregate;
 use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Html\Attributes;
@@ -12,7 +13,6 @@ use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
-use Traversable;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
 {
