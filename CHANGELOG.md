@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.7.0 - 2018-10-23
+- Add `IteratorAggregate` interface to `Menu` class
+
 ## 2.6.0 - 2018-09-10
 - Add `beforeRender` and `willRender` hooks that are called when an item is rendered
 
