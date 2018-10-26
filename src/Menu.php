@@ -45,9 +45,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     /** @var bool */
     protected $activeClassOnLink = false;
 
-    /** @var bool */
-    protected $exactActive = false;
-
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
 
@@ -394,6 +391,16 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
     }
 
     /**
+     * A menu can be active but not exact-active.
+     *
+     * @return bool
+     */
+    public function isExactActive(): bool
+    {
+        return false;
+    }
+
+    /**
      * Set multiple items in the menu as active based on a callable that filters
      * through items. If you typehint the item parameter in the callable, it will
      * only be applied to items of that type.
@@ -414,20 +421,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
         }
 
         throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
-    }
-
-    /**
-     * Set if the menu should add an extra class for exact url matches.
-     *
-     * @param bool @exactActive
-     *
-     * @return $this
-     */
-    public function setExactActive(bool $exactActive = true)
-    {
-        $this->exactActive = $exactActive;
-
-        return $this;
     }
 
     /**
@@ -492,6 +485,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
 
             if ($callable($item)) {
                 $item->setActive();
+                $item->setExactActive();
             }
         });
 
@@ -721,7 +715,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);
 
-                if ($this->exactActive && $item->isExactActive()) {
+                if ($item->isExactActive()) {
                     $attributes->addClass($this->exactActiveClass);
                 }
             }
@@ -729,7 +723,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes
             if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
 
-                if ($this->exactActive && $item->isExactActive()) {
+                if ($item->isExactActive()) {
                     $item->addClass($this->exactActiveClass);
                 }
             }

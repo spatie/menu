@@ -14,6 +14,11 @@ use Spatie\Menu\ExactUrlChecker;
 trait Activatable
 {
     /**
+     * @var bool
+     */
+    protected $exactActive = false;
+
+    /**
      * @return bool
      */
     public function isActive(): bool

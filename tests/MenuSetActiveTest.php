@@ -20,7 +20,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <li><a href="/">Home</a></li>
-                <li class="active"><a href="/about">About</a></li>
+                <li class="active exact-active"><a href="/about">About</a></li>
             </ul>
         ');
     }
@@ -29,7 +29,6 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_set_items_exact_active()
     {
         $this->menu = Menu::new()
-            ->setExactActive(true)
             ->link('/', 'Home')
             ->link('/people', 'People')
             ->link('/people/sebastian', 'Sebastian')
@@ -48,7 +47,6 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_only_sets_exact_active_on_exact_url_match()
     {
         $this->menu = Menu::new()
-            ->setExactActive(true)
             ->link('/', 'Home')
             ->link('/people', 'People')
             ->link('/people/sebastian', 'Sebastian')
@@ -82,7 +80,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li class="active">
                     <ul>
                         <li><a href="/">Home</a></li>
-                        <li class="active"><a href="/about">About</a></li>
+                        <li class="active exact-active"><a href="/about">About</a></li>
                     </ul>
                 </li>
             </ul>
@@ -104,7 +102,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li>
                     <a href="http://example.com/disclaimer">Disclaimer</a>
                 </li>
-                <li class="active">
+                <li class="active exact-active">
                     <a href="http://example.com/disclaimer-full">Full Disclaimer</a>
                 </li>
             </ul>
@@ -123,7 +121,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <li><a href="http://example.com">Home</a></li>
-                <li class="active">
+                <li class="active exact-active">
                     <a href="http://example.com/disclaimer">Disclaimer</a>
                 </li>
                 <li>
@@ -149,7 +147,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li class="active">
                     <ul>
                         <li><a href="http://example.com">Home</a></li>
-                        <li class="active">
+                        <li class="active exact-active">
                             <a href="http://example.com/disclaimer">Disclaimer</a>
                         </li>
                         <li>
@@ -173,7 +171,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <li><a href="/">Home</a></li>
-                <li class="active">
+                <li class="active exact-active">
                     <a href="/disclaimer">Disclaimer</a>
                 </li>
                 <li>
@@ -193,7 +191,7 @@ class MenuSetActiveTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li class="active"><a href="https://example.com/foo">Example Foo</a></li>
+                <li class="active exact-active"><a href="https://example.com/foo">Example Foo</a></li>
                 <li><a href="https://another-example.com/foo">Another Example Foo</a></li>
             </ul>
         ');
@@ -209,7 +207,7 @@ class MenuSetActiveTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li class="active"><a href="https://example.com/foo">Example Foo</a></li>
+                <li class="active exact-active"><a href="https://example.com/foo">Example Foo</a></li>
                 <li><a href="https://sub.example.com/foo">Sub Example Foo</a></li>
             </ul>
         ');
@@ -227,7 +225,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <li><a href="/nl">Home</a></li>
-                <li class="active"><a href="/nl/disclaimer">Disclaimer</a></li>
+                <li class="active exact-active"><a href="/nl/disclaimer">Disclaimer</a></li>
                 <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
             </ul>
         ');
@@ -245,7 +243,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <li><a href="/nl">Home</a></li>
-                <li class="active"><a href="/nl/disclaimer">Disclaimer</a></li>
+                <li class="active exact-active"><a href="/nl/disclaimer">Disclaimer</a></li>
                 <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
             </ul>
         ');
@@ -262,7 +260,7 @@ class MenuSetActiveTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li class="active"><a href="/nl">Home</a></li>
+                <li class="active exact-active"><a href="/nl">Home</a></li>
                 <li><a href="/nl/disclaimer">Disclaimer</a></li>
                 <li><a href="/nl/disclaimer/intellectuele-eigendom">Intellectuële Eigendom</a></li>
             </ul>
@@ -295,7 +293,6 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_render_a_custom_exact_active_class()
     {
         $this->menu = Menu::new()
-            ->setExactActive()
             ->setExactActiveClass('e-active')
             ->link('/', 'Home')
             ->link('/disclaimer', 'Disclaimer')
@@ -329,7 +326,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <div>
                 <li><a href="/">Home</a></li>
-                <li class="active"><a href="/about">About</a></li>
+                <li class="active exact-active"><a href="/about">About</a></li>
             </div>
         ');
     }
@@ -349,7 +346,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <ul>
                 <a href="/">Home</a>
-                <a href="/about" class="active">About</a>
+                <a href="/about" class="active exact-active">About</a>
             </ul>
         ');
     }
@@ -370,7 +367,7 @@ class MenuSetActiveTest extends MenuTestCase
         $this->assertRenders('
             <div>
                 <a href="/">Home</a>
-                <a href="/about" class="active">About</a>
+                <a href="/about" class="active exact-active">About</a>
             </div>
         ');
     }
@@ -395,7 +392,7 @@ class MenuSetActiveTest extends MenuTestCase
 
         $this->assertRenders('
             <ul class="navbar-nav">
-                <li class="active nav-item">
+                <li class="active exact-active nav-item">
                     <a href="/about" class="nav-link">About</a>
                 </li>
                 <li class="nav-item dropdown">
@@ -434,7 +431,7 @@ class MenuSetActiveTest extends MenuTestCase
                 <li class="active nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
                     <div class="dropdown-menu">
-                        <a href="/about" class="dropdown-item active">About</a>
+                        <a href="/about" class="dropdown-item active exact-active">About</a>
                     </div>
                 </li>
             </ul>
