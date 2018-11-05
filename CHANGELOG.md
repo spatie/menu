@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.8.0 - 2018-11-05
+- Add `exact-active` class to links that exactly match the current URL. This is accompanied by a `setExactActiveClass(string $class)` method to set the class name
+
 ## 2.7.0 - 2018-10-23
 - Add `IteratorAggregate` interface to `Menu` class
 
