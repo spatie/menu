@@ -3,8 +3,8 @@
 namespace Spatie\Menu\Traits;
 
 use Spatie\Url\Url;
-use Spatie\Menu\ActiveUrlChecker;
 use Spatie\Menu\ExactUrlChecker;
+use Spatie\Menu\ActiveUrlChecker;
 
 /**
  * Expects an `$active` property on the class.
@@ -104,7 +104,7 @@ trait Activatable
     }
 
     /**
-     * Set if current Activatable should be marked as an exact url match
+     * Set if current Activatable should be marked as an exact url match.
      *
      * @param bool $exactActive
      *
@@ -118,7 +118,7 @@ trait Activatable
     }
 
     /**
-     * Check if current Activatable is marked as an exact url match
+     * Check if current Activatable is marked as an exact url match.
      *
      * @return bool
      */
