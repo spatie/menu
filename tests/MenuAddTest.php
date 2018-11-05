@@ -188,4 +188,42 @@ class MenuAddTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    public function it_will_only_add_classes_to_all_links_in_the_menu_not_submenus()
+    {
+        $this->menu = Menu::new()
+            ->addClass('nav')
+            ->addItemParentClass('nav-item')
+            ->addItemClass('nav-link')
+            ->link('#', 'Main Menu Link 1')
+            ->link('#', 'Main Menu Link 2')
+            ->submenu(
+                Link::to('#', 'Sub Menu')
+                    ->addClass('nav-link nav-dropdown-toggle')
+                ,
+                Menu::new()
+                    ->addClass('nav-dropdown-items') // this has nav-link class from parent menu but it shouldn't
+                    ->addParentClass('nav-dropdown')
+                    ->addItemParentClass('nav-item')
+                    ->addItemClass('nav-link')
+                    ->link('#', 'Sub Menu Item 1')
+                    ->link('#', 'Sub Menu Item 2')
+            );
+
+        $this->menu->render();
+
+        $this->assertRenders('
+            <ul class="nav">
+                <li class="nav-item"><a href="#" class="nav-link">Main Menu Link 1</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Main Menu Link 2</a></li>
+                <li class="nav-dropdown nav-item"><a href="#" class="nav-link nav-dropdown-toggle">Sub Menu</a>
+                    <ul class="nav-dropdown-items">
+                        <li class="nav-item"><a href="#" class="nav-link">Sub Menu Item 1</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Sub Menu Item 2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
 }

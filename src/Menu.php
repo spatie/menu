@@ -518,7 +518,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function addItemClass(string $class)
     {
-        $this->applyToAll(function (HasHtmlAttributes $link) use ($class) {
+        $this->applyToAll(function (Link $link) use ($class) {
             $link->addClass($class);
         });
 
