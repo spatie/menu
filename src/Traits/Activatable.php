@@ -4,6 +4,7 @@ namespace Spatie\Menu\Traits;
 
 use Spatie\Url\Url;
 use Spatie\Menu\ActiveUrlChecker;
+use Spatie\Menu\ExactUrlChecker;
 
 /**
  * Expects an `$active` property on the class.
@@ -12,6 +13,11 @@ use Spatie\Menu\ActiveUrlChecker;
  */
 trait Activatable
 {
+    /**
+     * @var bool
+     */
+    protected $exactActive = false;
+
     /**
      * @return bool
      */
@@ -91,5 +97,33 @@ trait Activatable
         ActiveUrlChecker::check($this->url, $url, $root)
             ? $this->setActive()
             : $this->setInactive();
+
+        ExactUrlChecker::check($this->url, $url, $root)
+            ? $this->setExactActive()
+            : $this->setExactActive(false);
+    }
+
+    /**
+     * Set if current Activatable should be marked as an exact url match
+     *
+     * @param bool $exactActive
+     *
+     * @return $this
+     */
+    public function setExactActive(bool $exactActive = true)
+    {
+        $this->exactActive = $exactActive;
+
+        return $this;
+    }
+
+    /**
+     * Check if current Activatable is marked as an exact url match
+     *
+     * @return bool
+     */
+    public function isExactActive(): bool
+    {
+        return $this->exactActive;
     }
 }

@@ -34,6 +34,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     protected $activeClass = 'active';
 
     /** @var string */
+    protected $exactActiveClass = 'exact-active';
+
+    /** @var string */
     protected $wrapperTagName = 'ul';
 
     /** @var bool */
@@ -391,6 +394,16 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     }
 
     /**
+     * A menu can be active but not exact-active.
+     *
+     * @return bool
+     */
+    public function isExactActive(): bool
+    {
+        return false;
+    }
+
+    /**
      * Set multiple items in the menu as active based on a callable that filters
      * through items. If you typehint the item parameter in the callable, it will
      * only be applied to items of that type.
@@ -411,6 +424,20 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         }
 
         throw new \InvalidArgumentException('`setActive` requires a pattern or a callable');
+    }
+
+    /**
+     * Set the class name that will be used on exact-active items for this menu.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function setExactActiveClass(string $class)
+    {
+        $this->exactActiveClass = $class;
+
+        return $this;
     }
 
     /**
@@ -461,6 +488,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
             if ($callable($item)) {
                 $item->setActive();
+                $item->setExactActive();
             }
         });
 
@@ -689,10 +717,18 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         if ($item->isActive()) {
             if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);
+
+                if ($item->isExactActive()) {
+                    $attributes->addClass($this->exactActiveClass);
+                }
             }
 
             if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
+
+                if ($item->isExactActive()) {
+                    $item->addClass($this->exactActiveClass);
+                }
             }
         }
 
