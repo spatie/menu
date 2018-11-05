@@ -199,9 +199,7 @@ class MenuAddTest extends MenuTestCase
             ->link('#', 'Main Menu Link 1')
             ->link('#', 'Main Menu Link 2')
             ->submenu(
-                Link::to('#', 'Sub Menu')
-                    ->addClass('nav-link nav-dropdown-toggle')
-                ,
+                Link::to('#', 'Sub Menu')->addClass('nav-link nav-dropdown-toggle'),
                 Menu::new()
                     ->addClass('nav-dropdown-items') // this has nav-link class from parent menu but it shouldn't
                     ->addParentClass('nav-dropdown')
