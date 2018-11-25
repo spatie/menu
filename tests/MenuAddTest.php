@@ -190,12 +190,12 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_will_only_add_classes_to_all_links_in_the_menu_not_submenus()
+    public function it_will_only_add_classes_to_links_in_the_menu_and_not_submenus_or_items()
     {
         $this->menu = Menu::new()
             ->addClass('nav')
             ->addItemParentClass('nav-item')
-            ->addItemClass('nav-link')
+            ->addLinkClass('nav-link')
             ->link('#', 'Main Menu Link 1')
             ->link('#', 'Main Menu Link 2')
             ->submenu(
