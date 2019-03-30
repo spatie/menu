@@ -20,9 +20,10 @@ interface HasHtmlAttributes
     public function setAttributes(array $attributes);
 
     /**
-     * @param string $class
+     * @param string|array $class
      *
      * @return $this
      */
-    public function addClass(string $class);
+    public function addClass($class);
 }
+

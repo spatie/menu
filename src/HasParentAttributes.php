@@ -28,9 +28,9 @@ interface HasParentAttributes
     public function setParentAttributes(array $attributes);
 
     /**
-     * @param string $class
+     * @param string|array $class
      *
      * @return $this
      */
-    public function addParentClass(string $class);
+    public function addParentClass($class);
 }

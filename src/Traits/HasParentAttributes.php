@@ -46,11 +46,11 @@ trait HasParentAttributes
     }
 
     /**
-     * @param string $class
+     * @param string|array $class
      *
      * @return $this
      */
-    public function addParentClass(string $class)
+    public function addParentClass($class)
     {
         $this->parentAttributes->addClass($class);
 

@@ -35,14 +35,15 @@ trait HasHtmlAttributes
     }
 
     /**
-     * @param string $class
+     * @param string|array $class
      *
      * @return $this
      */
-    public function addClass(string $class)
+    public function addClass($class)
     {
         $this->htmlAttributes->addClass($class);
 
         return $this;
     }
 }
+
