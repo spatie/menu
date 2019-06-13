@@ -103,7 +103,7 @@ $menu = Menu::new()
 ```
 
 <div class="alert -info">
-If you only want to iterate over a specific type of item, you can typehint it in the callable, and it will ignore other instances. See <a href="/menu/v2/items-in-depth/manipulating-items">Manipulating Items</a> for some examples.
+If you only want to iterate over a specific type of item, you can typehint it in the callable, and it will ignore other instances. See <a href="/menu/v1/usage/manipulating-items">Manipulating Items</a> for some examples.
 </div>
 
 The callable will not traverse through submenus. If you want to traverse deeper, you'll have to manually add a `setActive` call with a callable that typehints `Menu`.
@@ -114,7 +114,7 @@ By default, the parent element of active items will receive an `active` class. I
 
 ```php
 Menu::new()
-    ->setActiveClass('is-active')
+    ->setActiveClass('-is-active')
     ->add(Link::to('/', 'Home')->setActive());
 ```
 
@@ -122,23 +122,6 @@ Menu::new()
 <ul>
     <li class="is-active">
         <a href="/">Home</a>
-    </li>
-</ul>
-```
-
-If you want to apply the active class on the `a` instead of the `ul`, call the `setActiveClassOnLink` method when building your menu.
-
-```php
-Menu::new()
-    ->setActiveClass('is-active')
-    ->setActiveClassOnLink()
-    ->add(Link::to('/', 'Home')->setActive());
-```
-
-```html
-<ul>
-    <li>
-        <a href="/" class="is-active">Home</a>
     </li>
 </ul>
 ```

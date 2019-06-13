@@ -16,7 +16,7 @@ Menu::new()
             ->addClass('dropdown-menu')
             ->link('#', 'Action')
             ->link('#', 'Another action')
-            ->html('', ['role' => 'separator', 'class' => 'divider'])
+            ->void(['role' => 'separator', 'class' => 'divider'])
     )
     ->wrap('div.collapse.navbar-collapse')
     ->setActive('/one');

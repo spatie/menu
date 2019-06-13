@@ -19,7 +19,7 @@ If you're in a Laravel environment, you'll want to require `laravel-menu` instea
 composer require spatie/laravel-menu
 ```
 
-If you use Laravel version lower than 5.5 and you want to use a facade, you'll need to register the service provider and facade class names (these are both optional):
+If you want to use a facade, you'll need to register the service provider and facade class names (these are both optional):
 
 ```php
 // config/app.php
@@ -31,6 +31,6 @@ If you use Laravel version lower than 5.5 and you want to use a facade, you'll n
 
 'aliases' => [
     // ...
-    'Menu' => Spatie\Menu\Laravel\Facades\Menu::class,
+    'Menu' => Spatie\Menu\Laravel\MenuFacade::class,
 ],
 ```

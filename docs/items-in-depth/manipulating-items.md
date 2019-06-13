@@ -25,7 +25,7 @@ Menu::new()
     });
 ```
 
-In the above example, all links will receive a `link` class, and all html chunk parents (`li`'s) will receive an `html` class.
+In the above example, all links will recieve a `link` class, and all html chunk parents (`li`'s) will receive an `html` class.
 
 ## each
 

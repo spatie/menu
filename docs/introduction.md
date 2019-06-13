@@ -19,7 +19,7 @@ Menu::new()
 // Or just...
 Menu::new()
     ->link('/', 'Home')
-    ->link('/about', 'About')
+    ->link('/about', 'About');
     ->link('/contact', 'Contact');
 ```
 
@@ -37,11 +37,11 @@ You can programatically add html classes and attributes to any item in the menu,
 
 ```php
 Menu::new()
-    ->addClass('navigation')
+    ->addClass('navigation');
     ->add(Link::to('/', 'Home')->addClass('home-link'))
     ->add(Link::to('/about', 'About'))
     ->add(Link::to('/contact', 'Contact')->addParentClass('float-right'))
-    ->wrap('div', ['class' => 'wrapper'])
+    ->wrap('div.wrapper')
 ```
 
 ```html
@@ -63,8 +63,8 @@ Menu::new()
     ->add(Link::to('/', 'Home'))
     ->submenu('More', Menu::new()
         ->addClass('submenu')
-        ->link('/about', 'About')
-        ->link('/contact', 'Contact')
+        ->link('/about', 'About'))
+        ->link('/contact', 'Contact'))
     );
 ```
 
@@ -108,6 +108,7 @@ Menu::macro('main', function () {
     <a href="https://packagist.org/packages/spatie/menu"><img src="https://img.shields.io/packagist/v/spatie/menu.svg?style=flat-square" alt="Latest Version on Packagist"></a>
     <a href="https://github.com/spatie/menu/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></a>
     <a href="https://travis-ci.org/spatie/menu"><img src="https://img.shields.io/travis/spatie/menu/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://insight.sensiolabs.com/projects/3f243a38-a1c7-42f5-96c8-37526e807029"><img src="https://img.shields.io/sensiolabs/i/3f243a38-a1c7-42f5-96c8-37526e807029.svg?style=flat-square" alt="SensioLabsInsight"></a>
     <a href="https://scrutinizer-ci.com/g/spatie/menu"><img src="https://img.shields.io/scrutinizer/g/spatie/menu.svg?style=flat-square" alt="Quality Score"></a>
     <a href="https://packagist.org/packages/spatie/menu"><img src="https://img.shields.io/packagist/dt/spatie/menu.svg?style=flat-square" alt="Total Downloads"></a>
 </section>
@@ -117,6 +118,7 @@ Menu::macro('main', function () {
     <a href="https://packagist.org/packages/spatie/laravel-menu"><img src="https://img.shields.io/packagist/v/spatie/laravel-menu.svg?style=flat-square" alt="Latest Version on Packagist"></a>
     <a href="https://github.com/spatie/laravel-menu/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square" alt="Software License"></a>
     <a href="https://travis-ci.org/spatie/laravel-menu"><img src="https://img.shields.io/travis/spatie/laravel-menu/master.svg?style=flat-square" alt="Build Status"></a>
+    <a href="https://insight.sensiolabs.com/projects/3f243a38-a1c7-42f5-96c8-37526e807029"><img src="https://img.shields.io/sensiolabs/i/3f243a38-a1c7-42f5-96c8-37526e807029.svg?style=flat-square" alt="SensioLabsInsight"></a>
     <a href="https://scrutinizer-ci.com/g/spatie/laravel-menu"><img src="https://img.shields.io/scrutinizer/g/spatie/laravel-menu.svg?style=flat-square" alt="Quality Score"></a>
     <a href="https://packagist.org/packages/spatie/laravel-menu"><img src="https://img.shields.io/packagist/dt/spatie/laravel-menu.svg?style=flat-square" alt="Total Downloads"></a>
 </section>

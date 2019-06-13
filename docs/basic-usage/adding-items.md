@@ -1,6 +1,5 @@
 ---
 title: Adding Items
-weight: 2
 ---
 
 ## Links
@@ -27,6 +26,30 @@ Menu::new()->link('/', 'Home');
 When using convenience methods to add items, you can't simultanuously add classes or attributes to the item since there isn't an instance variable.
 </div>
 
+Links also have a `prefix` method, or they can be prefixed in bulk per menu.
+
+```php
+Link::to('foo', 'Foo')->prefix('/items');
+```
+
+```html
+<a href="/users/sebastian">Sebastian</a>
+```
+
+```php
+Menu::new()
+    ->prefixLinks('/items')
+    ->link('foo', 'Foo')
+    ->link('bar', 'Bar');
+```
+
+```html
+<ul>
+    <li><a href="/items/foo">Foo</a></li>
+    <li><a href="/items/bar">Bar</a></li>
+</ul>
+```
+
 ## Raw Html
 
 `Spatie\Menu\Html`
@@ -44,26 +67,6 @@ Menu::new()->html('<span>Hi!</span>');
 ```html
 <ul>
     <li><span>Hi!</span></li>
-</ul>
-```
-
-It is also possible to add html directly into link display text, by calling `render` on the raw html and concatenating it with the rest of your desired output text or by writing the html directly into the display text. Please note, that this does not parse Laravel Blade syntax.
-
-```php
-Menu::new()->link('/hi',Html::raw('<b>Hello</b>')->render()." World")
-```
-
-```php
-Menu::new()->link('/hi',"<b>Hello</b> World")
-```
-
-```html
-<ul>
-    <li>
-        <a href="/hi">
-            <b>Hello</b> World
-        </a>
-    </li>
 </ul>
 ```
 
@@ -113,7 +116,7 @@ Menu::new()
         ->link('/introduction', 'Introduction')
         ->link('/requirements', 'Requirements')
         ->link('/installation-setup', 'Installation and Setup')
-    )
+    })
     // String header, `callable`
     ->submenu('<h2>Basic Usage</h2>', function (Menu $menu) {
         $menu
