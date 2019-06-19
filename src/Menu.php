@@ -693,11 +693,11 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
         $wrappedContents = $tag ? $tag->withContents($contents) : implode('', $contents);
 
-        $menu = $this->prepend.$wrappedContents.$this->append;
-
         if (! empty($this->wrap)) {
-            return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
+            $wrappedContents = Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($wrappedContents);
         }
+
+        $menu = $this->prepend . $wrappedContents . $this->append;
 
         return $menu;
     }

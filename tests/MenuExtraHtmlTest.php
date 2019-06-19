@@ -221,4 +221,36 @@ class MenuExtraHtmlTest extends MenuTestCase
             </ul>
         ');
     }
+
+    /** @test */
+    public function it_wraps_submenu_with_header_element()
+    {
+
+        $submenu = Menu::new()
+            ->link('#', 'SubMenu Item 1')
+            ->link('#', 'SubMenu Item 2')
+            ->wrap( 'div', ['class' => 'someclass'] );
+
+        $this->menu = Menu::new()
+            ->link('#', 'Menu Item 1')
+            ->link('#', 'Menu Item 2')
+            ->submenu(Link::to('#', 'Menu Item 3'), $submenu);
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="#">Menu Item 1</a></li>
+                <li><a href="#">Menu Item 2</a></li>
+                <li><a href="#">Menu Item 3</a>
+                    <div class="someclass">
+                        <ul>
+                            <li><a href="#">SubMenu Item 1</a></li>
+                            <li><a href="#">SubMenu Item 2</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        ');
+
+    }
+
 }
