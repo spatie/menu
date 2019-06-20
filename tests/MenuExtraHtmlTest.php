@@ -229,7 +229,7 @@ class MenuExtraHtmlTest extends MenuTestCase
         $submenu = Menu::new()
             ->link('#', 'SubMenu Item 1')
             ->link('#', 'SubMenu Item 2')
-            ->wrap( 'div', ['class' => 'someclass'] );
+            ->wrap('div', ['class' => 'someclass'] );
 
         $this->menu = Menu::new()
             ->link('#', 'Menu Item 1')
