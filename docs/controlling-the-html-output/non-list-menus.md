@@ -41,7 +41,7 @@ With custom wrapper tag & without parent tags:
 Menu::new()
     ->setWrapperTag('nav')
     ->withoutParentTag()
-    ->link('/', 'Home');
+    ->link('/', 'Home')
     ->link('/about', 'About');
 ```
 
@@ -58,7 +58,7 @@ With custom wrapper tag & custom parent tags:
 Menu::new()
     ->setWrapperTag('nav')
     ->setParentTag('span')
-    ->link('/', 'Home');
+    ->link('/', 'Home')
     ->link('/about', 'About');
 ```
 
