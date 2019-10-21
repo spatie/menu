@@ -225,11 +225,10 @@ class MenuExtraHtmlTest extends MenuTestCase
     /** @test */
     public function it_wraps_submenu_with_header_element()
     {
-
         $submenu = Menu::new()
             ->link('#', 'SubMenu Item 1')
             ->link('#', 'SubMenu Item 2')
-            ->wrap('div', ['class' => 'someclass'] );
+            ->wrap('div', ['class' => 'someclass']);
 
         $this->menu = Menu::new()
             ->link('#', 'Menu Item 1')

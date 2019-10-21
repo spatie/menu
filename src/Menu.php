@@ -224,7 +224,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function submenu($header, $menu = null)
     {
-        list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
+        [$header, $menu] = $this->parseSubmenuArgs(func_get_args());
 
         $menu = $this->createSubmenuMenu($menu);
         $header = $this->createSubmenuHeader($header);
@@ -697,7 +697,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $wrappedContents = Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($wrappedContents);
         }
 
-        $menu = $this->prepend . $wrappedContents . $this->append;
+        $menu = $this->prepend.$wrappedContents .$this->append;
 
         return $menu;
     }
