@@ -2,8 +2,8 @@
 
 namespace Spatie\Menu\Test\Items;
 
-use Spatie\Menu\Link;
 use PHPUnit\Framework\TestCase;
+use Spatie\Menu\Link;
 
 class LinkTest extends TestCase
 {

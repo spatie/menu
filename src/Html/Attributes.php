@@ -123,7 +123,7 @@ class Attributes
         return implode(' ', $attributeStrings);
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->toString();
     }

@@ -3,11 +3,11 @@
 namespace Spatie\Menu;
 
 use Spatie\Menu\Html\Attributes;
-use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
-use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
+use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 
 class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
 {
