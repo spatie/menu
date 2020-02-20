@@ -2,10 +2,10 @@
 
 namespace Spatie\Menu\Helpers;
 
-use ReflectionObject;
-use Spatie\Menu\Item;
 use ReflectionFunction;
+use ReflectionObject;
 use ReflectionParameter;
+use Spatie\Menu\Item;
 
 class Reflection
 {

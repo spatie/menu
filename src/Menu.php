@@ -2,17 +2,17 @@
 
 namespace Spatie\Menu;
 
-use Countable;
-use Traversable;
 use ArrayIterator;
+use Countable;
 use IteratorAggregate;
-use Spatie\Menu\Html\Tag;
-use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Helpers\Reflection;
+use Spatie\Menu\Html\Attributes;
+use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Traits\Conditions as ConditionsTrait;
-use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
+use Traversable;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
 {
@@ -224,7 +224,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function submenu($header, $menu = null)
     {
-        list($header, $menu) = $this->parseSubmenuArgs(func_get_args());
+        [$header, $menu] = $this->parseSubmenuArgs(func_get_args());
 
         $menu = $this->createSubmenuMenu($menu);
         $header = $this->createSubmenuHeader($header);
@@ -457,7 +457,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function setActiveFromUrl(string $url, string $root = '/')
     {
-        $this->applyToAll(function (Menu $menu) use ($url, $root) {
+        $this->applyToAll(function (self $menu) use ($url, $root) {
             $menu->setActiveFromUrl($url, $root);
         });
 
@@ -475,7 +475,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function setActiveFromCallable(callable $callable)
     {
-        $this->applyToAll(function (Menu $menu) use ($callable) {
+        $this->applyToAll(function (self $menu) use ($callable) {
             $menu->setActiveFromCallable($callable);
         });
 
