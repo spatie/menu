@@ -2,8 +2,8 @@
 
 namespace Spatie\Menu\Test\Items;
 
-use Spatie\Menu\Html;
 use PHPUnit\Framework\TestCase;
+use Spatie\Menu\Html;
 
 class HtmlTest extends TestCase
 {
