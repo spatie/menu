@@ -22,7 +22,7 @@ class MenuSortTest extends MenuTestCase
         ');
     }
     
-    /** @test /*
+    /** @test */
     public function element_has_priority()
     {
         $this->menu = Menu::new()
