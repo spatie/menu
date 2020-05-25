@@ -8,10 +8,11 @@ use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
+use Spatie\Menu\Traits\HasPriority as HasPriorityTrait;
 
 class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
 {
-    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
+    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait, HasPriorityTrait;
 
     /** @var string */
     protected $text;
