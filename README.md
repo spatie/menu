@@ -131,7 +131,7 @@ Items will be sorted using uasort() based on the priority.
 
 You can even modify the sorting proccess passing a sort callback to the menu:
 
-```
+```php
 Menu::new()
     ->add(Link::url('/contact', 'Contact')->setPriority(10)
     ->add(Link::url('/', 'Home')->setPriority(0)
