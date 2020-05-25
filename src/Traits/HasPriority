@@ -2,7 +2,7 @@
 
 namespace Spatie\Menu\Traits;
 
-trait HasPriorityTrait
+trait HasPriority
 {
     /**
      * @var int
