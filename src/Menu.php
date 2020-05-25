@@ -12,11 +12,12 @@ use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
+use Spatie\Menu\Traits\HasPriority as HasPriorityTrait;
 use Traversable;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
 {
-    use HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
+    use HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait, HasPriorityTrait;
 
     /** @var array */
     protected $items = [];
@@ -50,6 +51,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
+    
+    /** @var callable */
+    protected $sortCallback;
 
     protected function __construct(Item ...$items)
     {
@@ -676,6 +680,35 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $clone->activeClass = $this->activeClass;
 
         return $clone;
+    }
+    
+    /**
+     * Set the function to sort the menu
+     *
+     * @param callable $callable
+     * @return $this
+     */
+    public function setSortcallback($callable)
+    {
+        $this->sortCallback = $callable;
+
+        return $this;
+    }
+
+    /**
+     * Sorts the menu base on its priority using the sortCallback
+     *
+     * @return
+     */
+    protected function sortMenu()
+    {
+        if (!is_callable($this->sortCallback)) {
+            $this->sortCallback = function ($a, $b) {
+                return $a->getPriority() < $b->getPriority() ? -1 : 1;
+            };
+        }
+
+        uasort($this->items, $this->sortCallback);
     }
 
     /**
