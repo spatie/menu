@@ -22,6 +22,19 @@ class MenuSortTest extends MenuTestCase
         ');
     }
     
+    /** @test /*
+    public function element_has_priority()
+    {
+        $this->menu = Menu::new()
+            ->add(Link::to('/contact', 'Contact'))->setPriority(10);
+            
+        $items = $this->menu->getIterator();
+        $first = array_shift($items);
+        
+        $this->assertTrue(method_exists($first, 'getPriority'));
+        $this->assertEquals(10, $first->getPriority());
+    }
+    
     /** @test */
     public function sort_based_on_priority()
     {
