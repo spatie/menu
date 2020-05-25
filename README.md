@@ -117,6 +117,31 @@ Menu::new()
 </ul>
 ```
 
+## Sorting
+
+Sorting menu items is done internally, based on the order the items has been added to the menu. You can hook to the sort process assigning a priority to each menu item in order to modify the default order.
+
+```php
+Menu::new()
+    ->add(Link::url('/contact', 'Contact')->setPriority(10)
+    ->add(Link::url('/', 'Home')->setPriority(0);
+```
+
+Items will be sorted using uasort() based on the priority.
+
+You can even modify the sorting proccess passing a sort callback to the menu:
+
+```
+Menu::new()
+    ->add(Link::url('/contact', 'Contact')->setPriority(10)
+    ->add(Link::url('/', 'Home')->setPriority(0)
+    ->setSortcallback(function ($a, $b) {
+        return $a->getPriority() > $b->getPriority() ? -1 : 1;
+    });
+```
+
+This will change the previous sort to the reverse order
+
 ## Some Extra Treats for Laravel Apps
 
 The Laravel version of the menu package adds some extras like convenience methods for generating URLs and macros.
