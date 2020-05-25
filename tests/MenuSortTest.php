@@ -16,8 +16,8 @@ class MenuSortTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li><a href="/">Home</a>
-                <li><a href="/contact">Contact</a>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         ');
     }
@@ -31,8 +31,8 @@ class MenuSortTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li><a href="/">Home</a>
-                <li><a href="/contact">Contact</a>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         ');
     }
@@ -49,8 +49,8 @@ class MenuSortTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li><a href="/">Home</a>
-                <li><a href="/contact">Contact</a>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         ');
     }
@@ -68,8 +68,8 @@ class MenuSortTest extends MenuTestCase
 
         $this->assertRenders('
             <ul>
-                <li><a href="/contact">Contact</a>
-                <li><a href="/">Home</a>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/">Home</a></li>
             </ul>
         ');
     }
