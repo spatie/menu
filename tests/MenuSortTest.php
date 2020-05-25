@@ -29,7 +29,7 @@ class MenuSortTest extends MenuTestCase
             ->add(Link::to('/contact', 'Contact'))->setPriority(10);
             
         $items = $this->menu->getIterator();
-        $first = array_shift($items);
+        $first = $items[0];
         
         $this->assertTrue(method_exists($first, 'getPriority'));
         $this->assertEquals(10, $first->getPriority());
