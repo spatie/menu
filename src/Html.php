@@ -5,6 +5,7 @@ namespace Spatie\Menu;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Traits\Activatable as ActivatableTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
+use Spatie\Menu\Traits\HasPriority as HasPriorityTrait;
 
 class Html implements Item, Activatable, HasParentAttributes
 {
