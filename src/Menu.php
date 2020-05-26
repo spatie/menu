@@ -729,6 +729,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function render(): string
     {
+        $this->sortMenu();
+        
         $tag = $this->wrapperTagName
             ? new Tag($this->wrapperTagName, $this->htmlAttributes)
             : null;
