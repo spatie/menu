@@ -51,7 +51,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
     /** @var \Spatie\Menu\Html\Attributes */
     protected $htmlAttributes, $parentAttributes;
-    
+
     /** @var callable */
     protected $sortCallback;
 
@@ -681,9 +681,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
         return $clone;
     }
-    
+
     /**
-     * Set the function to sort the menu
+     * Set the function to sort the menu.
      *
      * @param callable $callable
      * @return $this
@@ -696,7 +696,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     }
 
     /**
-     * Sorts the menu base on its priority using the sortCallback
+     * Sorts the menu base on its priority using the sortCallback.
      *
      * @return
      */
@@ -705,9 +705,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         if (!is_callable($this->sortCallback)) {
             $this->sortCallback = function ($a, $b) {
                 /**
-                 * Avoid breaking previous version
+                 * Avoid breaking previous version.
                  */
-                if (!method_exists($a, 'getPriority') || !method_exists($b, 'getPriority')) {
+                if (! method_exists($a, 'getPriority') || ! method_exists($b, 'getPriority')) {
                     return 0;
                 }
 
@@ -730,7 +730,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     public function render(): string
     {
         $this->sortMenu();
-        
+
         $tag = $this->wrapperTagName
             ? new Tag($this->wrapperTagName, $this->htmlAttributes)
             : null;
