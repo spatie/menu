@@ -76,7 +76,6 @@ class MenuSortTest extends MenuTestCase
             ->add(Link::to('/', 'Home')->setPriority(100))
             ->setSortCallback(function ($a, $b) {
                 return strcmp($a->text(), $b->text());
-
             });
 
         $this->assertRenders('
