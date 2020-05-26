@@ -702,7 +702,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     protected function sortMenu()
     {
-        if (!is_callable($this->sortCallback)) {
+        if (! is_callable($this->sortCallback)) {
             $this->sortCallback = function ($a, $b) {
                 /**
                  * Avoid breaking previous version.
@@ -711,7 +711,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
                     return 0;
                 }
 
-                if ($a->getPriority() == $b->getPriority()) {
+                if ($a->getPriority() === $b->getPriority()) {
                     return 0;
                 }
 
