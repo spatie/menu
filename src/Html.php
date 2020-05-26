@@ -9,7 +9,7 @@ use Spatie\Menu\Traits\HasPriority as HasPriorityTrait;
 
 class Html implements Item, Activatable, HasParentAttributes
 {
-    use ActivatableTrait, HasParentAttributesTrait;
+    use ActivatableTrait, HasParentAttributesTrait, HasPriorityTrait;
 
     /** @var string */
     protected $html;
