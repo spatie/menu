@@ -140,7 +140,7 @@ Menu::new()
     });
 ```
 
-This will change the previous sort to the reverse order
+This will change the previous sort to the reverse order.
 
 ## Some Extra Treats for Laravel Apps
 
