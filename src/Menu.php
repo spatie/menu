@@ -11,8 +11,8 @@ use Spatie\Menu\Html\Tag;
 use Spatie\Menu\Traits\Conditions as ConditionsTrait;
 use Spatie\Menu\Traits\HasHtmlAttributes as HasHtmlAttributesTrait;
 use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
-use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Spatie\Menu\Traits\HasPriority as HasPriorityTrait;
+use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 use Traversable;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
