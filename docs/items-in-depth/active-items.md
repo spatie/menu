@@ -103,7 +103,8 @@ $menu = Menu::new()
 ```
 
 <div class="alert -info">
-If you only want to iterate over a specific type of item, you can typehint it in the callable, and it will ignore other instances. See <a href="/menu/v1/usage/manipulating-items">Manipulating Items</a> for some examples.
+If you only want to iterate over a specific type of item, you can typehint it in the callable, and it will ignore other instances.
+See <a href="/docs/menu/v1/items-in-depth/manipulating-items">Manipulating Items</a> for some examples.
 </div>
 
 The callable will not traverse through submenus. If you want to traverse deeper, you'll have to manually add a `setActive` call with a callable that typehints `Menu`.
