@@ -5,7 +5,6 @@ namespace Spatie\Menu;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use ReflectionFunction;
 use Spatie\Menu\Helpers\Reflection;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Html\Tag;
@@ -17,7 +16,10 @@ use Traversable;
 
 class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, IteratorAggregate
 {
-    use HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
+    use HasHtmlAttributesTrait;
+    use HasParentAttributesTrait;
+    use ConditionsTrait;
+    use HasAttributesTrait;
 
     /** @var array */
     protected $items = [];
@@ -26,7 +28,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     protected $filters = [];
 
     /** @var string */
-    protected $prepend, $append = '';
+    protected $prepend;
+    protected $append = '';
 
     /** @var array */
     protected $wrap = [];
@@ -50,7 +53,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     protected $activeClassOnLink = false;
 
     /** @var \Spatie\Menu\Html\Attributes */
-    protected $htmlAttributes, $parentAttributes;
+    protected $htmlAttributes;
+    protected $parentAttributes;
 
     protected function __construct(Item ...$items)
     {

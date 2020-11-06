@@ -67,7 +67,8 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_set_items_active_recursively_through_submenus_with_a_callable()
     {
         $this->menu = Menu::new()
-            ->add(Menu::new()
+            ->add(
+                Menu::new()
                 ->link('/', 'Home')
                 ->link('/about', 'About')
             )
@@ -135,7 +136,8 @@ class MenuSetActiveTest extends MenuTestCase
     public function it_can_set_items_active_recursively_through_submenus_from_an_absolute_url()
     {
         $this->menu = Menu::new()
-            ->add(Menu::new()
+            ->add(
+                Menu::new()
                 ->link('http://example.com', 'Home')
                 ->link('http://example.com/disclaimer', 'Disclaimer')
                 ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')

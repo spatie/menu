@@ -8,7 +8,8 @@ use Spatie\Menu\Traits\HasParentAttributes as HasParentAttributesTrait;
 
 class Html implements Item, Activatable, HasParentAttributes
 {
-    use ActivatableTrait, HasParentAttributesTrait;
+    use ActivatableTrait;
+    use HasParentAttributesTrait;
 
     /** @var string */
     protected $html;
