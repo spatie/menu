@@ -27,7 +27,7 @@ class ActiveUrlChecker
         $itemPath = Str::ensureRight('/', $url->getPath());
 
         // If this url doesn't start with the rootUrl, it's inactive.
-        if (!Str::startsWith($itemPath, $rootUrl)) {
+        if (! Str::startsWith($itemPath, $rootUrl)) {
             return false;
         }
 

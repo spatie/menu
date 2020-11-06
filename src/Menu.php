@@ -306,7 +306,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $type = Reflection::firstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if (!Reflection::itemMatchesType($item, $type)) {
+            if (! Reflection::itemMatchesType($item, $type)) {
                 continue;
             }
 
@@ -342,7 +342,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     {
         $type = Reflection::firstParameterType($filter);
 
-        if (!Reflection::itemMatchesType($item, $type)) {
+        if (! Reflection::itemMatchesType($item, $type)) {
             return;
         }
 
@@ -489,7 +489,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
 
             /** @var \Spatie\Menu\Activatable|\Spatie\Menu\Item $item */
-            if (!Reflection::itemMatchesType($item, $type)) {
+            if (! Reflection::itemMatchesType($item, $type)) {
                 return;
             }
 
@@ -708,7 +708,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
         $menu = $this->prepend.$wrappedContents.$this->append;
 
-        if (!empty($this->wrap)) {
+        if (! empty($this->wrap)) {
             return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
         }
 
@@ -751,7 +751,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $attributes->setAttributes($item->parentAttributes());
         }
 
-        if (!$this->parentTagName) {
+        if (! $this->parentTagName) {
             return $item->render();
         }
 

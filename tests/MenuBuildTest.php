@@ -32,8 +32,8 @@ class MenuBuildTest extends MenuTestCase
     public function it_can_build_a_menu_from_an_array_of_items_with_keys_with_a_reducer()
     {
         $items = [
-            '/'        => 'Home',
-            '/about'   => 'About',
+            '/' => 'Home',
+            '/about' => 'About',
             '/contact' => 'Contact',
         ];
 
