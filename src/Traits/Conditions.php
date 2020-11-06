@@ -6,6 +6,7 @@ trait Conditions
 {
     /**
      * @param mixed $conditional
+     *
      * @return bool
      */
     protected function resolveCondition($conditional)

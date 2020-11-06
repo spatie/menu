@@ -81,8 +81,8 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * the accumulator, the array item as the second parameter, and the item's
      * key as the third.
      *
-     * @param array|\Iterator $items
-     * @param callable $callback
+     * @param array|\Iterator        $items
+     * @param callable               $callback
      * @param \Spatie\Menu\Menu|null $initial
      *
      * @return static
@@ -98,7 +98,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * key as the third.
      *
      * @param array|\Iterator $items
-     * @param callable $callback
+     * @param callable        $callback
      *
      * @return static
      */
@@ -135,7 +135,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     /**
      * Add an item to the menu if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool              $condition
      * @param \Spatie\Menu\Item $item
      *
      * @return $this
@@ -175,7 +175,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     /**
      * Add a link to the menu if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $url
      * @param string $text
      *
@@ -194,7 +194,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Shortcut function to add raw html to the menu.
      *
      * @param string $html
-     * @param array $parentAttributes
+     * @param array  $parentAttributes
      *
      * @return $this
      */
@@ -206,9 +206,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     /**
      * Add a chunk of html if a (non-strict) condition is met.
      *
-     * @param bool $condition
+     * @param bool   $condition
      * @param string $html
-     * @param array $parentAttributes
+     * @param array  $parentAttributes
      *
      * @return $this
      */
@@ -223,7 +223,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
     /**
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
-     * @param callable|\Spatie\Menu\Menu|null $menu
+     * @param callable|\Spatie\Menu\Menu|null              $menu
      *
      * @return $this
      */
@@ -238,9 +238,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     }
 
     /**
-     * @param bool $condition
+     * @param bool                                         $condition
      * @param callable|\Spatie\Menu\Menu|\Spatie\Menu\Item $header
-     * @param callable|\Spatie\Menu\Menu|null $menu
+     * @param callable|\Spatie\Menu\Menu|null              $menu
      *
      * @return $this
      */
@@ -306,7 +306,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $type = Reflection::firstParameterType($callable);
 
         foreach ($this->items as $item) {
-            if (! Reflection::itemMatchesType($item, $type)) {
+            if (!Reflection::itemMatchesType($item, $type)) {
                 continue;
             }
 
@@ -335,14 +335,14 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     /**
      * Apply a filter to an item. Returns the result of the filter.
      *
-     * @param callable $filter
+     * @param callable          $filter
      * @param \Spatie\Menu\Item $item
      */
     protected function applyFilter(callable $filter, Item $item)
     {
         $type = Reflection::firstParameterType($filter);
 
-        if (! Reflection::itemMatchesType($item, $type)) {
+        if (!Reflection::itemMatchesType($item, $type)) {
             return;
         }
 
@@ -371,7 +371,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * wrapping above the `wrapperTag`.
      *
      * @param string $element
-     * @param array $attributes
+     * @param array  $attributes
      *
      * @return $this
      */
@@ -414,7 +414,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * only be applied to items of that type.
      *
      * @param callable|string $urlOrCallable
-     * @param string $root
+     * @param string          $root
      *
      * @return $this
      */
@@ -489,7 +489,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
 
             /** @var \Spatie\Menu\Activatable|\Spatie\Menu\Item $item */
-            if (! Reflection::itemMatchesType($item, $type)) {
+            if (!Reflection::itemMatchesType($item, $type)) {
                 return;
             }
 
@@ -587,6 +587,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Set tag for items wrapper.
      *
      * @param string|null $wrapperTagName
+     *
      * @return $this
      */
     public function setWrapperTag($wrapperTagName = null)
@@ -600,6 +601,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Set tag for items wrapper.
      *
      * @param string|null $wrapperTagName
+     *
      * @return $this
      */
     public function withoutWrapperTag()
@@ -613,6 +615,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Set the parent tag name.
      *
      * @param string|null $parentTagName
+     *
      * @return $this
      */
     public function setParentTag($parentTagName = null)
@@ -638,6 +641,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Set whether active class should (also) be on link.
      *
      * @param $activeClassOnLink
+     *
      * @return $this
      */
     public function setActiveClassOnLink(bool $activeClassOnLink = true)
@@ -651,6 +655,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * Set whether active class should (also) be on parent.
      *
      * @param $activeClassOnParent
+     *
      * @return $this
      */
     public function setActiveClassOnParent(bool $activeClassOnParent = true)
@@ -661,7 +666,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     }
 
     /**
-     * @param bool $condition
+     * @param bool     $condition
      * @param callable $callable
      *
      * @return $this
@@ -703,7 +708,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
         $menu = $this->prepend.$wrappedContents.$this->append;
 
-        if (! empty($this->wrap)) {
+        if (!empty($this->wrap)) {
             return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
         }
 
@@ -746,7 +751,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $attributes->setAttributes($item->parentAttributes());
         }
 
-        if (! $this->parentTagName) {
+        if (!$this->parentTagName) {
             return $item->render();
         }
 

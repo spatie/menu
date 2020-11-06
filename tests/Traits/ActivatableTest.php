@@ -11,7 +11,7 @@ class ActivatableTest extends TestCase
 
     public function setUp(): void
     {
-        $this->activatable = new class {
+        $this->activatable = new class() {
             use Activatable;
             protected $active = false;
         };

@@ -34,9 +34,10 @@ class MenuExtraHtmlTest extends MenuTestCase
     /**
      * @test
      * @dataProvider prependIfDataProvider
+     *
      * @param \Closure|bool $condition
-     * @param string $prepend
-     * @param string $expected
+     * @param string        $prepend
+     * @param string        $expected
      */
     public function it_can_conditionally_prepend_content($condition, string $prepend, string $expected)
     {
@@ -72,9 +73,10 @@ class MenuExtraHtmlTest extends MenuTestCase
     /**
      * @test
      * @dataProvider appendIfDataProvider
+     *
      * @param \Closure|bool $condition
-     * @param string $prepend
-     * @param string $expected
+     * @param string        $prepend
+     * @param string        $expected
      */
     public function it_can_conditionally_append_content($condition, string $prepend, string $expected)
     {

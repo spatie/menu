@@ -67,7 +67,7 @@ trait Activatable
      */
     public function hasUrl(): bool
     {
-        return ! is_null($this->url);
+        return !is_null($this->url);
     }
 
     /**
@@ -90,7 +90,7 @@ trait Activatable
      */
     public function determineActiveForUrl(string $url, string $root = '/')
     {
-        if (! $this->hasUrl()) {
+        if (!$this->hasUrl()) {
             return;
         }
 
