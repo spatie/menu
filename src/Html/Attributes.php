@@ -65,7 +65,7 @@ class Attributes
      */
     public function addClass($class)
     {
-        if (! is_array($class)) {
+        if (!is_array($class)) {
             $class = [$class];
         }
 

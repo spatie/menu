@@ -83,7 +83,8 @@ class MenuAddTest extends MenuTestCase
     public function submenus_can_be_added()
     {
         $this->menu = Menu::new()
-            ->add(Menu::new()
+            ->add(
+                Menu::new()
                 ->add(Link::to('#', 'In Too Deep'))
             );
 
@@ -102,7 +103,8 @@ class MenuAddTest extends MenuTestCase
     public function it_adds_active_classes_to_active_submenus()
     {
         $this->menu = Menu::new()
-            ->add(Menu::new()
+            ->add(
+                Menu::new()
                 ->add(Link::to('#', 'In Too Deep')->setActive())
             );
 

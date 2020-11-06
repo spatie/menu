@@ -11,7 +11,11 @@ use Spatie\Menu\Traits\HasTextAttributes as HasAttributesTrait;
 
 class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
 {
-    use ActivatableTrait, HasHtmlAttributesTrait, HasParentAttributesTrait, ConditionsTrait, HasAttributesTrait;
+    use ActivatableTrait;
+    use HasHtmlAttributesTrait;
+    use HasParentAttributesTrait;
+    use ConditionsTrait;
+    use HasAttributesTrait;
 
     /** @var string */
     protected $text;
@@ -20,13 +24,15 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     protected $url = null;
 
     /** @var string */
-    protected $prepend, $append = '';
+    protected $prepend;
+    protected $append = '';
 
     /** @var bool */
     protected $active = false;
 
     /** @var \Spatie\Menu\Html\Attributes */
-    protected $htmlAttributes, $parentAttributes;
+    protected $htmlAttributes;
+    protected $parentAttributes;
 
     /**
      * @param string $url
