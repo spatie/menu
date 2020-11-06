@@ -15,7 +15,7 @@ class Str
 
     public static function removeFromStart(string $remove, string $subject): string
     {
-        if (!self::startsWith($subject, $remove)) {
+        if (! self::startsWith($subject, $remove)) {
             return $subject;
         }
 
