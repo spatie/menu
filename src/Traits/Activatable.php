@@ -86,7 +86,7 @@ trait Activatable
      * @param string $url
      * @param string $root
      *
-     * @return $this
+     * @return void
      */
     public function determineActiveForUrl(string $url, string $root = '/')
     {

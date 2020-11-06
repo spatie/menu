@@ -21,7 +21,9 @@
         "spatie/url": "^1.0.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.4"
+        "phpunit/phpunit": "^9.3",
+        "vimeo/psalm": "^3.11",
+        "larapack/dd": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -37,6 +39,17 @@
         }
     },
     "scripts": {
+        "psalm": "vendor/bin/psalm",
         "test": "vendor/bin/phpunit"
-    }
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/spatie"
+        },
+        {
+            "type": "other",
+            "url": "https://spatie.be/open-source/support-us"
+        }
+    ]
 }

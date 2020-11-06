@@ -5,6 +5,7 @@ namespace Spatie\Menu;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
+use ReflectionFunction;
 use Spatie\Menu\Helpers\Reflection;
 use Spatie\Menu\Html\Attributes;
 use Spatie\Menu\Html\Tag;
@@ -39,7 +40,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     /** @var string */
     protected $wrapperTagName = 'ul';
 
-    /** @var bool */
+    /** @var string|null */
     protected $parentTagName = 'li';
 
     /** @var bool */
@@ -457,7 +458,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function setActiveFromUrl(string $url, string $root = '/')
     {
-        $this->applyToAll(function (self $menu) use ($url, $root) {
+        $this->applyToAll(function (Menu $menu) use ($url, $root) {
             $menu->setActiveFromUrl($url, $root);
         });
 
@@ -475,19 +476,22 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function setActiveFromCallable(callable $callable)
     {
-        $this->applyToAll(function (self $menu) use ($callable) {
+        $this->applyToAll(function (Menu $menu) use ($callable) {
             $menu->setActiveFromCallable($callable);
         });
 
         $type = Reflection::firstParameterType($callable);
 
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
+
+            /** @var \Spatie\Menu\Activatable|\Spatie\Menu\Item $item */
             if (! Reflection::itemMatchesType($item, $type)) {
                 return;
             }
 
             if ($callable($item)) {
                 $item->setActive();
+                /** @psalm-suppress UndefinedInterfaceMethod */
                 $item->setExactActive();
             }
         });
@@ -718,6 +722,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             if ($this->activeClassOnParent) {
                 $attributes->addClass($this->activeClass);
 
+                /** @psalm-suppress UndefinedInterfaceMethod */
                 if ($item->isExactActive()) {
                     $attributes->addClass($this->exactActiveClass);
                 }
@@ -726,6 +731,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             if ($this->activeClassOnLink && $item instanceof HasHtmlAttributes) {
                 $item->addClass($this->activeClass);
 
+                /** @psalm-suppress UndefinedInterfaceMethod */
                 if ($item->isExactActive()) {
                     $item->addClass($this->exactActiveClass);
                 }

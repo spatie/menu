@@ -22,7 +22,7 @@ trait HasTextAttributes
      * Prepend the text with a string of html on render if a certain condition is
      * met.
      *
-     * @param bool $condition
+     * @param mixed $condition
      * @param string $prepend
      *
      * @return $this

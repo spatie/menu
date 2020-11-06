@@ -12,6 +12,8 @@ class Reflection
 {
     public static function firstParameterType(callable $callable): string
     {
+//        dd(new ReflectionFunction($callable));
+
         $reflection = is_object($callable)
             ? (new ReflectionObject($callable))->getMethod('__invoke')
             : new ReflectionFunction($callable);

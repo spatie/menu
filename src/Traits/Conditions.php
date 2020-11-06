@@ -5,7 +5,7 @@ namespace Spatie\Menu\Traits;
 trait Conditions
 {
     /**
-     * @param $conditional
+     * @param mixed $conditional
      * @return bool
      */
     protected function resolveCondition($conditional)

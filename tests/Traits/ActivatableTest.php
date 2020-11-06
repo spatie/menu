@@ -9,7 +9,7 @@ class ActivatableTest extends TestCase
 {
     protected $activatable;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->activatable = new class {
             use Activatable;
