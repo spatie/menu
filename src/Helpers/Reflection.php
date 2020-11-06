@@ -21,7 +21,7 @@ class Reflection
         $parameters = $reflection->getParameters();
 
         $parameterTypes = array_map(function (ReflectionParameter $parameter) {
-            $class = $parameter->getType() && ! $parameter->getType()->isBuiltin()
+            $class = $parameter->getType() && !$parameter->getType()->isBuiltin()
                 ? new ReflectionClass($parameter->getType()->getName())
                 : null;
 
