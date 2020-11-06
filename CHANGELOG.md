@@ -4,7 +4,7 @@ All notable changes to `menu` will be documented in this file.
 
 ## 2.9.0 - 2020-11-06
 
-- Drop support for 
+- Drop support for versions older than PHP 7.1
 
 ## 2.8.0 - 2018-11-05
 - Add `exact-active` class to links that exactly match the current URL. This is accompanied by a `setExactActiveClass(string $class)` method to set the class name
