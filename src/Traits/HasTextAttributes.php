@@ -2,16 +2,18 @@
 
 namespace Spatie\Menu\Traits;
 
+use Spatie\Menu\Item;
+
 trait HasTextAttributes
 {
     /**
      * Prepend the anchor with a string of html on render.
      *
-     * @param string $prepend
+     * @param string|Item $prepend
      *
      * @return $this
      */
-    public function prepend(string $prepend)
+    public function prepend($prepend)
     {
         $this->prepend = $prepend;
 
@@ -23,11 +25,11 @@ trait HasTextAttributes
      * met.
      *
      * @param mixed $condition
-     * @param string $prepend
+     * @param string|Item $prepend
      *
      * @return $this
      */
-    public function prependIf($condition, string $prepend)
+    public function prependIf($condition, $prepend)
     {
         if ($this->resolveCondition($condition)) {
             return $this->prepend($prepend);
@@ -39,11 +41,11 @@ trait HasTextAttributes
     /**
      * Append a text of html to the menu on render.
      *
-     * @param string $append
+     * @param string|Item $append
      *
      * @return $this
      */
-    public function append(string $append)
+    public function append($append)
     {
         $this->append = $append;
 
@@ -55,11 +57,11 @@ trait HasTextAttributes
      * met.
      *
      * @param bool $condition
-     * @param string $append
+     * @param string|Item $append
      *
      * @return static
      */
-    public function appendIf($condition, string $append)
+    public function appendIf($condition, $append)
     {
         if ($this->resolveCondition($condition)) {
             return $this->append($append);
