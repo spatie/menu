@@ -409,7 +409,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     public function isExactActive(): bool
     {
         // Kind of hacky, should be handled differently in the next major version
-        if (!method_exists($this->prepend, 'isExactActive')) {
+        if (! method_exists($this->prepend, 'isExactActive')) {
             return false;
         }
 
