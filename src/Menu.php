@@ -408,6 +408,10 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      */
     public function isExactActive(): bool
     {
+        if (! $this->prepend) {
+            return false;
+        }
+
         // Kind of hacky, should be handled differently in the next major version
         if (! method_exists($this->prepend, 'isExactActive')) {
             return false;
