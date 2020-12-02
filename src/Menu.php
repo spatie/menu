@@ -402,17 +402,18 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     }
 
     /**
-     * A menu can be active but not exact-active.
+     * A menu can be active but not exact-active, unless its prepend is.
      *
      * @return bool
      */
     public function isExactActive(): bool
     {
-        if ($this->prepend && $this->prepend instanceof Item && $this->prepend->isExactActive()) {
-            return true;
+        // Kind of hacky, should be handled differently in the next major version
+        if (!method_exists($this->prepend, 'isExactActive')) {
+            return false;
         }
 
-        return false;
+        return $this->prepend->isExactActive();
     }
 
     /**
@@ -473,7 +474,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $menu->setActiveFromUrl($url, $root);
         });
 
-        if ($this->prepend && $this->prepend instanceof Item) {
+        if ($this->prepend instanceof Activatable) {
             $this->prepend->determineActiveForUrl($url, $root);
         }
 

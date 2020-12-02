@@ -4,7 +4,6 @@ namespace Spatie\Menu\Traits;
 
 use Spatie\Menu\ActiveUrlChecker;
 use Spatie\Menu\ExactUrlChecker;
-use Spatie\Url\Url;
 
 /**
  * Expects an `$active` property on the class.
