@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.10.2 - 2020-12-02
+- Fix `methods_exists` check in PHP8
+
 ## 2.10.1 - 2020-12-02
 - Ensure the necessary methods exist to check if a menu is active
 
