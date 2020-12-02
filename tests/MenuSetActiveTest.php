@@ -44,6 +44,104 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
+    public function it_can_set_exact_active_for_submenu_header()
+    {
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->submenu(Link::to('/people', 'People'), Menu::new()->link('/people/sebastian', 'Sebastian'))
+            ->setActive('/people');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active exact-active">
+                    <a href="/people">People</a>
+                    <ul>
+                        <li><a href="/people/sebastian">Sebastian</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_set_active_for_submenu_header()
+    {
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->submenu(Link::to('/people', 'People'), Menu::new()->link('/people/sebastian', 'Sebastian'))
+            ->setActive('/people/sebastian');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active">
+                    <a href="/people">People</a>
+                    <ul>
+                        <li class="active exact-active"><a href="/people/sebastian">Sebastian</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_set_link_exact_active_for_submenu_header()
+    {
+        $submenu = Menu::new()
+            ->link('/people/sebastian', 'Sebastian')
+            ->setActiveClassOnLink(true)
+            ->setActiveClassOnParent(false);
+
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->submenu(Link::to('/people', 'People'), $submenu)
+            ->setActive('/people')
+            ->setActiveClassOnLink(true)
+            ->setActiveClassOnParent(false);
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/people" class="active exact-active">People</a>
+                    <ul>
+                        <li><a href="/people/sebastian">Sebastian</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_set_link_active_for_submenu_header()
+    {
+        $submenu = Menu::new()
+            ->link('/people/sebastian', 'Sebastian')
+            ->setActiveClassOnLink(true)
+            ->setActiveClassOnParent(false);
+
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->submenu(Link::to('/people', 'People'), $submenu)
+            ->setActive('/people/sebastian')
+            ->setActiveClassOnLink(true)
+            ->setActiveClassOnParent(false);
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li>
+                    <a href="/people" class="active">People</a>
+                    <ul>
+                        <li><a href="/people/sebastian" class="active exact-active">Sebastian</a></li>
+                    </ul>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     public function it_only_sets_exact_active_on_exact_url_match()
     {
         $this->menu = Menu::new()
