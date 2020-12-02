@@ -1,4 +1,5 @@
 build
 composer.lock
 vendor
- .php_cs.cache
+.php_cs.cache
+.phpunit.result.cache
