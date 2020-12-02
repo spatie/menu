@@ -2,8 +2,10 @@
 
 All notable changes to `menu` will be documented in this file.
 
-## 2.9.0 - 2020-11-06
+## 2.10.0 - 2020-12-02
+- Support `Item` instances in `Menu::prepend` so headers can be set active
 
+## 2.9.0 - 2020-11-06
 - Drop support for versions older than PHP 7.1
 
 ## 2.8.0 - 2018-11-05
