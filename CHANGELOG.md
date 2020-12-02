@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.10.1 - 2020-12-02
+- Ensure the necessary methods exist to check if a menu is active
+
 ## 2.10.0 - 2020-12-02
 - Support `Item` instances in `Menu::prepend` so headers can be set active
 
