@@ -778,7 +778,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return $item;
     }
 
-
     /**
      * The amount of items in the menu.
      *
