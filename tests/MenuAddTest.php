@@ -202,7 +202,7 @@ class MenuAddTest extends MenuTestCase
     }
 
     /** @test */
-    public function it_can_handle_html_in_appendpend()
+    public function it_can_handle_html_in_append()
     {
         $this->menu = Menu::new()
             ->append(Html::raw('<span>test</span>'));
