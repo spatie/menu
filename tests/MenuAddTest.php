@@ -2,6 +2,7 @@
 
 namespace Spatie\Menu\Test;
 
+use Spatie\Menu\Html;
 use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
 
@@ -189,5 +190,23 @@ class MenuAddTest extends MenuTestCase
                 <li>Quux</li>
             </ul>
         ');
+    }
+
+    /** @test */
+    public function it_can_handle_html_in_prepend()
+    {
+        $this->menu = Menu::new()
+            ->prepend(Html::raw('<span>test</span>'));
+
+        $this->assertRenders('<span>test</span><ul></ul>');
+    }
+
+    /** @test */
+    public function it_can_handle_html_in_appendpend()
+    {
+        $this->menu = Menu::new()
+            ->append(Html::raw('<span>test</span>'));
+
+        $this->assertRenders('<ul></ul><span>test</span>');
     }
 }

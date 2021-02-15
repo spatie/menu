@@ -721,7 +721,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $this->prepend = $this->renderActiveClassOnLink($this->prepend);
         }
 
-        $menu = $this->prepend.$wrappedContents.$this->append;
+        $menu = $this->renderStringOrItem($this->prepend).$wrappedContents.$this->renderStringOrItem($this->append);
 
         if (! empty($this->wrap)) {
             return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);
@@ -804,5 +804,20 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
+    }
+
+    /**
+     * @param null|string|Item $item
+     * @return string
+     */
+    protected function renderStringOrItem($item): string
+    {
+        if ($item === null) {
+            return '';
+        }
+
+        return $item instanceof Item
+            ? $item->render()
+            : $item;
     }
 }
