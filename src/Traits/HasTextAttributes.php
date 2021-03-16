@@ -69,4 +69,18 @@ trait HasTextAttributes
 
         return $this;
     }
+
+    protected function renderPrepend()
+    {
+        return $this->prepend instanceof Item
+            ? $this->prepend->render()
+            : $this->prepend;
+    }
+
+    protected function renderAppend()
+    {
+        return $this->append instanceof Item
+            ? $this->append->render()
+            : $this->append;
+    }
 }

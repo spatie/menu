@@ -28,7 +28,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
     protected $filters = [];
 
     /** @var string|Item */
-    protected $prepend;
+    protected $prepend = '';
+
+    /** @var string|Item */
     protected $append = '';
 
     /** @var array */
@@ -721,7 +723,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             $this->prepend = $this->renderActiveClassOnLink($this->prepend);
         }
 
-        $menu = $this->prepend.$wrappedContents.$this->append;
+        $menu = $this->renderPrepend().$wrappedContents.$this->renderAppend();
 
         if (! empty($this->wrap)) {
             return Tag::make($this->wrap[0], new Attributes($this->wrap[1]))->withContents($menu);

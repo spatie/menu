@@ -24,7 +24,9 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     protected $url = null;
 
     /** @var string */
-    protected $prepend;
+    protected $prepend = '';
+
+    /** @var string */
     protected $append = '';
 
     /** @var bool */
@@ -73,7 +75,7 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
         $attributes = new Attributes(['href' => $this->url]);
         $attributes->mergeWith($this->htmlAttributes);
 
-        return $this->prepend."<a {$attributes}>{$this->text}</a>".$this->append;
+        return $this->renderPrepend()."<a {$attributes}>{$this->text}</a>".$this->renderAppend();
     }
 
     /**

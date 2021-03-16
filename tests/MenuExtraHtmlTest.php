@@ -15,6 +15,14 @@ class MenuExtraHtmlTest extends MenuTestCase
         $this->assertRenders('<h1>Hi!</h1><ul></ul>');
     }
 
+    /** @test */
+    public function it_can_prepend_items()
+    {
+        $this->menu = Menu::new()->prepend(Link::to('#', 'Hi!'));
+
+        $this->assertRenders('<a href="#">Hi!</a><ul></ul>');
+    }
+
     public function prependIfDataProvider()
     {
         return [
@@ -51,6 +59,14 @@ class MenuExtraHtmlTest extends MenuTestCase
         $this->menu = Menu::new()->append('<aside>Bye!</aside>');
 
         $this->assertRenders('<ul></ul><aside>Bye!</aside>');
+    }
+
+    /** @test */
+    public function it_can_append_items()
+    {
+        $this->menu = Menu::new()->append(Link::to('#', 'Bye!'));
+
+        $this->assertRenders('<ul></ul><a href="#">Bye!</a>');
     }
 
     public function appendIfDataProvider()
