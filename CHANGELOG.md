@@ -2,6 +2,9 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 2.10.3 - 2021-03-16
+- Ensure `Items` are transformed to string before prepending or appending
+
 ## 2.10.2 - 2020-12-02
 - Fix `methods_exists` check in PHP8
 
