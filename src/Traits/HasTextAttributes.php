@@ -11,9 +11,9 @@ trait HasTextAttributes
      *
      * @param string|Item $prepend
      *
-     * @return $this
+     * @return HasTextAttributes
      */
-    public function prepend($prepend)
+    public function prepend(string|Item $prepend): self
     {
         $this->prepend = $prepend;
 
@@ -27,9 +27,9 @@ trait HasTextAttributes
      * @param mixed $condition
      * @param string|Item $prepend
      *
-     * @return $this
+     * @return HasTextAttributes
      */
-    public function prependIf($condition, $prepend)
+    public function prependIf(mixed $condition, string|Item $prepend): self
     {
         if ($this->resolveCondition($condition)) {
             return $this->prepend($prepend);
@@ -43,9 +43,9 @@ trait HasTextAttributes
      *
      * @param string|Item $append
      *
-     * @return $this
+     * @return HasTextAttributes
      */
-    public function append($append)
+    public function append(string|Item $append): self
     {
         $this->append = $append;
 
@@ -56,12 +56,12 @@ trait HasTextAttributes
      * Append the text with a string of html on render if a certain condition is
      * met.
      *
-     * @param bool $condition
+     * @param bool|callable $condition
      * @param string|Item $append
      *
-     * @return static
+     * @return HasTextAttributes
      */
-    public function appendIf($condition, $append)
+    public function appendIf(bool|callable $condition, string|Item $append): self
     {
         if ($this->resolveCondition($condition)) {
             return $this->append($append);
@@ -70,14 +70,14 @@ trait HasTextAttributes
         return $this;
     }
 
-    protected function renderPrepend()
+    protected function renderPrepend(): string
     {
         return $this->prepend instanceof Item
             ? $this->prepend->render()
             : $this->prepend;
     }
 
-    protected function renderAppend()
+    protected function renderAppend(): string
     {
         return $this->append instanceof Item
             ? $this->append->render()

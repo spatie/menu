@@ -4,38 +4,15 @@ namespace Spatie\Menu;
 
 interface Activatable
 {
-    /**
-     * @param bool|callable $active
-     *
-     * @return $this
-     */
-    public function setActive($active = true);
+    public function setActive(bool|callable $active = true): static;
 
-    /**
-     * @return $this
-     */
-    public function setInactive();
+    public function setInactive(): static;
 
-    /**
-     * @return string|null
-     */
-    public function url();
+    public function url(): string|null;
 
-    /**
-     * @return bool
-     */
     public function hasUrl(): bool;
 
-    /**
-     * @param string|null $url
-     *
-     * @return $this
-     */
-    public function setUrl($url);
+    public function setUrl(string|null $url): static;
 
-    /**
-     * @param string $url
-     * @param string $root
-     */
-    public function determineActiveForUrl(string $url, string $root = '/');
+    public function determineActiveForUrl(string $url, string $root = '/'): void;
 }

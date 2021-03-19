@@ -4,19 +4,14 @@ namespace Spatie\Menu\Html;
 
 class Tag
 {
-    /** @var string */
-    protected $tagName;
-
-    /** @var \Spatie\Menu\Html\Attributes */
-    protected $attributes;
-
-    public function __construct(string $tagName, Attributes $attributes = null)
-    {
-        $this->tagName = $tagName;
-        $this->attributes = $attributes ?: new Attributes();
+    public function __construct(
+        public string $tagName,
+        protected Attributes|null $attributes = null,
+    ) {
+        $this->attributes ??= new Attributes();
     }
 
-    public static function make(string $tagName, Attributes $attributes = null)
+    public static function make(string $tagName, Attributes $attributes = null): self
     {
         return new self($tagName, $attributes);
     }

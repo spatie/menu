@@ -4,7 +4,7 @@ namespace Spatie\Menu\Helpers;
 
 class Arr
 {
-    public static function map(array $array, $callback): array
+    public static function map(array $array, callable $callback): array
     {
         $keys = array_keys($array);
 
@@ -13,7 +13,7 @@ class Arr
         return array_combine($keys, $items);
     }
 
-    public static function push(array $array, $item): array
+    public static function push(array $array, mixed $item): array
     {
         array_push($array, $item);
 
