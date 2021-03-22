@@ -2,6 +2,12 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 3.0.0 - unreleased
+
+- Support PHP 8+
+- Drop support for PHP 7.x
+- Use PHP 8 syntax where possible
+
 ## 2.10.3 - 2021-03-16
 - Ensure `Items` are transformed to string before prepending or appending
 
