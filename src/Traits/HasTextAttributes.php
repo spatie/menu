@@ -11,7 +11,7 @@ trait HasTextAttributes
      *
      * @param string|Item $prepend
      *
-     * @return HasTextAttributes
+     * @return $this
      */
     public function prepend(string|Item $prepend): self
     {
@@ -27,7 +27,7 @@ trait HasTextAttributes
      * @param mixed $condition
      * @param string|Item $prepend
      *
-     * @return HasTextAttributes
+     * @return $this
      */
     public function prependIf(mixed $condition, string|Item $prepend): self
     {
@@ -43,7 +43,7 @@ trait HasTextAttributes
      *
      * @param string|Item $append
      *
-     * @return HasTextAttributes
+     * @return $this
      */
     public function append(string|Item $append): self
     {
@@ -59,7 +59,7 @@ trait HasTextAttributes
      * @param bool|callable $condition
      * @param string|Item $append
      *
-     * @return HasTextAttributes
+     * @return $this
      */
     public function appendIf(bool|callable $condition, string|Item $append): self
     {
