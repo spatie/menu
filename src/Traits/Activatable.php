@@ -27,7 +27,7 @@ trait Activatable
             return $this;
         }
 
-        $this->active = (bool) $active;
+        $this->active = $active;
 
         return $this;
     }
