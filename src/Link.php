@@ -28,7 +28,7 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     protected Attributes $parentAttributes;
 
     protected function __construct(
-        protected string|null $url,
+        protected string | null $url,
         protected string $text,
     ) {
         $this->htmlAttributes = new Attributes();

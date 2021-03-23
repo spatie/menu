@@ -46,7 +46,7 @@ class Attributes
         return $this;
     }
 
-    public function addClass(string|array $class): self
+    public function addClass(string | array $class): self
     {
         if (! is_array($class)) {
             $class = [$class];
