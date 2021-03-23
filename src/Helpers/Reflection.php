@@ -10,7 +10,10 @@ use Spatie\Menu\Item;
 
 class Reflection
 {
-    public static function firstParameterType(callable $callable): string
+    /**
+     * @psalm-suppress UndefinedMethod
+     */
+    public static function firstParameterType(callable|object $callable): string
     {
         $reflection = is_object($callable)
             ? (new ReflectionObject($callable))->getMethod('__invoke')
@@ -19,11 +22,11 @@ class Reflection
         $parameters = $reflection->getParameters();
 
         $parameterTypes = array_map(function (ReflectionParameter $parameter) {
-            $class = $parameter->getType() && ! $parameter->getType()->isBuiltin()
+            $class = $parameter->getType()
                 ? new ReflectionClass($parameter->getType()->getName())
                 : null;
 
-            return $class ? $class->name : null;
+            return $class?->name;
         }, $parameters);
 
         return $parameterTypes[0] ?? '';
