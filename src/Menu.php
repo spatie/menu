@@ -25,9 +25,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
     protected array $filters = [];
 
-    protected string|Item $prepend = '';
+    protected string | Item $prepend = '';
 
-    protected string|Item $append = '';
+    protected string | Item $append = '';
 
     protected array $wrap = [];
 
@@ -35,9 +35,9 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
 
     protected string $exactActiveClass = 'exact-active';
 
-    protected string|null $wrapperTagName = 'ul';
+    protected string | null $wrapperTagName = 'ul';
 
-    protected string|null $parentTagName = 'li';
+    protected string | null $parentTagName = 'li';
 
     protected bool $activeClassOnParent = true;
 
@@ -78,7 +78,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return static
      */
-    public static function build(array|\Iterator $items, callable $callback, self|null $initial = null): static
+    public static function build(array | \Iterator $items, callable $callback, self | null $initial = null): static
     {
         return ($initial ?: static::new())->fill($items, $callback);
     }
@@ -93,7 +93,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return static
      */
-    public function fill(array|\Iterator $items, callable $callback): self
+    public function fill(array | \Iterator $items, callable $callback): self
     {
         $menu = $this;
 
@@ -131,7 +131,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return $this
      */
-    public function addIf(bool|callable $condition, Item $item): self
+    public function addIf(bool | callable $condition, Item $item): self
     {
         if ($this->resolveCondition($condition)) {
             $this->add($item);
@@ -172,7 +172,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return $this
      */
-    public function linkIf(bool|callable $condition, string $url, string $text): self
+    public function linkIf(bool | callable $condition, string $url, string $text): self
     {
         if ($this->resolveCondition($condition)) {
             $this->link($url, $text);
@@ -203,7 +203,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return $this
      */
-    public function htmlIf(bool|callable $condition, string $html, array $parentAttributes = []): self
+    public function htmlIf(bool | callable $condition, string $html, array $parentAttributes = []): self
     {
         if ($this->resolveCondition($condition)) {
             $this->html($html, $parentAttributes);
@@ -212,7 +212,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return $this;
     }
 
-    public function submenu(callable|self|Item|string $header, callable|self|null $menu = null): self
+    public function submenu(callable | self | Item | string $header, callable | self | null $menu = null): self
     {
         [$header, $menu] = $this->parseSubmenuArgs(func_get_args());
 
@@ -221,7 +221,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return $this->add($menu->prependIf($header, $header));
     }
 
-    public function submenuIf(bool $condition, callable|self|Item|string $header, callable|self|null $menu = null): self
+    public function submenuIf(bool $condition, callable | self | Item | string $header, callable | self | null $menu = null): self
     {
         if ($condition) {
             $this->submenu($header, $menu);
@@ -239,7 +239,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return [$args[0], $args[1]];
     }
 
-    protected function createSubmenuMenu(self|callable $menu): self
+    protected function createSubmenuMenu(self | callable $menu): self
     {
         if (is_callable($menu)) {
             $transformer = $menu;
@@ -250,7 +250,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         return $menu;
     }
 
-    protected function createSubmenuHeader(Item|string $header): string
+    protected function createSubmenuHeader(Item | string $header): string
     {
         if ($header instanceof Item) {
             $header = $header->render();
@@ -399,7 +399,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      *
      * @return $this
      */
-    public function setActive(callable|string $urlOrCallable, string $root = '/'): self
+    public function setActive(callable | string $urlOrCallable, string $root = '/'): self
     {
         if (is_string($urlOrCallable)) {
             return $this->setActiveFromUrl($urlOrCallable, $root);
@@ -565,7 +565,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * @param string|null $wrapperTagName
      * @return $this
      */
-    public function setWrapperTag(string|null $wrapperTagName = null): self
+    public function setWrapperTag(string | null $wrapperTagName = null): self
     {
         $this->wrapperTagName = $wrapperTagName;
 
@@ -590,7 +590,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * @param string|null $parentTagName
      * @return $this
      */
-    public function setParentTag(string|null $parentTagName = null): self
+    public function setParentTag(string | null $parentTagName = null): self
     {
         $this->parentTagName = $parentTagName;
 

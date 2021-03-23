@@ -13,7 +13,7 @@ class Reflection
     /**
      * @psalm-suppress UndefinedMethod
      */
-    public static function firstParameterType(callable|object $callable): string
+    public static function firstParameterType(callable | object $callable): string
     {
         $reflection = is_object($callable)
             ? (new ReflectionObject($callable))->getMethod('__invoke')

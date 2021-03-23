@@ -6,7 +6,7 @@ class Tag
 {
     public function __construct(
         public string $tagName,
-        protected Attributes|null $attributes = null,
+        protected Attributes | null $attributes = null,
     ) {
         $this->attributes ??= new Attributes();
     }

@@ -19,7 +19,7 @@ trait Activatable
         return $this->active;
     }
 
-    public function setActive(bool|callable $active = true): static
+    public function setActive(bool | callable $active = true): static
     {
         if (is_callable($active)) {
             $this->active = $active($this);
@@ -39,7 +39,7 @@ trait Activatable
         return $this;
     }
 
-    public function url(): string|null
+    public function url(): string | null
     {
         return $this->url;
     }
@@ -49,7 +49,7 @@ trait Activatable
         return ! is_null($this->url);
     }
 
-    public function setUrl(string|null $url): static
+    public function setUrl(string | null $url): static
     {
         $this->url = $url;
 

@@ -11,7 +11,7 @@ class Html implements Item, Activatable, HasParentAttributes
     use ActivatableTrait;
     use HasParentAttributesTrait;
 
-    protected string|null $url = null;
+    protected string | null $url = null;
 
     protected bool $active = false;
 
