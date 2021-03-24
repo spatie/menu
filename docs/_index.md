@@ -1,6 +1,6 @@
 ---
-title: v2
+title: v3
 slogan: Html menu generator
 githubUrl: https://github.com/spatie/menu
-branch: v2
+branch: master
 ---
