@@ -11,24 +11,14 @@ class Html implements Item, Activatable, HasParentAttributes
     use ActivatableTrait;
     use HasParentAttributesTrait;
 
-    /** @var string */
-    protected $html;
+    protected string | null $url = null;
 
-    /** @var string|null */
-    protected $url = null;
+    protected bool $active = false;
 
-    /** @var bool */
-    protected $active = false;
+    protected Attributes $parentAttributes;
 
-    /** @var \Spatie\Menu\Html\Attributes */
-    protected $parentAttributes;
-
-    /**
-     * @param string $html
-     */
-    protected function __construct(string $html)
+    protected function __construct(protected string $html)
     {
-        $this->html = $html;
         $this->parentAttributes = new Attributes();
     }
 
@@ -39,7 +29,7 @@ class Html implements Item, Activatable, HasParentAttributes
      *
      * @return static
      */
-    public static function raw(string $html)
+    public static function raw(string $html): static
     {
         return new static($html);
     }
@@ -49,22 +39,16 @@ class Html implements Item, Activatable, HasParentAttributes
      *
      * @return static
      */
-    public static function empty()
+    public static function empty(): static
     {
         return new static('');
     }
 
-    /**
-     * @return string
-     */
     public function html(): string
     {
         return $this->html;
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         return $this->html;

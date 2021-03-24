@@ -17,59 +17,34 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
     use ConditionsTrait;
     use HasAttributesTrait;
 
-    /** @var string */
-    protected $text;
+    protected string $prepend = '';
 
-    /** @var string|null */
-    protected $url = null;
+    protected string $append = '';
 
-    /** @var string */
-    protected $prepend = '';
+    protected bool $active = false;
 
-    /** @var string */
-    protected $append = '';
+    protected Attributes $htmlAttributes;
 
-    /** @var bool */
-    protected $active = false;
+    protected Attributes $parentAttributes;
 
-    /** @var \Spatie\Menu\Html\Attributes */
-    protected $htmlAttributes;
-    protected $parentAttributes;
-
-    /**
-     * @param string $url
-     * @param string $text
-     */
-    protected function __construct(string $url, string $text)
-    {
-        $this->url = $url;
-        $this->text = $text;
+    protected function __construct(
+        protected string | null $url,
+        protected string $text,
+    ) {
         $this->htmlAttributes = new Attributes();
         $this->parentAttributes = new Attributes();
     }
 
-    /**
-     * @param string $url
-     * @param string $text
-     *
-     * @return static
-     */
-    public static function to(string $url, string $text)
+    public static function to(string $url, string $text): static
     {
         return new static($url, $text);
     }
 
-    /**
-     * @return string
-     */
     public function text(): string
     {
         return $this->text;
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         $attributes = new Attributes(['href' => $this->url]);
@@ -78,9 +53,6 @@ class Link implements Item, HasHtmlAttributes, HasParentAttributes, Activatable
         return $this->renderPrepend()."<a {$attributes}>{$this->text}</a>".$this->renderAppend();
     }
 
-    /**
-     * @return string
-     */
     public function __toString(): string
     {
         return $this->render();

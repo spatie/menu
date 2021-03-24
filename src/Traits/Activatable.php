@@ -12,25 +12,14 @@ use Spatie\Menu\ExactUrlChecker;
  */
 trait Activatable
 {
-    /**
-     * @var bool
-     */
-    protected $exactActive = false;
+    protected bool $exactActive = false;
 
-    /**
-     * @return bool
-     */
     public function isActive(): bool
     {
         return $this->active;
     }
 
-    /**
-     * @param bool|callable $active
-     *
-     * @return $this
-     */
-    public function setActive($active = true)
+    public function setActive(bool | callable $active = true): static
     {
         if (is_callable($active)) {
             $this->active = $active($this);
@@ -38,56 +27,36 @@ trait Activatable
             return $this;
         }
 
-        $this->active = (bool) $active;
+        $this->active = $active;
 
         return $this;
     }
 
-    /**
-     * @return $this
-     */
-    public function setInactive()
+    public function setInactive(): static
     {
         $this->active = false;
 
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
-    public function url()
+    public function url(): string | null
     {
         return $this->url;
     }
 
-    /**
-     * @return bool
-     */
     public function hasUrl(): bool
     {
         return ! is_null($this->url);
     }
 
-    /**
-     * @param string|null $url
-     *
-     * @return $this
-     */
-    public function setUrl($url)
+    public function setUrl(string | null $url): static
     {
         $this->url = $url;
 
         return $this;
     }
 
-    /**
-     * @param string $url
-     * @param string $root
-     *
-     * @return void
-     */
-    public function determineActiveForUrl(string $url, string $root = '/')
+    public function determineActiveForUrl(string $url, string $root = '/'): void
     {
         if (! $this->hasUrl()) {
             return;
@@ -109,7 +78,7 @@ trait Activatable
      *
      * @return $this
      */
-    public function setExactActive(bool $exactActive = true)
+    public function setExactActive(bool $exactActive = true): static
     {
         $this->exactActive = $exactActive;
 

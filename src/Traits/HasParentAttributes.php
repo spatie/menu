@@ -3,7 +3,7 @@
 namespace Spatie\Menu\Traits;
 
 /**
- * Expects a `$parentAttributes` propert on the class.
+ * Expects a `$parentAttributes` property on the class.
  *
  * @property $parentAttributes \Spatie\Menu\Html\Attributes
  */
@@ -20,37 +20,21 @@ trait HasParentAttributes
         return $this->parentAttributes->toArray();
     }
 
-    /**
-     * @param string $attribute
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setParentAttribute(string $attribute, string $value = '')
+    public function setParentAttribute(string $attribute, string $value = ''): static
     {
         $this->parentAttributes->setAttribute($attribute, $value);
 
         return $this;
     }
 
-    /**
-     * @param array $attributes
-     *
-     * @return $this
-     */
-    public function setParentAttributes(array $attributes)
+    public function setParentAttributes(array $attributes): static
     {
         $this->parentAttributes->setAttributes($attributes);
 
         return $this;
     }
 
-    /**
-     * @param string $class
-     *
-     * @return $this
-     */
-    public function addParentClass(string $class)
+    public function addParentClass(string $class): static
     {
         $this->parentAttributes->addClass($class);
 
