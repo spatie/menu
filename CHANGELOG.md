@@ -2,7 +2,7 @@
 
 All notable changes to `menu` will be documented in this file.
 
-## 3.0.0 - unreleased
+## 3.0.0 - 2021-03-24
 
 - Support PHP 8+
 - Drop support for PHP 7.x
