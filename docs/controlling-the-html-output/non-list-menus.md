@@ -3,7 +3,7 @@ title: Non-list Menus
 weight: 4
 ---
 
-As of v2.5, you can render menus without `ul` and `li` tags. This can be achieved with the `setWrapperTag`, `withoutWrapperTag`, `setParentTag` and `withoutParentTag` methods.
+You can render menus without `ul` and `li` tags. This can be achieved with the `setWrapperTag`, `withoutWrapperTag`, `setParentTag` and `withoutParentTag` methods.
 
 Without wrapper tag & without parent tag:
 
