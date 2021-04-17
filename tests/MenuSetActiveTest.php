@@ -282,6 +282,50 @@ class MenuSetActiveTest extends MenuTestCase
     }
 
     /** @test */
+    public function it_can_set_relative_items_active_from_absolute_urls()
+    {
+        $this->menu = Menu::new()
+            ->link('/', 'Home')
+            ->link('/disclaimer', 'Disclaimer')
+            ->link('/disclaimer/intellectual-property', 'Intellectual Property')
+            ->setActive('http://example.com/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li class="active exact-active">
+                    <a href="/disclaimer">Disclaimer</a>
+                </li>
+                <li>
+                    <a href="/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
+    public function it_can_set_absolute_items_active_from_relative_urls()
+    {
+        $this->menu = Menu::new()
+            ->link('http://example.com/', 'Home')
+            ->link('http://example.com/disclaimer', 'Disclaimer')
+            ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')
+            ->setActive('/disclaimer');
+
+        $this->assertRenders('
+            <ul>
+                <li><a href="http://example.com/">Home</a></li>
+                <li class="active exact-active">
+                    <a href="http://example.com/disclaimer">Disclaimer</a>
+                </li>
+                <li>
+                    <a href="http://example.com/disclaimer/intellectual-property">Intellectual Property</a>
+                </li>
+            </ul>
+        ');
+    }
+
+    /** @test */
     public function it_doesnt_set_items_active_if_the_paths_match_but_they_have_a_different_domain()
     {
         $this->menu = Menu::new()
