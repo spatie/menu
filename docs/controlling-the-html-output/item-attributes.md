@@ -22,7 +22,7 @@ The `setAttribute` and `addClass` methods are smart enough to merge class names 
 ```php
 Link::to('#', 'Back to top')
     ->setAttribute('class', 'link')
-    ->addClass(['button', 'top']);
+    ->addClasses(['button', 'top']);
 ```
 
 ```html
