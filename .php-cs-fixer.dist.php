@@ -28,7 +28,7 @@ return (new PhpCsFixer\Config())
         'phpdoc_var_without_name' => true,
         'class_attributes_separation' => [
             'elements' => [
-                'method',
+                'method' => 'one',
             ],
         ],
         'method_argument_space' => [
