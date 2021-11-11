@@ -95,7 +95,7 @@ class FiltersTest extends MenuTestCase
     public function it_can_register_an_invokable_class_as_a_filter()
     {
         // Use an anonymous class -- should be identical to a concrete class
-        $invokable_class = new class() {
+        $invokable_class = new class () {
             public function __invoke(Link $link)
             {
                 $link->addClass('filtered');
