@@ -4,15 +4,36 @@ namespace Spatie\Menu\Html;
 
 class Attributes
 {
+    /**
+     * Array of attributes.
+     *
+     * @var array
+     */
     protected array $attributes = [];
 
+    /**
+     * Array of classes.
+     *
+     * @var array
+     */
     protected array $classes = [];
 
+    /**
+     * magic method.
+     *
+     * @param  array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
     }
 
+    /**
+     * Set attributes by array of attribute.
+     *
+     * @param  array $attributes
+     * @return $this
+     */
     public function setAttributes(array $attributes): self
     {
         foreach ($attributes as $attribute => $value) {
@@ -33,6 +54,14 @@ class Attributes
         return $this;
     }
 
+
+    /**
+     * Set attribute by array of attribute & value.
+     *
+     * @param  string $attribute
+     * @param  string $value
+     * @return $this
+     */
     public function setAttribute(string $attribute, string $value = ''): self
     {
         if ($attribute === 'class') {
@@ -46,6 +75,12 @@ class Attributes
         return $this;
     }
 
+    /**
+     * Add class.
+     *
+     * @param  string|array $class
+     * @return $this
+     */
     public function addClass(string | array $class): self
     {
         if (! is_array($class)) {
@@ -59,6 +94,12 @@ class Attributes
         return $this;
     }
 
+    /**
+     * Merge with attributes.
+     *
+     * @param  Attributes $attributes
+     * @return $this
+     */
     public function mergeWith(self $attributes): self
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
@@ -67,11 +108,21 @@ class Attributes
         return $this;
     }
 
+    /**
+     * Check is empty.
+     *
+     * @return bool
+     */
     public function isEmpty(): bool
     {
         return empty($this->attributes) && empty($this->classes);
     }
 
+    /**
+     * To array attributes.
+     *
+     * @return array
+     */
     public function toArray(): array
     {
         if (empty($this->classes)) {
@@ -81,6 +132,11 @@ class Attributes
         return array_merge($this->attributes, ['class' => implode(' ', $this->classes)]);
     }
 
+    /**
+     * To string attributes.
+     *
+     * @return string
+     */
     public function toString(): string
     {
         if ($this->isEmpty()) {
@@ -102,6 +158,11 @@ class Attributes
         return implode(' ', $attributeStrings);
     }
 
+    /**
+     * Use magic method for to string.
+     *
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->toString();
