@@ -463,7 +463,6 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
         $type = Reflection::firstParameterType($callable);
 
         $this->applyToAll(function (Activatable $item) use ($callable, $type) {
-
             /** @var \Spatie\Menu\Activatable|\Spatie\Menu\Item $item */
             if (! Reflection::itemMatchesType($item, $type)) {
                 return;
