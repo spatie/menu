@@ -22,7 +22,7 @@ it('can be set inactive via set inactive', function () {
 });
 
 it('can be set active via a callable', function () {
-    expect($this->activatable->setActive(function () {)->toBeFalse();
+    expect($this->activatable->setActive(function () {
         return false;
-    })->isActive());
+    })->isActive())->toBeFalse();
 });
