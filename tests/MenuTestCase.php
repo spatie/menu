@@ -9,6 +9,6 @@ abstract class MenuTestCase extends TestCase
 
     public function assertRenders(string $expected)
     {
-        $this->assertHtmlEquals($expected, $this->menu->render());
+        assertHtmlEquals($expected, $this->menu->render());
     }
 }
