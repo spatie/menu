@@ -1,193 +1,166 @@
 <?php
 
-namespace Spatie\Menu\Test;
-
 use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
 
-class MenuAddTest extends MenuTestCase
-{
-    /** @test */
-    public function it_starts_as_an_empty_list()
-    {
-        $this->menu = Menu::new();
+it('starts as an empty list', function () {
+    $this->menu = Menu::new();
 
-        $this->assertRenders('<ul></ul>');
-    }
+    assertRenders('<ul></ul>');
+});
 
-    /** @test */
-    public function an_item_can_be_added()
-    {
-        $this->menu = Menu::new()->add(Link::to('#', 'Hello'));
+it('an item can be added', function () {
+    $this->menu = Menu::new()->add(Link::to('#', 'Hello'));
 
-        $this->assertRenders('
+    assertRenders('
+        <ul>
+        <li><a href="#">Hello</a></li>
+        </ul>
+    ');
+});
+
+it('a link can be added', function () {
+    $this->menu = Menu::new()->link('#', 'Hello');
+
+    assertRenders('
+        <ul>
+        <li><a href="#">Hello</a></li>
+        </ul>
+    ');
+});
+
+it('an empty item can be added', function () {
+    $this->menu = Menu::new()->empty();
+
+    assertRenders('
+        <ul>
+        <li></li>
+        </ul>
+    ');
+});
+
+it('multiple items can be added', function () {
+    $this->menu = Menu::new()
+        ->add(Link::to('#', 'Hello'))
+        ->add(Link::to('#', 'World'));
+
+    assertRenders('
+        <ul>
+        <li><a href="#">Hello</a></li>
+        <li><a href="#">World</a></li>
+        </ul>
+    ');
+});
+
+it('adds an active class to active items', function () {
+    $this->menu = Menu::new()
+        ->add(Link::to('#', 'Hello')->setActive());
+
+    assertRenders('
+        <ul>
+        <li class="active"><a href="#">Hello</a></li>
+        </ul>
+    ');
+});
+
+it('submenus can be added', function () {
+    $this->menu = Menu::new()
+        ->add(
+        Menu::new()
+        ->add(Link::to('#', 'In Too Deep'))
+        );
+
+    assertRenders('
+        <ul>
+        <li>
             <ul>
-                <li><a href="#">Hello</a></li>
+            <li><a href="#">In Too Deep</a></li>
             </ul>
-        ');
-    }
+        </li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function a_link_can_be_added()
-    {
-        $this->menu = Menu::new()->link('#', 'Hello');
+it('adds active classes to active submenus', function () {
+    $this->menu = Menu::new()
+        ->add(
+        Menu::new()
+        ->add(Link::to('#', 'In Too Deep')->setActive())
+        );
 
-        $this->assertRenders('
+    assertRenders('
+        <ul>
+        <li class="active">
             <ul>
-                <li><a href="#">Hello</a></li>
+            <li class="active"><a href="#">In Too Deep</a></li>
             </ul>
-        ');
-    }
+        </li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function an_empty_item_can_be_added()
-    {
-        $this->menu = Menu::new()->empty();
+it('can conditionally add an item', function () {
+    $this->menu = Menu::new()
+        ->addIf(true, Link::to('#', 'Foo'))
+        ->addIf(false, Link::to('#', 'Bar'))
+        ->addIf(function () {
+        return true;
+        }, Link::to('#', 'Baz'))
+        ->addIf(function () {
+        return false;
+        }, Link::to('#', 'Qux'))
+        ->addIf('is_true', Link::to('#', 'Quux'))
+        ->addIf('is_false', Link::to('#', 'Quuz'));
 
-        $this->assertRenders('
-            <ul>
-                <li></li>
-            </ul>
-        ');
-    }
+    assertRenders('
+        <ul>
+        <li><a href="#">Foo</a></li>
+        <li><a href="#">Baz</a></li>
+        <li><a href="#">Quux</a></li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function multiple_items_can_be_added()
-    {
-        $this->menu = Menu::new()
-            ->add(Link::to('#', 'Hello'))
-            ->add(Link::to('#', 'World'));
+it('can conditionally add a link', function () {
+    $this->menu = Menu::new()
+        ->linkIf(true, '#', 'Foo')
+        ->linkIf(false, '#', 'Bar')
+        ->linkIf(function () {
+        return true;
+        }, '#', 'Baz')
+        ->linkIf(function () {
+        return false;
+        }, '#', 'Qux')
+        ->linkIf('is_true', '#', 'Quux')
+        ->linkIf('is_false', '#', 'Quuz');
 
-        $this->assertRenders('
-            <ul>
-                <li><a href="#">Hello</a></li>
-                <li><a href="#">World</a></li>
-            </ul>
-        ');
-    }
+    assertRenders('
+        <ul>
+        <li><a href="#">Foo</a></li>
+        <li><a href="#">Baz</a></li>
+        <li><a href="#">Quux</a></li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function it_adds_an_active_class_to_active_items()
-    {
-        $this->menu = Menu::new()
-            ->add(Link::to('#', 'Hello')->setActive());
+it('can conditionally add html', function () {
+    $this->menu = Menu::new()
+        ->htmlIf(true, 'Foo')
+        ->htmlIf(false, 'Bar')
+        ->htmlIf(function () {
+        return true;
+        }, 'Baz')
+        ->htmlIf(function () {
+        return false;
+        }, 'Qux')
+        ->htmlIf('is_true', 'Quux')
+        ->htmlIf('is_false', 'Quuz');
 
-        $this->assertRenders('
-            <ul>
-                <li class="active"><a href="#">Hello</a></li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function submenus_can_be_added()
-    {
-        $this->menu = Menu::new()
-            ->add(
-                Menu::new()
-                ->add(Link::to('#', 'In Too Deep'))
-            );
-
-        $this->assertRenders('
-            <ul>
-                <li>
-                    <ul>
-                        <li><a href="#">In Too Deep</a></li>
-                    </ul>
-                </li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_adds_active_classes_to_active_submenus()
-    {
-        $this->menu = Menu::new()
-            ->add(
-                Menu::new()
-                ->add(Link::to('#', 'In Too Deep')->setActive())
-            );
-
-        $this->assertRenders('
-            <ul>
-                <li class="active">
-                    <ul>
-                        <li class="active"><a href="#">In Too Deep</a></li>
-                    </ul>
-                </li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_conditionally_add_an_item()
-    {
-        $this->menu = Menu::new()
-            ->addIf(true, Link::to('#', 'Foo'))
-            ->addIf(false, Link::to('#', 'Bar'))
-            ->addIf(function () {
-                return true;
-            }, Link::to('#', 'Baz'))
-            ->addIf(function () {
-                return false;
-            }, Link::to('#', 'Qux'))
-            ->addIf('is_true', Link::to('#', 'Quux'))
-            ->addIf('is_false', Link::to('#', 'Quuz'));
-
-        $this->assertRenders('
-            <ul>
-                <li><a href="#">Foo</a></li>
-                <li><a href="#">Baz</a></li>
-                <li><a href="#">Quux</a></li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_conditionally_add_a_link()
-    {
-        $this->menu = Menu::new()
-            ->linkIf(true, '#', 'Foo')
-            ->linkIf(false, '#', 'Bar')
-            ->linkIf(function () {
-                return true;
-            }, '#', 'Baz')
-            ->linkIf(function () {
-                return false;
-            }, '#', 'Qux')
-            ->linkIf('is_true', '#', 'Quux')
-            ->linkIf('is_false', '#', 'Quuz');
-
-        $this->assertRenders('
-            <ul>
-                <li><a href="#">Foo</a></li>
-                <li><a href="#">Baz</a></li>
-                <li><a href="#">Quux</a></li>
-            </ul>
-        ');
-    }
-
-    /** @test */
-    public function it_can_conditionally_add_html()
-    {
-        $this->menu = Menu::new()
-            ->htmlIf(true, 'Foo')
-            ->htmlIf(false, 'Bar')
-            ->htmlIf(function () {
-                return true;
-            }, 'Baz')
-            ->htmlIf(function () {
-                return false;
-            }, 'Qux')
-            ->htmlIf('is_true', 'Quux')
-            ->htmlIf('is_false', 'Quuz');
-
-        $this->assertRenders('
-            <ul>
-                <li>Foo</li>
-                <li>Baz</li>
-                <li>Quux</li>
-            </ul>
-        ');
-    }
-}
+    assertRenders('
+        <ul>
+        <li>Foo</li>
+        <li>Baz</li>
+        <li>Quux</li>
+        </ul>
+    ');
+});

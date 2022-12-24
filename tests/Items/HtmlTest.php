@@ -1,27 +1,11 @@
 <?php
 
-namespace Spatie\Menu\Test\Items;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Menu\Html;
 
-class HtmlTest extends TestCase
-{
-    /** @test */
-    public function it_contains_html()
-    {
-        $this->assertEquals(
-            'Hello world',
-            Html::raw('Hello world')->html()
-        );
-    }
+it('contains html', function () {
+    expect(Html::raw('Hello world')->html())->toEqual('Hello world');
+});
 
-    /** @test */
-    public function it_can_make_an_empty_item()
-    {
-        $this->assertEquals(
-            '',
-            Html::empty()->html()
-        );
-    }
-}
+it('can make an empty item', function () {
+    expect(Html::empty()->html())->toEqual('');
+});

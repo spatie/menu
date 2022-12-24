@@ -30,3 +30,8 @@ function sanitizeHtmlWhitespace(string $subject): string
 
     return preg_replace($find, $replace, $subject);
 }
+
+function assertRenders(string $expected): void
+{
+    assertHtmlEquals($expected, test()->menu->render());
+}

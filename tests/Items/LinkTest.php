@@ -1,54 +1,23 @@
 <?php
 
-namespace Spatie\Menu\Test\Items;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Menu\Link;
 
-class LinkTest extends TestCase
-{
-    /** @test */
-    public function it_contains_text()
-    {
-        $this->assertEquals(
-            'Home',
-            Link::to('https://spatie.be', 'Home')->text()
-        );
-    }
+it('contains text', function () {
+    expect(Link::to('https://spatie.be', 'Home')->text())->toEqual('Home');
+});
 
-    /** @test */
-    public function it_has_an_url()
-    {
-        $this->assertEquals(
-            'https://spatie.be',
-            Link::to('https://spatie.be', 'Home')->url()
-        );
-    }
+it('has an url', function () {
+    expect(Link::to('https://spatie.be', 'Home')->url())->toEqual('https://spatie.be');
+});
 
-    /** @test */
-    public function it_can_be_rendered()
-    {
-        $this->assertEquals(
-            '<a href="https://spatie.be">Home</a>',
-            Link::to('https://spatie.be', 'Home')->render()
-        );
-    }
+it('can be rendered', function () {
+    expect(Link::to('https://spatie.be', 'Home')->render())->toEqual('<a href="https://spatie.be">Home</a>');
+});
 
-    /** @test */
-    public function it_can_render_classes()
-    {
-        $this->assertEquals(
-            '<a href="https://spatie.be" class="home">Home</a>',
-            Link::to('https://spatie.be', 'Home')->addClass('home')->render()
-        );
-    }
+it('can render classes', function () {
+    expect(Link::to('https://spatie.be', 'Home')->addClass('home')->render())->toEqual('<a href="https://spatie.be" class="home">Home</a>');
+});
 
-    /** @test */
-    public function it_can_render_attributes()
-    {
-        $this->assertEquals(
-            '<a href="https://spatie.be" data-home-link>Home</a>',
-            Link::to('https://spatie.be', 'Home')->setAttribute('data-home-link')->render()
-        );
-    }
-}
+it('can render attributes', function () {
+    expect(Link::to('https://spatie.be', 'Home')->setAttribute('data-home-link')->render())->toEqual('<a href="https://spatie.be" data-home-link>Home</a>');
+});
