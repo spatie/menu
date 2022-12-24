@@ -11,7 +11,7 @@ it('can apply using each', function () {
         ->link('#', 'Beam')
         ->link('#', 'Me')
         ->each(function (Link $link) {
-        $link->addClass('filtered');
+            $link->addClass('filtered');
         })
         ->link('#', 'Up')
         ->link('#', 'Scotty');
@@ -31,7 +31,7 @@ it('can apply using register filter', function () {
         ->link('#', 'Beam')
         ->link('#', 'Me')
         ->registerFilter(function (Link $link) {
-        $link->addClass('filtered');
+            $link->addClass('filtered');
         })
         ->link('#', 'Up')
         ->link('#', 'Scotty');
@@ -51,7 +51,7 @@ it('can apply using apply to all', function () {
         ->link('#', 'Beam')
         ->link('#', 'Me')
         ->applyToAll(function (Link $link) {
-        $link->addClass('filtered');
+            $link->addClass('filtered');
         })
         ->link('#', 'Up')
         ->link('#', 'Scotty');
@@ -83,7 +83,7 @@ it('can register an invokable class as a filter', function () {
     $invokable_class = new class () {
         public function __invoke(Link $link)
         {
-        $link->addClass('filtered');
+            $link->addClass('filtered');
         }
     };
 

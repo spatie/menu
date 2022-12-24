@@ -27,10 +27,10 @@ it('can add a submenu with a callable menu', function () {
 it('preserves filters with callable menus', function () {
     $this->menu = Menu::new()
         ->registerFilter(function (Activatable $item) {
-        $item->setUrl('/bar'.$item->url());
+            $item->setUrl('/bar'.$item->url());
         })
         ->submenu(function (Menu $menu): Menu {
-        return $menu->link('/baz', 'Baz');
+            return $menu->link('/baz', 'Baz');
         });
 
     assertRenders('

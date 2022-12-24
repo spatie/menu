@@ -66,8 +66,8 @@ it('adds an active class to active items', function () {
 it('submenus can be added', function () {
     $this->menu = Menu::new()
         ->add(
-        Menu::new()
-        ->add(Link::to('#', 'In Too Deep'))
+            Menu::new()
+            ->add(Link::to('#', 'In Too Deep'))
         );
 
     assertRenders('
@@ -84,8 +84,8 @@ it('submenus can be added', function () {
 it('adds active classes to active submenus', function () {
     $this->menu = Menu::new()
         ->add(
-        Menu::new()
-        ->add(Link::to('#', 'In Too Deep')->setActive())
+            Menu::new()
+            ->add(Link::to('#', 'In Too Deep')->setActive())
         );
 
     assertRenders('
@@ -104,10 +104,10 @@ it('can conditionally add an item', function () {
         ->addIf(true, Link::to('#', 'Foo'))
         ->addIf(false, Link::to('#', 'Bar'))
         ->addIf(function () {
-        return true;
+            return true;
         }, Link::to('#', 'Baz'))
         ->addIf(function () {
-        return false;
+            return false;
         }, Link::to('#', 'Qux'))
         ->addIf('is_true', Link::to('#', 'Quux'))
         ->addIf('is_false', Link::to('#', 'Quuz'));
@@ -126,10 +126,10 @@ it('can conditionally add a link', function () {
         ->linkIf(true, '#', 'Foo')
         ->linkIf(false, '#', 'Bar')
         ->linkIf(function () {
-        return true;
+            return true;
         }, '#', 'Baz')
         ->linkIf(function () {
-        return false;
+            return false;
         }, '#', 'Qux')
         ->linkIf('is_true', '#', 'Quux')
         ->linkIf('is_false', '#', 'Quuz');
@@ -148,10 +148,10 @@ it('can conditionally add html', function () {
         ->htmlIf(true, 'Foo')
         ->htmlIf(false, 'Bar')
         ->htmlIf(function () {
-        return true;
+            return true;
         }, 'Baz')
         ->htmlIf(function () {
-        return false;
+            return false;
         }, 'Qux')
         ->htmlIf('is_true', 'Quux')
         ->htmlIf('is_false', 'Quuz');

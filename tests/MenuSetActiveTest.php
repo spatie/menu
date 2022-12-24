@@ -10,7 +10,7 @@ it('can set items active with a callable', function () {
         ->link('/', 'Home')
         ->link('/about', 'About')
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -148,12 +148,12 @@ it('only sets exact active on exact url match', function () {
 it('can set items active recursively through submenus with a callable', function () {
     $this->menu = Menu::new()
         ->add(
-        Menu::new()
-        ->link('/', 'Home')
-        ->link('/about', 'About')
+            Menu::new()
+            ->link('/', 'Home')
+            ->link('/about', 'About')
         )
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -211,10 +211,10 @@ it('can set items active with an absolute url', function () {
 it('can set items active recursively through submenus from an absolute url', function () {
     $this->menu = Menu::new()
         ->add(
-        Menu::new()
-        ->link('http://example.com', 'Home')
-        ->link('http://example.com/disclaimer', 'Disclaimer')
-        ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')
+            Menu::new()
+            ->link('http://example.com', 'Home')
+            ->link('http://example.com/disclaimer', 'Disclaimer')
+            ->link('http://example.com/disclaimer/intellectual-property', 'Intellectual Property')
         )
         ->setActive('http://example.com/disclaimer');
 
@@ -379,7 +379,7 @@ it('can render active on custom tag', function () {
         ->link('/', 'Home')
         ->link('/about', 'About')
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -397,7 +397,7 @@ it('can render active without list items', function () {
         ->link('/', 'Home')
         ->link('/about', 'About')
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -416,7 +416,7 @@ it('can render active on custom tag without list items', function () {
         ->link('/', 'Home')
         ->link('/about', 'About')
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -440,7 +440,7 @@ it('can render active on a bootstrap 4 menu', function () {
         ->add(Link::to('/about', 'About')->addParentClass('nav-item')->addClass('nav-link'))
         ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
@@ -471,7 +471,7 @@ it('can render active on a bootstrap 4 submenu', function () {
         ->add(Link::to('/', 'Home')->addParentClass('nav-item')->addClass('nav-link'))
         ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'))
         ->setActive(function (Link $link) {
-        return $link->url() === '/about';
+            return $link->url() === '/about';
         });
 
     assertRenders('
