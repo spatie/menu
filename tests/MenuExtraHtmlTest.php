@@ -1,240 +1,159 @@
 <?php
 
-namespace Spatie\Menu\Test;
-
 use Spatie\Menu\Link;
 use Spatie\Menu\Menu;
 
-class MenuExtraHtmlTest extends MenuTestCase
-{
-    /** @test */
-    public function it_can_prepend_content()
-    {
-        $this->menu = Menu::new()->prepend('<h1>Hi!</h1>');
+it('can prepend content', function () {
+    $this->menu = Menu::new()->prepend('<h1>Hi!</h1>');
 
-        $this->assertRenders('<h1>Hi!</h1><ul></ul>');
-    }
+    assertRenders('<h1>Hi!</h1><ul></ul>');
+});
 
-    /** @test */
-    public function it_can_prepend_items()
-    {
-        $this->menu = Menu::new()->prepend(Link::to('#', 'Hi!'));
+it('can prepend items', function () {
+    $this->menu = Menu::new()->prepend(Link::to('#', 'Hi!'));
 
-        $this->assertRenders('<a href="#">Hi!</a><ul></ul>');
-    }
+    assertRenders('<a href="#">Hi!</a><ul></ul>');
+});
 
-    public function prependIfDataProvider()
-    {
-        return [
-            [true, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
-            [false, '<h1>Hi!</h1>', '<ul></ul>'],
-            [function () {
-                return true;
-            }, '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
-            [function () {
-                return false;
-            }, '<h1>Hi!</h1>', '<ul></ul>'],
-            ['is_true', '<h1>Hi!</h1>', '<h1>Hi!</h1><ul></ul>'],
-            ['is_false', '<h1>Hi!</h1>', '<ul></ul>'],
-        ];
-    }
+it('can conditionally prepend content', function ($condition, string $prepend, string $expected) {
+    $this->menu = Menu::new()->prependIf($condition, $prepend);
 
-    /**
-     * @test
-     * @dataProvider prependIfDataProvider
-     * @param \Closure|bool $condition
-     * @param string $prepend
-     * @param string $expected
-     */
-    public function it_can_conditionally_prepend_content($condition, string $prepend, string $expected)
-    {
-        $this->menu = Menu::new()->prependIf($condition, $prepend);
+    assertRenders($expected);
+})->with('prepend_if');
 
-        $this->assertRenders($expected);
-    }
+it('can append content', function () {
+    $this->menu = Menu::new()->append('<aside>Bye!</aside>');
 
-    /** @test */
-    public function it_can_append_content()
-    {
-        $this->menu = Menu::new()->append('<aside>Bye!</aside>');
+    assertRenders('<ul></ul><aside>Bye!</aside>');
+});
 
-        $this->assertRenders('<ul></ul><aside>Bye!</aside>');
-    }
+it('can append items', function () {
+    $this->menu = Menu::new()->append(Link::to('#', 'Bye!'));
 
-    /** @test */
-    public function it_can_append_items()
-    {
-        $this->menu = Menu::new()->append(Link::to('#', 'Bye!'));
+    assertRenders('<ul></ul><a href="#">Bye!</a>');
+});
 
-        $this->assertRenders('<ul></ul><a href="#">Bye!</a>');
-    }
+it('can conditionally append content', function ($condition, string $prepend, string $expected) {
+    $this->menu = Menu::new()->appendIf($condition, $prepend);
 
-    public function appendIfDataProvider()
-    {
-        return [
-            [true, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
-            [false, '<aside>Bye!</aside>', '<ul></ul>'],
-            [function () {
-                return true;
-            }, '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
-            [function () {
-                return false;
-            }, '<aside>Bye!</aside>', '<ul></ul>'],
-            ['is_true', '<aside>Bye!</aside>', '<ul></ul><aside>Bye!</aside>'],
-            ['is_false', '<aside>Bye!</aside>', '<ul></ul>'],
-        ];
-    }
+    assertRenders($expected);
+})->with('append_if');
 
-    /**
-     * @test
-     * @dataProvider appendIfDataProvider
-     * @param \Closure|bool $condition
-     * @param string $prepend
-     * @param string $expected
-     */
-    public function it_can_conditionally_append_content($condition, string $prepend, string $expected)
-    {
-        $this->menu = Menu::new()->appendIf($condition, $prepend);
+it('renders classes', function () {
+    $this->menu = Menu::new()->addClass('menu');
 
-        $this->assertRenders($expected);
-    }
+    assertRenders('<ul class="menu"></ul>');
+});
 
-    /** @test */
-    public function it_renders_classes()
-    {
-        $this->menu = Menu::new()->addClass('menu');
+it('renders attributes', function () {
+    $this->menu = Menu::new()->setAttribute('data-role', 'navigation');
 
-        $this->assertRenders('<ul class="menu"></ul>');
-    }
+    assertRenders('<ul data-role="navigation"></ul>');
+});
 
-    /** @test */
-    public function it_renders_attributes()
-    {
-        $this->menu = Menu::new()->setAttribute('data-role', 'navigation');
+it('renders attributes on the list items', function () {
+    $this->menu = Menu::new()
+        ->add(Link::to('/foo', 'Foo')->setParentAttribute('data-foo'));
 
-        $this->assertRenders('<ul data-role="navigation"></ul>');
-    }
+    assertRenders('
+        <ul>
+        <li data-foo><a href="/foo">Foo</a></li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function it_renders_attributes_on_the_list_items()
-    {
-        $this->menu = Menu::new()
-            ->add(Link::to('/foo', 'Foo')->setParentAttribute('data-foo'));
+it('renders classes on the list items', function () {
+    $this->menu = Menu::new()
+        ->add(Link::to('/foo', 'Foo')->addParentClass('red'));
 
-        $this->assertRenders('
-            <ul>
-                <li data-foo><a href="/foo">Foo</a></li>
-            </ul>
-        ');
-    }
+    assertRenders('
+        <ul>
+        <li class="red"><a href="/foo">Foo</a></li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function it_renders_classes_on_the_list_items()
-    {
-        $this->menu = Menu::new()
-            ->add(Link::to('/foo', 'Foo')->addParentClass('red'));
+it('renders classes on the list items when they are active', function () {
+    $this->menu = Menu::new()
+        ->add(Link::to('/foo', 'Foo')->setActive()->addParentClass('red'));
 
-        $this->assertRenders('
-            <ul>
-                <li class="red"><a href="/foo">Foo</a></li>
-            </ul>
-        ');
-    }
+    assertRenders('
+        <ul>
+        <li class="active red"><a href="/foo">Foo</a></li>
+        </ul>
+    ');
+});
 
-    /** @test */
-    public function it_renders_classes_on_the_list_items_when_they_are_active()
-    {
-        $this->menu = Menu::new()
-            ->add(Link::to('/foo', 'Foo')->setActive()->addParentClass('red'));
+it('can be wrapped in an element', function () {
+    $this->menu = Menu::new()->link('#', 'Foo')->wrap('div');
 
-        $this->assertRenders('
-            <ul>
-                <li class="active red"><a href="/foo">Foo</a></li>
-            </ul>
-        ');
-    }
+    assertRenders('
+        <div>
+        <ul>
+            <li><a href="#">Foo</a></li>
+        </ul>
+        </div>
+    ');
+});
 
-    /** @test */
-    public function it_can_be_wrapped_in_an_element()
-    {
-        $this->menu = Menu::new()->link('#', 'Foo')->wrap('div');
+it('can render without wrapping anything', function () {
+    $this->menu = Menu::new()
+        ->withoutWrapperTag()
+        ->withoutParentTag()
+        ->link('#', 'Foo');
 
-        $this->assertRenders('
-            <div>
-                <ul>
-                    <li><a href="#">Foo</a></li>
-                </ul>
+    assertRenders('
+        <a href="#">Foo</a>
+    ');
+});
+
+it('can render as another tag with a custom wrapper tag', function () {
+    $this->menu = Menu::new()
+        ->setWrapperTag('div')
+        ->withoutParentTag()
+        ->link('#', 'Foo');
+
+    assertRenders('
+        <div>
+        <a href="#">Foo</a>
+        </div>
+    ');
+});
+
+it('can render as another tag with custom parent tags', function () {
+    $this->menu = Menu::new()
+        ->withoutWrapperTag()
+        ->setParentTag('span')
+        ->link('#', 'Foo');
+
+    assertRenders('
+        <span><a href="#">Foo</a></span>
+    ');
+});
+
+it('can render as a bootstrap 4 menu', function () {
+    $submenu = Menu::new()
+        ->setWrapperTag('div')
+        ->withoutParentTag()
+        ->addClass('dropdown-menu')
+        ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
+
+    $this->menu = Menu::new()
+        ->addClass('navbar-nav')
+        ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('nav-link'))
+        ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'));
+
+    assertRenders('
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a href="#" class="nav-link">Foo</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
+            <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Foo</a>
             </div>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_without_wrapping_anything()
-    {
-        $this->menu = Menu::new()
-            ->withoutWrapperTag()
-            ->withoutParentTag()
-            ->link('#', 'Foo');
-
-        $this->assertRenders('
-            <a href="#">Foo</a>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_as_another_tag_with_a_custom_wrapper_tag()
-    {
-        $this->menu = Menu::new()
-            ->setWrapperTag('div')
-            ->withoutParentTag()
-            ->link('#', 'Foo');
-
-        $this->assertRenders('
-            <div>
-                <a href="#">Foo</a>
-            </div>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_as_another_tag_with_custom_parent_tags()
-    {
-        $this->menu = Menu::new()
-            ->withoutWrapperTag()
-            ->setParentTag('span')
-            ->link('#', 'Foo');
-
-        $this->assertRenders('
-            <span><a href="#">Foo</a></span>
-        ');
-    }
-
-    /** @test */
-    public function it_can_render_as_a_bootstrap_4_menu()
-    {
-        $submenu = Menu::new()
-            ->setWrapperTag('div')
-            ->withoutParentTag()
-            ->addClass('dropdown-menu')
-            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('dropdown-item'));
-
-        $this->menu = Menu::new()
-            ->addClass('navbar-nav')
-            ->add(Link::to('#', 'Foo')->addParentClass('nav-item')->addClass('nav-link'))
-            ->submenu(Link::to('#', 'Dropdown link')->addClass('nav-link dropdown-toggle')->setAttribute('data-toggle', 'dropdown'), $submenu->addParentClass('nav-item dropdown'));
-
-        $this->assertRenders('
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Foo</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle">Dropdown link</a>
-                    <div class="dropdown-menu">
-                        <a href="#" class="dropdown-item">Foo</a>
-                    </div>
-                </li>
-            </ul>
-        ');
-    }
-}
+        </li>
+        </ul>
+    ');
+});

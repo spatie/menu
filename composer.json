@@ -23,7 +23,8 @@
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "vimeo/psalm": "^4.0",
-        "larapack/dd": "^1.0"
+        "larapack/dd": "^1.0",
+        "pestphp/pest": "^1.22"
     },
     "autoload": {
         "psr-4": {
@@ -40,7 +41,7 @@
     },
     "scripts": {
         "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit"
+        "test": "vendor/bin/pest"
     },
     "funding": [
         {
@@ -51,5 +52,10 @@
             "type": "other",
             "url": "https://spatie.be/open-source/support-us"
         }
-    ]
+    ],
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
 }

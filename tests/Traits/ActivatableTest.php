@@ -1,45 +1,28 @@
 <?php
 
-namespace Spatie\Menu\Test\Traits;
-
-use PHPUnit\Framework\TestCase;
 use Spatie\Menu\Traits\Activatable;
 
-class ActivatableTest extends TestCase
-{
-    protected $activatable;
+beforeEach(function () {
+    $this->activatable = new class () {
+        use Activatable;
+        protected $active = false;
+    };
+});
 
-    public function setUp(): void
-    {
-        $this->activatable = new class () {
-            use Activatable;
-            protected $active = false;
-        };
-    }
+it('can be set active', function () {
+    expect($this->activatable->setActive()->isActive())->toBeTrue();
+});
 
-    /** @test */
-    public function it_can_be_set_active()
-    {
-        $this->assertTrue($this->activatable->setActive()->isActive());
-    }
+it('can be set inactive via set active', function () {
+    expect($this->activatable->setActive()->setActive(false)->isActive())->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_be_set_inactive_via_set_active()
-    {
-        $this->assertFalse($this->activatable->setActive()->setActive(false)->isActive());
-    }
+it('can be set inactive via set inactive', function () {
+    expect($this->activatable->setActive()->setInactive()->isActive())->toBeFalse();
+});
 
-    /** @test */
-    public function it_can_be_set_inactive_via_set_inactive()
-    {
-        $this->assertFalse($this->activatable->setActive()->setInactive()->isActive());
-    }
-
-    /** @test */
-    public function it_can_be_set_active_via_a_callable()
-    {
-        $this->assertFalse($this->activatable->setActive(function () {
-            return false;
-        })->isActive());
-    }
-}
+it('can be set active via a callable', function () {
+    expect($this->activatable->setActive(function () {
+        return false;
+    })->isActive())->toBeFalse();
+});
