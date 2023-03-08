@@ -79,6 +79,7 @@ class Attributes
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
         $this->classes = array_merge($this->classes, $attributes->classes);
+        $this->ids = array_merge($this->ids, $attributes->ids);
 
         return $this;
     }
