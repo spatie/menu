@@ -74,7 +74,6 @@ class Attributes
         return $this;
     }
 
-
     public function mergeWith(self $attributes): self
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
@@ -97,7 +96,7 @@ class Attributes
 
         return array_merge($this->attributes, [
             'class' => implode(' ', $this->classes),
-            'id' => implode(' ', $this->ids)
+            'id' => implode(' ', $this->ids),
         ]);
     }
 
