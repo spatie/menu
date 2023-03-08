@@ -98,9 +98,9 @@ Menu::new()
 </div
 ```
 
-## Add id For Control Menu With JS
+## Adding ids to elements
 
-You can add html ids for menu.
+You can add ids so you can easily target some of these elements with CSS or JS.
 
 ```php
 Menu::new()
