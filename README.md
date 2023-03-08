@@ -98,6 +98,26 @@ Menu::new()
 </div
 ```
 
+## Add id For Control Menu With JS
+
+You can add html ids for menu.
+
+```php
+Menu::new()
+    ->addId('navigation')
+    ->add(Link::to('/', 'Home')->addId('home-link'))
+    ->add(Link::to('/about', 'About'))
+    ->add(Link::to('/contact', 'Contact'))
+```
+
+```html
+<ul id="navigation">
+    <li id="home-link"><a href="/">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
+```
+
 ## Not Afraid of Depths
 
 The menu supports submenus, which in turn can be nested infinitely.
