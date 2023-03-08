@@ -112,7 +112,7 @@ Menu::new()
 
 ```html
 <ul id="navigation">
-    <li id="home-link"><a href="/">Home</a></li>
+    <li><a href="/" id="home-link">Home</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="/contact">Contact</a></li>
 </ul>
