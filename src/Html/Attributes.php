@@ -90,11 +90,14 @@ class Attributes
 
     public function toArray(): array
     {
-        if (empty($this->classes)) {
+        if (empty($this->classes) || empty($this->ids)) {
             return $this->attributes;
         }
 
-        return array_merge($this->attributes, ['class' => implode(' ', $this->classes)]);
+        return array_merge($this->attributes, [
+            'class' => implode(' ', $this->classes),
+            'id' => implode(' ', $this->ids)
+        ]);
     }
 
     public function toString(): string
