@@ -8,6 +8,8 @@ class Attributes
 
     protected array $classes = [];
 
+    protected array $ids = [];
+
     public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
@@ -58,6 +60,20 @@ class Attributes
 
         return $this;
     }
+
+    public function addId(string | array $id): self
+    {
+        if (! is_array($id)) {
+            $id = [$id];
+        }
+
+        $this->ids = array_unique(
+            array_merge($this->ids, $id)
+        );
+
+        return $this;
+    }
+
 
     public function mergeWith(self $attributes): self
     {
