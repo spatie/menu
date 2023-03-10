@@ -61,7 +61,7 @@ class Attributes
         return $this;
     }
 
-    public function addId(string | array $id): self
+    public function id(?string $id): self
     {
         if (! is_array($id)) {
             $id = [$id];
