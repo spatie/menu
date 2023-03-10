@@ -98,14 +98,14 @@ Menu::new()
 </div
 ```
 
-## Adding ids to elements
+## Adding id to elements
 
-You can add ids so you can easily target some of these elements with CSS or JS.
+You can add id, so you can easily target some of these elements with CSS or JS.
 
 ```php
 Menu::new()
-    ->addId('navigation')
-    ->add(Link::to('/', 'Home')->addId('home-link'))
+    ->id('navigation')
+    ->add(Link::to('/', 'Home')->id('home-link'))
     ->add(Link::to('/about', 'About'))
     ->add(Link::to('/contact', 'Contact'))
 ```
