@@ -9,4 +9,6 @@ interface HasHtmlAttributes
     public function setAttributes(array $attributes): static;
 
     public function addClass(string $class): static;
+
+    public function id(?string $id): static;
 }

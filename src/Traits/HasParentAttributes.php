@@ -43,7 +43,7 @@ trait HasParentAttributes
 
     public function parentId(?string $id): static
     {
-        $this->parentAttributes->addId($id);
+        $this->parentAttributes->id($id);
 
         return $this;
     }
