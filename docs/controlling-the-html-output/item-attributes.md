@@ -30,3 +30,16 @@ Link::to('#', 'Back to top')
 ```
 
 If you want to add classes or set attributes to all items in a menu, the `Menu` class provides some convenience methods: `addItemClass`, `setItemAttribute`.
+
+The trait provides two methods to set attributes: `setAttribute` and `id`.
+
+```php
+Menu::new()
+    ->setAttribute('role', 'navigation')
+    ->id('nav');
+```
+
+```html
+<ul role="navigation" id="nav"></ul>
+```
+
