@@ -5,6 +5,8 @@ weight: 1
 
 The `Menu` and `Link` classes use the `HtmlAttributes` trait, which enables you to add attributes to their main elements (respectively the `ul` and `a` tags).
 
+## Add class into menu
+
 The trait provides two methods to set attributes: `setAttribute` and `addClass`.
 
 ```php
@@ -30,6 +32,8 @@ Link::to('#', 'Back to top')
 ```
 
 If you want to add classes or set attributes to all items in a menu, the `Menu` class provides some convenience methods: `addItemClass`, `setItemAttribute`.
+
+## Add id into menu
 
 The trait provides two methods to set attributes: `setAttribute` and `id`.
 
