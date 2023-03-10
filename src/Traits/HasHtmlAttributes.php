@@ -32,7 +32,7 @@ trait HasHtmlAttributes
 
     public function id(?string $id): static
     {
-        $this->htmlAttributes->addId($id);
+        $this->htmlAttributes->id($id);
 
         return $this;
     }
