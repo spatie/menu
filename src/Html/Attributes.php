@@ -63,13 +63,7 @@ class Attributes
 
     public function id(?string $id): self
     {
-        if (! is_array($id)) {
-            $id = [$id];
-        }
-
-        $this->ids = array_unique(
-            array_merge($this->ids, $id)
-        );
+        $this->id = $id;
 
         return $this;
     }
@@ -78,7 +72,7 @@ class Attributes
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
         $this->classes = array_merge($this->classes, $attributes->classes);
-        $this->ids = array_merge($this->ids, $attributes->ids);
+        $this->id = $this->id ?: $attributes->id;
 
         return $this;
     }
@@ -90,13 +84,13 @@ class Attributes
 
     public function toArray(): array
     {
-        if (empty($this->classes) || empty($this->ids)) {
+        if (empty($this->classes) || empty($this->id)) {
             return $this->attributes;
         }
 
         return array_merge($this->attributes, [
             'class' => implode(' ', $this->classes),
-            'id' => implode(' ', $this->ids),
+            'id' => implode(' ', $this->id),
         ]);
     }
 
