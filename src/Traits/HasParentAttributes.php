@@ -40,4 +40,11 @@ trait HasParentAttributes
 
         return $this;
     }
+
+    public function parentId(?string $id): static
+    {
+        $this->parentAttributes->id($id);
+
+        return $this;
+    }
 }

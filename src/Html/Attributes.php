@@ -8,6 +8,8 @@ class Attributes
 
     protected array $classes = [];
 
+    protected ?string $id = null;
+
     public function __construct(array $attributes = [])
     {
         $this->setAttributes($attributes);
@@ -59,10 +61,18 @@ class Attributes
         return $this;
     }
 
+    public function id(?string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function mergeWith(self $attributes): self
     {
         $this->attributes = array_merge($this->attributes, $attributes->attributes);
         $this->classes = array_merge($this->classes, $attributes->classes);
+        $this->id = $this->id ?: $attributes->id;
 
         return $this;
     }
@@ -74,11 +84,14 @@ class Attributes
 
     public function toArray(): array
     {
-        if (empty($this->classes)) {
+        if (empty($this->classes) || empty($this->id)) {
             return $this->attributes;
         }
 
-        return array_merge($this->attributes, ['class' => implode(' ', $this->classes)]);
+        return array_merge($this->attributes, [
+            'class' => implode(' ', $this->classes),
+            'id' => implode(' ', $this->id),
+        ]);
     }
 
     public function toString(): string

@@ -29,4 +29,11 @@ trait HasHtmlAttributes
 
         return $this;
     }
+
+    public function id(?string $id): static
+    {
+        $this->htmlAttributes->id($id);
+
+        return $this;
+    }
 }

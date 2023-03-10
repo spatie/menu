@@ -17,4 +17,6 @@ interface HasParentAttributes
     public function setParentAttributes(array $attributes): static;
 
     public function addParentClass(string $class): static;
+
+    public function parentId(?string $id): static;
 }
