@@ -8,7 +8,7 @@ class Attributes
 
     protected array $classes = [];
 
-    protected array $ids = [];
+    protected ?string $id = null;
 
     public function __construct(array $attributes = [])
     {
