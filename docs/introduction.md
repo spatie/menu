@@ -54,6 +54,26 @@ Menu::new()
 </div
 ```
 
+## Adding id to elements
+
+You can add id, so you can easily target some of these elements with CSS or JS.
+
+```php
+Menu::new()
+    ->id('navigation')
+    ->add(Link::to('/', 'Home')->id('home-link'))
+    ->add(Link::to('/about', 'About'))
+    ->add(Link::to('/contact', 'Contact'))
+```
+
+```html
+<ul id="navigation">
+    <li><a href="/" id="home-link">Home</a></li>
+    <li><a href="/about">About</a></li>
+    <li><a href="/contact">Contact</a></li>
+</ul>
+```
+
 ## Not Afraid of Depths
 
 The menu supports submenus, which in turn can be nested infinitely.
