@@ -56,7 +56,6 @@ class Attributes
         return $this;
     }
 
-
     /**
      * Set attribute by array of attribute & value.
      *
