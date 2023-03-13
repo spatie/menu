@@ -84,10 +84,13 @@ class Attributes
 
     public function toArray(): array
     {
-        return array_merge($this->attributes, array_filter([
+        if (empty($this->classes)) {
+            return $this->attributes;
+        }
+
+        return array_merge($this->attributes, [
             'class' => implode(' ', $this->classes),
-            'id' => $this->id,
-        ]));
+        ]);
     }
 
     public function toString(): string
