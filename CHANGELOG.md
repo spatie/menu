@@ -2,6 +2,16 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 3.1.1 - 2023-03-13
+
+- fix active classes
+
+### What's Changed
+
+- Add `id` to docs by @milwad-dev in https://github.com/spatie/menu/pull/144
+
+**Full Changelog**: https://github.com/spatie/menu/compare/3.1.0...3.1.1
+
 ## 3.1.0 - 2023-03-10
 
 ### What's Changed
@@ -135,11 +145,17 @@ All notable changes to `menu` will be documented in this file.
 
 - New methods on `Menu`:
 - - `submenu` for submenus with optional headers
+- 
 - - `void` and `voidIf` for empty list items
+- 
 - - `wrap` to wrap the menu in an html tag with optional attributes
+- 
 - - A `blueprint` method to copy the menu without it's contents
+- 
 - - Html item convenience methods: `addItemClass`, `setItemAttribute`
+- 
 - - Html parent convenience methods: `addItemParentClass`, `setItemParentAttribute`
+- 
 - 
 - Added `HasHtmlAttributes` and `HasParentAttributes` interfaces
 - `HtmlAttributes` and `ParentAttributes` now also have a `setAttributes` method
