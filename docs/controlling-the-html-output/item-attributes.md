@@ -33,7 +33,7 @@ Link::to('#', 'Back to top')
 
 If you want to add classes or set attributes to all items in a menu, the `Menu` class provides some convenience methods: `addItemClass`, `setItemAttribute`.
 
-## Add id into menu
+## Adding an ID to a menu
 
 The trait provides two methods to set attributes: `setAttribute` and `id`.
 
