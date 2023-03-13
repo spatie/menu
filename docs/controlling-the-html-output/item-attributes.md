@@ -5,7 +5,7 @@ weight: 1
 
 The `Menu` and `Link` classes use the `HtmlAttributes` trait, which enables you to add attributes to their main elements (respectively the `ul` and `a` tags).
 
-## Add class into menu
+## Adding classes to a menu
 
 The trait provides two methods to set attributes: `setAttribute` and `addClass`.
 

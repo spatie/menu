@@ -54,7 +54,7 @@ Menu::new()
 </div
 ```
 
-## Adding id to elements
+## Adding an ID to elements
 
 You can add id, so you can easily target some of these elements with CSS or JS.
 

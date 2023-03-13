@@ -34,7 +34,7 @@ class Attributes
 
         return $this;
     }
-
+    
     public function setAttribute(string $attribute, string $value = ''): self
     {
         if ($attribute === 'class') {
