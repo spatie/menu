@@ -73,13 +73,15 @@ trait Activatable
 
     /**
      * Set if current Activatable should be marked as an exact url match.
-     *
-     * @param bool $exactActive
-     *
-     * @return $this
      */
-    public function setExactActive(bool $exactActive = true): static
+    public function setExactActive(bool |callable $exactActive = true): static
     {
+	    if (is_callable($exactActive)) {
+		    $this->exactActive = $exactActive($this);
+		    
+		    return $this;
+	    }
+		
         $this->exactActive = $exactActive;
 
         return $this;
