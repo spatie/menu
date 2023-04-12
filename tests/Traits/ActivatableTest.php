@@ -26,3 +26,9 @@ it('can be set active via a callable', function () {
         return false;
     })->isActive())->toBeFalse();
 });
+
+it('can be set exact active via a callable', function () {
+    expect($this->activatable->setExactActive(function () {
+        return false;
+    })->isExactActive())->toBeFalse();
+});
