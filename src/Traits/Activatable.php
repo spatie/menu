@@ -22,9 +22,7 @@ trait Activatable
     public function setActive(bool | callable $active = true): static
     {
         if (is_callable($active)) {
-            $this->active = $active($this);
-
-            return $this;
+            $active = (bool)$active($this);
         }
 
         $this->active = $active;
