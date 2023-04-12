@@ -74,12 +74,12 @@ trait Activatable
      */
     public function setExactActive(bool | callable $exactActive = true): static
     {
-	    if (is_callable($exactActive)) {
-		    $this->exactActive = $exactActive($this);
-		    
-		    return $this;
-	    }
-		
+        if (is_callable($exactActive)) {
+            $this->exactActive = $exactActive($this);
+
+            return $this;
+        }
+
         $this->exactActive = $exactActive;
 
         return $this;
