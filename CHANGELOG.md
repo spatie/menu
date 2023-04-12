@@ -2,6 +2,18 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 3.2.0 - 2023-04-12
+
+### What's Changed
+
+- Make `->setExactActive()` accept a callable as well by @ralphjsmit in https://github.com/spatie/menu/pull/146
+
+### New Contributors
+
+- @ralphjsmit made their first contribution in https://github.com/spatie/menu/pull/146
+
+**Full Changelog**: https://github.com/spatie/menu/compare/3.1.1...3.2.0
+
 ## 3.1.1 - 2023-03-13
 
 - fix active classes
@@ -146,15 +158,21 @@ All notable changes to `menu` will be documented in this file.
 - New methods on `Menu`:
 - - `submenu` for submenus with optional headers
 - 
+- 
 - - `void` and `voidIf` for empty list items
+- 
 - 
 - - `wrap` to wrap the menu in an html tag with optional attributes
 - 
+- 
 - - A `blueprint` method to copy the menu without it's contents
+- 
 - 
 - - Html item convenience methods: `addItemClass`, `setItemAttribute`
 - 
+- 
 - - Html parent convenience methods: `addItemParentClass`, `setItemParentAttribute`
+- 
 - 
 - 
 - Added `HasHtmlAttributes` and `HasParentAttributes` interfaces
