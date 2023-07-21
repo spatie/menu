@@ -7,6 +7,8 @@
 
 The `spatie/menu` package provides a fluent interface to build menus of any size in your php application. If you're building your app with Laravel, the [`spatie/laravel-menu`](https://github.com/spatie/laravel-menu) provides some extra treats.
 
+If you're looking for a more flexible and renderless solution, maybe our spiritual successor [Laravel Navigation](https://github.com/spatie/laravel-navigation) is what you're looking for.
+
 Documentation is available at https://docs.spatie.be/menu.
 
 Upgrading from version 1? There's a [guide](https://github.com/spatie/menu#upgrading-to-20) for that!
