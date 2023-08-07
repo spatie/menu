@@ -72,13 +72,13 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * the accumulator, the array item as the second parameter, and the item's
      * key as the third.
      *
-     * @param array|\Iterator $items
+     * @param iterable $items
      * @param callable $callback
      * @param \Spatie\Menu\Menu|null $initial
      *
      * @return static
      */
-    public static function build(array | \Iterator $items, callable $callback, self | null $initial = null): static
+    public static function build(iterable $items, callable $callback, self | null $initial = null): static
     {
         return ($initial ?: static::new())->fill($items, $callback);
     }
@@ -88,12 +88,12 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
      * the accumulator, the array item as the second parameter, and the item's
      * key as the third.
      *
-     * @param array|\Iterator $items
+     * @param iterable $items
      * @param callable $callback
      *
      * @return static
      */
-    public function fill(array | \Iterator $items, callable $callback): self
+    public function fill(iterable $items, callable $callback): self
     {
         $menu = $this;
 
