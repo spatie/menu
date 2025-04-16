@@ -1,9 +1,18 @@
-# Html Menu Generator
+<div align="left">
+    <a href="https://spatie.be/open-source?utm_source=github&utm_medium=banner&utm_campaign=menu">
+      <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="https://spatie.be/packages/header/menu/html/dark.webp?1">
+        <img alt="Logo for menu" src=" https://spatie.be/packages/header/menu/html/light.webp?1" height="190">
+      </picture>
+    </a>
+
+<h1>Fluent interface to build HTML menus in PHP</h1>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 [![Tests](https://github.com/spatie/menu/workflows/Tests/badge.svg)](https://github.com/spatie/menu/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/spatie/menu.svg?style=flat-square)](https://packagist.org/packages/spatie/menu)
 
+</div>
 
 The `spatie/menu` package provides a fluent interface to build menus of any size in your php application. If you're building your app with Laravel, the [`spatie/laravel-menu`](https://github.com/spatie/laravel-menu) provides some extra treats.
 
