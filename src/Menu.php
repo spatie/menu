@@ -363,11 +363,7 @@ class Menu implements Item, Countable, HasHtmlAttributes, HasParentAttributes, I
             }
         }
 
-        if ($this->prepend && $this->prepend instanceof Item && $this->prepend->isActive()) {
-            return true;
-        }
-
-        return false;
+        return $this->prepend instanceof Item && $this->prepend->isActive();
     }
 
     /**
