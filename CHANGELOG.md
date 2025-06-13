@@ -2,6 +2,24 @@
 
 All notable changes to `menu` will be documented in this file.
 
+## 3.2.1 - 2025-06-13
+
+### What's Changed
+
+* Fix wrapping in Bootstrap menu code example by @buddhaCode in https://github.com/spatie/menu/pull/148
+* Add hint to the spiritual successor by @buddhaCode in https://github.com/spatie/menu/pull/149
+* ci: fix deprecations in the ci and improve it by @Chris53897 in https://github.com/spatie/menu/pull/152
+* refactor(check): simplified final comparison to directly return boolean result by @Ayoub-Mabrouk in https://github.com/spatie/menu/pull/155
+* refactor: simplify isActive() by combining prepend check into return by @Ayoub-Mabrouk in https://github.com/spatie/menu/pull/154
+
+### New Contributors
+
+* @buddhaCode made their first contribution in https://github.com/spatie/menu/pull/148
+* @Chris53897 made their first contribution in https://github.com/spatie/menu/pull/152
+* @Ayoub-Mabrouk made their first contribution in https://github.com/spatie/menu/pull/155
+
+**Full Changelog**: https://github.com/spatie/menu/compare/3.2.0...3.2.1
+
 ## 3.2.0 - 2023-04-12
 
 ### What's Changed
@@ -157,21 +175,27 @@ All notable changes to `menu` will be documented in this file.
 
 - New methods on `Menu`:
 - - `submenu` for submenus with optional headers
+  
 - 
 - 
 - - `void` and `voidIf` for empty list items
+  
 - 
 - 
 - - `wrap` to wrap the menu in an html tag with optional attributes
+  
 - 
 - 
 - - A `blueprint` method to copy the menu without it's contents
+  
 - 
 - 
 - - Html item convenience methods: `addItemClass`, `setItemAttribute`
+  
 - 
 - 
 - - Html parent convenience methods: `addItemParentClass`, `setItemParentAttribute`
+  
 - 
 - 
 - 
