@@ -11,7 +11,7 @@ class Tag
         $this->attributes ??= new Attributes();
     }
 
-    public static function make(string $tagName, Attributes $attributes = null): self
+    public static function make(string $tagName, ?Attributes $attributes = null): self
     {
         return new self($tagName, $attributes);
     }
